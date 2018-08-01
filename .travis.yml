@@ -9,7 +9,7 @@ install:
 script:
   - flake8
   # TODO: Optimize this command. It's wonky right now.
-  - PYTHONPATH=`pwd`/verify:$PYTHONPATH behave verify/features/
+  - PYTHONPATH=`pwd`/veripy:$PYTHONPATH behave veripy/features/
 
 # TODO: We don't have coveralls yet.
 # after_success: coveralls
