@@ -3,6 +3,11 @@ python:
   - '3.6'
   - "3.7-dev"  # 3.7 development branch
 
+addons:
+  chrome: stable
+before_install:
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+
 install:
   - pip install -r dev-requirements.txt
 
