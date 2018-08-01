@@ -1,0 +1,15 @@
+language: python
+python:
+  - '3.6'
+  - "3.7-dev"  # 3.7 development branch
+
+install:
+  - pip install -r dev_requirements.txt
+
+script:
+  - flake8
+  # TODO: Optimize this command. It's wonky right now.
+  - PYTHONPATH=`pwd`/verify:$PYTHONPATH behave verify/features/
+
+# TODO: We don't have coveralls yet.
+# after_success: coveralls
