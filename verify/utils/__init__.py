@@ -21,5 +21,3 @@ def open_and_purge(name, mode='r'):
     yield f
     f.close()
     os.remove(name)
-
-

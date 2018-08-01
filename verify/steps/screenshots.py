@@ -1,4 +1,4 @@
-from behave import *
+from behave import then
 
 from pages import Page
 from utils.browsers import screenshot_bytes

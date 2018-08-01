@@ -1,4 +1,4 @@
-from behave import *
+from behave import when, given
 
 from pages import Page
 

@@ -20,7 +20,6 @@ class Page(object):
     class InvalidConfiguration(Exception):
         pass
 
-
     def __init__(self, name, browser):
         self.name = name
         self.browser = browser
@@ -83,7 +82,6 @@ class Page(object):
         self._elements = Page.PageElements(fixture_config.pop('elements'))
         self.__dict__.update(**fixture_config)
 
-
     def __getattr__(self, name):
         property = getattr(self._elements, name)
         return self.find(property['selector'], property['by'])
@@ -113,4 +111,3 @@ class Page(object):
         else:
             method = self.abscence_selectors[by]
         return method(selector, **kwargs)
-

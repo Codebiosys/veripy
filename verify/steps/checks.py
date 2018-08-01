@@ -1,4 +1,4 @@
-from behave import *
+from behave import then
 
 
 @then('the page title should be "{title}"')

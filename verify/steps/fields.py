@@ -1,6 +1,4 @@
-from behave import *
-
-from pages import Page
+from behave import when
 
 
 @when('"{text}" is entered into the {input_name}')
@@ -17,4 +15,3 @@ def check_element(context, element_name):
     """ Tells the browser to click on an element with the given identifier. """
     element = getattr(context.page, element_name)
     element.click()
-
