@@ -1,0 +1,17 @@
+{
+    "url": "https://google.com/",
+    "elements": {
+        "search_field": {
+            "by": "id",
+            "selector": "lst-ib"
+        },
+        "submit_button": {
+            "by": "value",
+            "selector": "Google Search"
+        },
+        "search_results_logo": {
+            "by": "id",
+            "selector": "logocont"
+        }
+    }
+}

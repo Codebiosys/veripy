@@ -1,0 +1,6 @@
+[behave]
+format=formatters.cucumber_json:PrettyCucumberJSONFormatter
+outfiles=report/cucumber.json
+logging_clear_handlers=yes
+logging_filter=-suds
+
