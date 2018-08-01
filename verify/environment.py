@@ -1,7 +1,7 @@
 import os
 
 from behave.log_capture import capture
-import faker, splinter
+import splinter
 
 from utils import mkdir
 
