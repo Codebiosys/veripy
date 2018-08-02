@@ -4,6 +4,9 @@ import splinter
 from utils import mkdir
 import settings
 
+# bootstrap the custom types
+from veripy import custom_types  # noqa
+
 
 @capture
 def before_all(context):

@@ -82,7 +82,7 @@ class Page(object):
         self._elements = Page.PageElements(fixture_config.pop('elements'))
         self.__dict__.update(**fixture_config)
 
-    def __getattr__(self, name):
+    def __getitem__(self, name):
         property = getattr(self._elements, name)
         return self.find(property['selector'], property['by'])
 
