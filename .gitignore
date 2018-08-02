@@ -1,4 +1,5 @@
 # Project specific files
+environment.sh
 report/*
 
 # Byte-compiled / optimized / DLL files
