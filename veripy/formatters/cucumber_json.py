@@ -145,26 +145,26 @@ class CucumberJSONFormatter(Formatter):
             }
             self.current_step['match'] = match_data
 
-    def result(self, result):
+    def result(self, step):
         self.current_step['result'] = {
-            'status': self.status(result.status),
-            'duration': int(round(result.duration * 1000.0 * 1000.0 * 1000.0)),
+            'status': self.status(step.status),
+            'duration': int(round(step.duration * 1000.0 * 1000.0 * 1000.0)),
         }
-        if result.error_message and result.status == 'failed':
+        if step.error_message and step.status == 'failed':
             # -- OPTIONAL: Provided for failed steps.
-            error_message = result.error_message
+            error_message = step.error_message
             result_element = self.current_step['result']
             result_element['error_message'] = error_message
         self._step_index += 1
 
-        if getattr(result, 'screenshots') and len(result.screenshots) > 0:
-            step = self.current_feature_element['steps'][-1]
-            step['embeddings'] = [
+        if getattr(step, 'screenshots', False) and len(step.screenshots) > 0:
+            step_element = self.current_feature_element['steps'][-1]
+            step_element['embeddings'] = [
                 {
                     'data': base64.b64encode(data).decode('ascii'),
                     'media': {'type': mime_type},
                 }
-                for data, mime_type in result.screenshots
+                for data, mime_type in step.screenshots
             ]
 
     def eof(self):

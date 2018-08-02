@@ -1,3 +1,7 @@
+# Test Configuration
+# This suite is run during CI tests. We should make sure to include all available
+# statements here to know that they work.
+
 Feature: showing off behave
 
     Scenario: run a simple test

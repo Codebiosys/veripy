@@ -1,9 +1,8 @@
-import os
-
 from behave.log_capture import capture
 import splinter
 
 from utils import mkdir
+import settings
 
 
 @capture
@@ -11,8 +10,8 @@ def before_all(context):
     """ Before the suite runs, we set up a location to write temp files to and
     a directory for the report to be written to.
     """
-    context.tmp_directory = '/tmp/behave'
-    mkdir('../report')
+    context.tmp_directory = settings.TMP_DIRECTORY
+    mkdir(settings.REPORTS_DIRECTORY)
 
 
 @capture
@@ -20,7 +19,10 @@ def before_scenario(context, scenario):
     """ Before each scenario, we need to restart the browser session so that
     there's no bleed-over from previous tests.
     """
-    context.browser = splinter.Browser(driver_name=os.getenv('BROWSER', 'chrome'))
+    context.browser = splinter.Browser(
+        driver_name=settings.BROWSER,
+        headless=settings.RUN_HEADLESS,
+    )
 
 
 @capture
