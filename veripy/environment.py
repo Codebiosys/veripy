@@ -22,10 +22,17 @@ def before_scenario(context, scenario):
     """ Before each scenario, we need to restart the browser session so that
     there's no bleed-over from previous tests.
     """
-    context.browser = splinter.Browser(
-        driver_name=settings.BROWSER,
-        headless=settings.RUN_HEADLESS,
-    )
+    if settings.BROWSER == 'remote':
+        context.browser = splinter.Browser(
+            driver_name='remote',
+            browser='chrome',
+            url=settings.SELENIUM_URL,
+        )
+    else:
+        context.browser = splinter.Browser(
+            driver_name=settings.BROWSER,
+            headless=settings.RUN_HEADLESS,
+        )
 
 
 @capture

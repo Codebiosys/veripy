@@ -23,7 +23,8 @@ ENVIRONMENT = os.environ['ENVIRONMENT']
 
 
 BROWSER = os.environ.get('BROWSER', 'chrome')
-
+if BROWSER == 'remote':
+    SELENIUM_URL = os.environ['SELENIUM_URL']
 
 # We always run headless in CI mode. Otherwise we defer to the environment.
 RUN_HEADLESS = (
