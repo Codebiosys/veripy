@@ -4,7 +4,8 @@ dist: trusty
 
 python:
   - '3.6'
-  - "3.7-dev"  # 3.7 development branch
+  - "3.7"
+  - "3.8-dev"
 
 addons:
   apt:
