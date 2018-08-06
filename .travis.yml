@@ -14,6 +14,9 @@ addons:
       - google-chrome-stable
 
 before_install:
+  # Start the python web server to test against
+  - cd example && sudo python -m SimpleHTTPServer 80 &
+  # Start Chrome
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   # Install the Chrome Driver according to the Spliter Docs
   - wget https://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip
@@ -22,6 +25,8 @@ before_install:
   - mv chromedriver $HOME/bin
   - echo "export PATH=$PATH:$HOME/bin" >> $HOME/.bash_profile
   - source ~/.bash_profile
+  # Map www to localhost to mock docker doing it.
+  - echo "127.0.0.1       www" | sudo tee -a /etc/hosts
 
 install:
   - pip install -r dev-requirements.txt

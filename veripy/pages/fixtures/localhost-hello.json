@@ -1,0 +1,33 @@
+{
+    "url": "http://www/",
+    "elements": {
+        "h1": {
+            "by": "tag",
+            "selector": "h1"
+        },
+        "required_field": {
+            "by": "name",
+            "selector": "required-field"
+        },
+        "optional_field": {
+            "by": "name",
+            "selector": "optional-field"
+        },
+        "enabled_field": {
+            "by": "name",
+            "selector": "enabled-field"
+        },
+        "disabled_field": {
+            "by": "name",
+            "selector": "disabled-field"
+        },
+        "text_field": {
+            "by": "name",
+            "selector": "text-field"
+        },
+        "number_field": {
+            "by": "name",
+            "selector": "number-field"
+        }
+    }
+}
