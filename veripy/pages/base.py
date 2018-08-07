@@ -7,6 +7,57 @@ FIXTURES_DIR = os.path.join(BASE_DIR, 'fixtures')
 
 
 class Page(object):
+    """ A page is a dynamic container for interacting with Browser elements
+    using Splinter. A page is configured using a fixture config JSON file.
+    Once the fixture JSON is loaded, elements in the file can be accessed as
+    follows:
+
+    Example
+    -------
+
+        # Assuming there is a fixture in FIXTURES_DIR named "google.com.json"
+        # then the page for 'google.com' can be loaded as follows.
+        browser = get_browser()
+        page = Page('google.com', browser)
+        page['search_field'].fill('a search string')
+        page['submit_button'].click()
+
+    Elements are automatically selected using the configured selector for the
+    given element. Once the item is returned, the normal Splinter methods can be
+    used.
+
+    Example JSON Configuration
+    --------------------------
+
+        // google.com.json
+        {
+            "url": "https://google.com/",
+            "elements": {
+                "search_field": {
+                    "by": "id",
+                    "selector": "lst-ib"
+                },
+                "submit_button": {
+                    "by": "value",
+                    "selector": "Google Search"
+                }
+            }
+        }
+
+    **Important Note:** Top-level configuration fields are spread into the Page
+    object directly while elements must be accessed via dictionary-like getter
+    methods.
+
+    Example Top-Level Attribute
+    ---------------------------
+
+        # Using the above google.com.json configuration, the URL attribute can be
+        # accessed as follows:
+        browser = get_browser()
+        page = Page('google.com', browser)
+        print(page.url)
+        # >>> 'https://google.com/'
+    """
 
     name = 'base'
 
@@ -82,7 +133,7 @@ class Page(object):
         self._elements = Page.PageElements(fixture_config.pop('elements'))
         self.__dict__.update(**fixture_config)
 
-    def __getattr__(self, name):
+    def __getitem__(self, name):
         property = getattr(self._elements, name)
         return self.find(property['selector'], property['by'])
 
