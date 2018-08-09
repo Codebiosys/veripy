@@ -5,6 +5,7 @@
 
 import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Environment Definitions
 
@@ -42,3 +43,5 @@ TMP_DIRECTORY = os.environ.get('TMP_DIRECTORY', '/tmp/behave')
 
 # Where to put the output reports.
 REPORTS_DIRECTORY = os.environ.get('REPORTS_DIRECTORY', '../reports')
+
+FIXTURES_DIR = os.environ.get('FIXTURES_DIR', os.path.join(BASE_DIR, 'pages', 'fixtures'))
