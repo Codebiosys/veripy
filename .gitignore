@@ -1,6 +1,6 @@
 # Project specific files
 environment.sh
-report/*
+reports/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
