@@ -133,7 +133,10 @@ class Page(object):
 
     def __getitem__(self, name):
         property = getattr(self._elements, name)
-        return self.find(property['selector'], property['by'])
+        try:
+            return self.find(property['selector'], property['by'])
+        except:
+            raise KeyError
 
     # Public Methods
 
