@@ -15,7 +15,7 @@ def browser_is_at(context, name):
     context.page.browser.visit(context.page.url)
 
 
-@when('the user waits {seconds:d} seconds for the {element_name} to be visible')
+@when('the user waits {seconds:d} seconds for the "{element_name}" to be visible')
 def wait_for_element(context, seconds, element_name):
     """ Wait for a given element on the page to become visible. """
     context.page.wait_for(element_name, wait_time=seconds)
