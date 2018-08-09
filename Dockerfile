@@ -3,7 +3,7 @@
 #
 
 # Use minimal platform for just the Node runtime
-FROM python:3.6
+FROM python:3.7
 
 # Declare application root for easier copying of files
 WORKDIR /app
