@@ -15,6 +15,18 @@ def browser_is_at(context, name):
     context.page.browser.visit(context.page.url)
 
 
+@given('the browser window is {width:d} by {height:d} pixels')
+def resize_window(context, width, height):
+    """ Tells the browser to resize the viewport.
+
+    Resizing the browser viewport will be important for testing the web applciation
+    in various device screen sizes such as desktop, phone, tablet, etc.
+    """
+    # Splinter does not support window resize, so we must do it via driver instead
+    # https://stackoverflow.com/a/21062539/148781
+    context.page.browser.driver.set_window_size(width, height)
+
+
 @when('the user waits {seconds:d} seconds for the "{element_name}" to be visible')
 def wait_for_element(context, seconds, element_name):
     """ Wait for a given element on the page to become visible. """
