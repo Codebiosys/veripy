@@ -1,9 +1,7 @@
 import os.path
 import json
 
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-FIXTURES_DIR = os.path.join(BASE_DIR, 'fixtures')
+from veripy import settings
 
 
 class Page(object):
@@ -116,7 +114,7 @@ class Page(object):
         }
 
         # Load the configuration for this page.
-        fixture = os.path.join(FIXTURES_DIR, f'{self.name}.json')
+        fixture = os.path.join(settings.FIXTURES_DIR, f'{self.name}.json')
 
         try:
             with open(fixture) as f:
@@ -124,7 +122,7 @@ class Page(object):
         except FileNotFoundError:
             raise Page.InvalidConfiguration(
                 f'Unable to load configuration file for page named: {self.name}. '
-                f'Please ensure that a configuration object exists in {FIXTURES_DIR}. '
+                f'Please ensure that a configuration object exists in {settings.FIXTURES_DIR}. '
                 f'\nThe file should take the form: {self.name}.json'
             )
 
@@ -135,7 +133,10 @@ class Page(object):
 
     def __getitem__(self, name):
         property = getattr(self._elements, name)
-        return self.find(property['selector'], property['by'])
+        try:
+            return self.find(property['selector'], property['by'])
+        except:
+            raise KeyError
 
     # Public Methods
 
