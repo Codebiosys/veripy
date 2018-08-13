@@ -135,8 +135,8 @@ class Page(object):
         property = getattr(self._elements, name)
         try:
             return self.find(property['selector'], property['by'])
-        except:
-            raise KeyError
+        except Exception:
+            raise KeyError(f'Item {name} was not found.')
 
     # Public Methods
 
