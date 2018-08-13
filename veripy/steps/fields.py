@@ -20,6 +20,13 @@ def click_element(context, element_name):
     element.click()
 
 
+@when('the file "{filename:file_input_type}" has been added to the "{field}" field')
+def upload_file_to_field(context, field, filename):
+    assert filename is not None
+
+    field = context.page[field]
+    field._element.send_keys(filename)
+
 # Then
 
 

@@ -27,9 +27,12 @@ Feature: showing off behave
         Then the "h1" does contain the text "Hello World"
         Then take a screen shot
 
-
+    @Example_App
     Scenario: Test if the demo app fields accept the right data.
         Given that the browser is at "localhost-hello"
+
+        When the file "uploadable-file.txt" has been added to the "file_field" field
+
         Then the "optional_field" field is not required
         Then the "required_field" field is required
 
@@ -40,5 +43,7 @@ Feature: showing off behave
         Then the "text_field" field does not accept numbers
         Then the "number_field" field does accept numbers
         Then the "number_field" field does not accept passwords
+
+        Then the "file_field" field does accept files
 
         Then take a screen shot
