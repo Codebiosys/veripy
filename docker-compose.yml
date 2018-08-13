@@ -8,7 +8,7 @@ services:
     volumes:
       - ./example/nginx-services.conf:/etc/nginx/conf.d/default.conf
       - ./example/index.html:/var/www/public/index.html
-      - ./report:/var/www/public/report
+      - ./reports:/var/www/public/reports
 
   veripy:
     build: .
@@ -21,7 +21,7 @@ services:
       - www
       - selenium_hub
     volumes:
-      - ./report:/app/report
+      - ./reports:/app/reports
       - ./veripy:/app/veripy
     links:
       - selenium_hub:selenium_hub

@@ -45,3 +45,4 @@ TMP_DIRECTORY = os.environ.get('TMP_DIRECTORY', '/tmp/behave')
 REPORTS_DIRECTORY = os.environ.get('REPORTS_DIRECTORY', '../reports')
 
 FIXTURES_DIR = os.environ.get('FIXTURES_DIR', os.path.join(BASE_DIR, 'pages', 'fixtures'))
+RESOURCES_DIR = os.environ.get('RESOURCES_DIR', os.path.join(BASE_DIR, 'resources'))

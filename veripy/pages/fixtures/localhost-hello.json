@@ -28,6 +28,10 @@
         "number_field": {
             "by": "name",
             "selector": "number-field"
+        },
+        "file_field": {
+            "by": "name",
+            "selector": "file-field"
         }
     }
 }
