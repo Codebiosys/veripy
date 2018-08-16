@@ -1,7 +1,11 @@
+import logging
 import os.path
 import json
 
 from veripy import settings
+
+
+logger = logging.getLogger(__name__)
 
 
 class Page(object):
@@ -147,10 +151,12 @@ class Page(object):
             page.find('submitButton')
             page.find('button[type="submit"]', by='css')
         """
+        logger.critical(f'Selecting element "{selector}" by "{by}".')
         method = self.find_selectors[by]
         return method(selector, **kwargs)
 
     def wait_for(self, selector, by=None, present=True, **kwargs):
+        logger.info(f'Waiting for element "{selector}" by "{by}".')
         if by is None:
             by = getattr(self._elements, selector)['by']
 
