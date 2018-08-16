@@ -1,8 +1,8 @@
 from behave.log_capture import capture
 import splinter
 
-from utils import mkdir
-import settings
+from veripy.utils import mkdir
+from veripy import settings
 
 # bootstrap the custom types
 from veripy import custom_types  # noqa
