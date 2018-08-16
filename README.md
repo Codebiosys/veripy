@@ -58,3 +58,22 @@ Veri-Py is built on Behave. As such any files ending in `.feature` inside of the
 ```bash
 behave veripy/features/
 ```
+
+
+## Generating Documentation
+
+VeriPy uses Sphinx for documentation. Once you've installed the dependencies, simply run the following command to generate the docs.
+
+```bash
+cd docs/
+make html
+```
+
+You should now see a `_build` directory. Either open `index.html` in a browser or serve the directory directly using the following command.
+
+```bash
+cd _build/html
+python -m http.server
+```
+
+You should now be able to navigate to [http://localhost:8000/](http://localhost:8000/) and see the documentation.
