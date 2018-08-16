@@ -11,6 +11,8 @@ Once the tests are running simply run the following command to see the logs:
 tail -f veripy.log
 ```
 
+**Important** Setting the log-level to `DEBUG` will also emit behave's built-in logging.
+
 ## Gotchas
 
 Because of the way Behave imports files and tests, using the built-in Python logging with `__name__` doesn't namespace the logs as expected. Providing an explicit name is therefore preferred.
