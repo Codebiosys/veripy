@@ -1,6 +1,11 @@
+import logging
+
 from behave import when, given
 
 from veripy.pages import Page
+
+
+logger = logging.getLogger('navigation')
 
 
 @given('that the browser is at "{name}"')
@@ -14,6 +19,7 @@ def given_browser_is_at(context, name):
     statement sets the page context so that later steps can refer to the page
     by it's predefined identifiers.
     """
+    logger.info(f'Navigating to page named "{name}"')
     context.page = Page(name, context.browser)
     context.page.browser.visit(context.page.url)
 
@@ -28,6 +34,7 @@ def given_resize_window(context, width, height):
     Resizing the browser viewport will be important for testing the web applciation
     in various device screen sizes such as desktop, phone, tablet, etc.
     """
+    logger.info(f'Resizing the browser window to {width}x{height}')
     # Splinter does not support window resize, so we must do it via driver instead
     # https://stackoverflow.com/a/21062539/148781
     context.page.browser.driver.set_window_size(width, height)
@@ -40,4 +47,5 @@ def when_wait_for_element(context, seconds, element_name):
 
         When the user waits 10 seconds for the "Search Field" to be visible
     """
+    logger.info(f'Waiting {seconds} for "{element_name}" to be visible.')
     context.page.wait_for(element_name, wait_time=seconds)

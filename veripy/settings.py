@@ -52,5 +52,5 @@ RESOURCES_DIR = os.environ.get('RESOURCES_DIR', os.path.join(BASE_DIR, 'resource
 
 LOGGING_CONFIG = {
     'filename': 'veripy.log',
-    'level': 'DEBUG',
+    'level': 'INFO',
 }

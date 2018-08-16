@@ -10,8 +10,9 @@ from veripy import settings
 from veripy import custom_types  # noqa
 
 
+# Bootstrap the logger.
+logging.basicConfig(**settings.LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
-# import pdb; pdb.set_trace()
 
 
 @capture
