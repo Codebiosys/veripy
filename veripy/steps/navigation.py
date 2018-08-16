@@ -33,6 +33,7 @@ def given_resize_window(context, width, height):
     context.page.browser.driver.set_window_size(width, height)
 
 
+@given('the user waits {seconds:d} seconds for the "{element_name}" to be visible')
 @when('the user waits {seconds:d} seconds for the "{element_name}" to be visible')
 def when_wait_for_element(context, seconds, element_name):
     """ Wait for a given element on the page to become visible.
