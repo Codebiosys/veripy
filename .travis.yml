@@ -34,6 +34,7 @@ install:
 
 script:
   - flake8
+  - (cd docs && make html)
   # TODO: Optimize this command. It's wonky right now.
   - PYTHONPATH=`pwd`/veripy:$PYTHONPATH behave veripy/features/
 

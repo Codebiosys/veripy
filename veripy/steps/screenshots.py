@@ -1,6 +1,6 @@
 from behave import then
 
-from utils.browsers import screenshot_bytes
+from veripy.utils.browsers import screenshot_bytes
 
 
 @then('take a screen shot')

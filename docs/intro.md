@@ -1,9 +1,24 @@
-# Veri-Py
+Introduction to VeriPy
+======================
 
-*Browser based Gherkin Testing Made Easy*
+VeriPy is a simple, command-line application that allows any user to use Behavior Driven Development style testing statements against almost any web application. VeriPy runs locally, or inside of Docker for easy testing and deployment.
 
-[![Build Status](https://travis-ci.com/Codebiosys/veri-py.svg?token=sqxCEuNQWHfr2F3qwRmC&branch=master)](https://travis-ci.com/Codebiosys/veri-py)
-![Python Versions](https://img.shields.io/badge/Python-3.6-blue.svg)
+What do we mean? Here's an example.
+
+```gherkin
+Given that the browser is at "google.com"
+And that the window is 1024 by 768 pixels wide
+Then take a screen shot
+
+Then the "Search" field does accept text
+And the "Search Button" is enabled
+
+When "Hello World!" is entered into the "Search"
+And the user clicks the "Search Button"
+And the user waits 10 seconds for the "Search Field" to be visible
+Then take a screen shot
+```
+
 
 ## Installation
 
@@ -59,21 +74,3 @@ Veri-Py is built on Behave. As such any files ending in `.feature` inside of the
 behave veripy/features/
 ```
 
-
-## Generating Documentation
-
-VeriPy uses Sphinx for documentation. Once you've installed the dependencies, simply run the following command to generate the docs.
-
-```bash
-cd docs/
-make html
-```
-
-You should now see a `_build` directory. Either open `index.html` in a browser or serve the directory directly using the following command.
-
-```bash
-cd _build/html
-python -m http.server
-```
-
-You should now be able to navigate to [http://localhost:8000/](http://localhost:8000/) and see the documentation.

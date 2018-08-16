@@ -10,8 +10,7 @@ class Page(object):
     Once the fixture JSON is loaded, elements in the file can be accessed as
     follows:
 
-    Example
-    -------
+    **Example**::
 
         # Assuming there is a fixture in FIXTURES_DIR named "google.com.json"
         # then the page for 'google.com' can be loaded as follows.
@@ -24,8 +23,7 @@ class Page(object):
     given element. Once the item is returned, the normal Splinter methods can be
     used.
 
-    Example JSON Configuration
-    --------------------------
+    **Example JSON Configuration**::
 
         // google.com.json
         {
@@ -46,8 +44,7 @@ class Page(object):
     object directly while elements must be accessed via dictionary-like getter
     methods.
 
-    Example Top-Level Attribute
-    ---------------------------
+    **Example Top-Level Attribute**::
 
         # Using the above google.com.json configuration, the URL attribute can be
         # accessed as follows:
@@ -145,11 +142,10 @@ class Page(object):
         with the selector by the given method. The default method is by ID. All
         additional kwargs are passed to the selector method.
 
-        Example
-        -------
+        **Example**::
 
-        page.find('submitButton')
-        page.find('button[type="submit"]', by='css')
+            page.find('submitButton')
+            page.find('button[type="submit"]', by='css')
         """
         method = self.find_selectors[by]
         return method(selector, **kwargs)
