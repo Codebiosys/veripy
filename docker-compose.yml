@@ -22,8 +22,7 @@ services:
       - www
       - selenium_hub
     volumes:
-      - ./reports:/app/reports
-      - ./veripy:/app/veripy
+      - ./:/app/
     links:
       - selenium_hub:selenium_hub
 
