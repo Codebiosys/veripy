@@ -9,6 +9,7 @@ VeriPy - Programmatic Validation for Humans
    intro.md
    writing_sentences.md
    creating_pages.md
+   logs.md
 
    api/api.rst
 
