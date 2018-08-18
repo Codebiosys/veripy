@@ -1,3 +1,5 @@
+import logging
+
 from behave import given, when, then
 
 # Bootstrap the custom types for Sphinx
