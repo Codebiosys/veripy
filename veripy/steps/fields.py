@@ -1,6 +1,6 @@
 import logging
 
-from behave import when, then
+from behave import given, when, then
 
 # Bootstrap the custom types for Sphinx
 from veripy import custom_types  # noqa
@@ -12,6 +12,7 @@ logger = logging.getLogger('fields')
 # When
 
 
+@given('"{text}" is entered into the "{input_name}"')
 @when('"{text}" is entered into the "{input_name}"')
 def when_enter_text_into_input(context, text, input_name):
     """ Tells the browser to enter the given test into an element with
@@ -26,6 +27,7 @@ def when_enter_text_into_input(context, text, input_name):
     input.fill(text)
 
 
+@given('the user clicks the "{element_name}"')
 @when('the user clicks the "{element_name}"')
 def when_click_element(context, element_name):
     """ Tells the browser to click on an element with the given identifier.
