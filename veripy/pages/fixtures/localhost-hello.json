@@ -32,6 +32,10 @@
         "file_field": {
             "by": "name",
             "selector": "file-field"
+        },
+        "Random Number": {
+            "by": "id",
+            "selector": "rando"
         }
     }
 }
