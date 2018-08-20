@@ -1,11 +1,18 @@
+import logging
+
 from behave.log_capture import capture
 import splinter
 
-from utils import mkdir
-import settings
+from veripy.utils import mkdir
+from veripy import settings
 
 # bootstrap the custom types
 from veripy import custom_types  # noqa
+
+
+# Bootstrap the logger.
+logging.basicConfig(**settings.LOGGING_CONFIG)
+logger = logging.getLogger(__name__)
 
 
 @capture
@@ -13,6 +20,7 @@ def before_all(context):
     """ Before the suite runs, we set up a location to write temp files to and
     a directory for the report to be written to.
     """
+    logger.debug('Setting up tmp directory and reports output directory.')
     context.tmp_directory = settings.TMP_DIRECTORY
     mkdir(settings.REPORTS_DIRECTORY)
 

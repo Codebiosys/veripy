@@ -1,7 +1,11 @@
+import logging
 import os.path
 import json
 
 from veripy import settings
+
+
+logger = logging.getLogger(__name__)
 
 
 class Page(object):
@@ -10,8 +14,7 @@ class Page(object):
     Once the fixture JSON is loaded, elements in the file can be accessed as
     follows:
 
-    Example
-    -------
+    **Example**::
 
         # Assuming there is a fixture in FIXTURES_DIR named "google.com.json"
         # then the page for 'google.com' can be loaded as follows.
@@ -24,8 +27,7 @@ class Page(object):
     given element. Once the item is returned, the normal Splinter methods can be
     used.
 
-    Example JSON Configuration
-    --------------------------
+    **Example JSON Configuration**::
 
         // google.com.json
         {
@@ -46,8 +48,7 @@ class Page(object):
     object directly while elements must be accessed via dictionary-like getter
     methods.
 
-    Example Top-Level Attribute
-    ---------------------------
+    **Example Top-Level Attribute**::
 
         # Using the above google.com.json configuration, the URL attribute can be
         # accessed as follows:
@@ -120,16 +121,19 @@ class Page(object):
             with open(fixture) as f:
                 fixture_config = json.load(f)
         except FileNotFoundError:
-            raise Page.InvalidConfiguration(
+            message = (
                 f'Unable to load configuration file for page named: {self.name}. '
                 f'Please ensure that a configuration object exists in {settings.FIXTURES_DIR}. '
                 f'\nThe file should take the form: {self.name}.json'
             )
+            logger.critical(message)
+            raise Page.InvalidConfiguration(message)
 
         # Save the page elements config to the elements object. Then spread
         # the rest of the config into ourselves.
         self._elements = Page.PageElements(fixture_config.pop('elements'))
         self.__dict__.update(**fixture_config)
+        logger.info(f'Finished initializing page: "{name}"')
 
     def __getitem__(self, name):
         property = getattr(self._elements, name)
@@ -145,16 +149,17 @@ class Page(object):
         with the selector by the given method. The default method is by ID. All
         additional kwargs are passed to the selector method.
 
-        Example
-        -------
+        **Example**::
 
-        page.find('submitButton')
-        page.find('button[type="submit"]', by='css')
+            page.find('submitButton')
+            page.find('button[type="submit"]', by='css')
         """
+        logger.info(f'Selecting element "{selector}" by "{by}" on page "{self.name}".')
         method = self.find_selectors[by]
         return method(selector, **kwargs)
 
     def wait_for(self, selector, by=None, present=True, **kwargs):
+        logger.info(f'Selecting element "{selector}" by "{by}" on page "{self.name}".')
         if by is None:
             by = getattr(self._elements, selector)['by']
 
