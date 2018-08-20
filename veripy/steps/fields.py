@@ -1,12 +1,18 @@
-from behave import when, then
+import logging
+
+from behave import given, when, then
 
 # Bootstrap the custom types for Sphinx
 from veripy import custom_types  # noqa
 
 
+logger = logging.getLogger('fields')
+
+
 # When
 
 
+@given('"{text}" is entered into the "{input_name}"')
 @when('"{text}" is entered into the "{input_name}"')
 def when_enter_text_into_input(context, text, input_name):
     """ Tells the browser to enter the given test into an element with
@@ -16,10 +22,12 @@ def when_enter_text_into_input(context, text, input_name):
         When "query text" is entered into the "Search Box"
 
     """
+    logger.info(f'Entering text: "{text}" into selector "{input_name}".')
     input = context.page[input_name]
     input.fill(text)
 
 
+@given('the user clicks the "{element_name}"')
 @when('the user clicks the "{element_name}"')
 def when_click_element(context, element_name):
     """ Tells the browser to click on an element with the given identifier.
@@ -27,6 +35,7 @@ def when_click_element(context, element_name):
 
         When the user clicks the "Search Button"
     """
+    logger.info(f'Clicking on element: "{element_name}".')
     element = context.page[element_name]
     element.click()
 
@@ -40,6 +49,7 @@ def when_upload_file_to_field(context, field, filename):
         When the "My File.txt" has been added to the "File Upload" field
 
     """
+    logger.info(f'Uploading "{filename}" to "{field}".')
     assert filename is not None
 
     field = context.page[field]
@@ -65,6 +75,7 @@ def then_field_is_required(context, field, not_, state):
         The "Phone Number" field is optional
 
     """
+    logger.info(f'Asserting that "{field}" is {"not " if not_ else ""}{state}.')
     required = (state == 'required') != not_
     field = context.page[field]
     if required:
@@ -89,6 +100,7 @@ def then_field_is_enabled(context, field, not_, state):
         The "Phone Number" field is disabled
 
     """
+    logger.info(f'Asserting that "{field}" is {"not " if not_ else ""}{state}.')
     require_enabled = (state == 'enabled') != not_
     field = context.page[field]
     if require_enabled:
@@ -114,6 +126,7 @@ def then_field_accepts_type(context, field, not_, input_type):
         The "Phone Number" field does not accept numbers
 
     """
+    logger.info(f'Asserting that "{field}" does {"not " if not_ else ""}accept {input_type}.')
     field = context.page[field]
     type = field._element.get_attribute('type')
     # Assert that the input-type equals the type or that they don't match.

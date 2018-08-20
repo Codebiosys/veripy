@@ -1,7 +1,11 @@
+import logging
 import os.path
 import json
 
 from veripy import settings
+
+
+logger = logging.getLogger(__name__)
 
 
 class Page(object):
@@ -117,16 +121,19 @@ class Page(object):
             with open(fixture) as f:
                 fixture_config = json.load(f)
         except FileNotFoundError:
-            raise Page.InvalidConfiguration(
+            message = (
                 f'Unable to load configuration file for page named: {self.name}. '
                 f'Please ensure that a configuration object exists in {settings.FIXTURES_DIR}. '
                 f'\nThe file should take the form: {self.name}.json'
             )
+            logger.critical(message)
+            raise Page.InvalidConfiguration(message)
 
         # Save the page elements config to the elements object. Then spread
         # the rest of the config into ourselves.
         self._elements = Page.PageElements(fixture_config.pop('elements'))
         self.__dict__.update(**fixture_config)
+        logger.info(f'Finished initializing page: "{name}"')
 
     def __getitem__(self, name):
         property = getattr(self._elements, name)
@@ -147,10 +154,12 @@ class Page(object):
             page.find('submitButton')
             page.find('button[type="submit"]', by='css')
         """
+        logger.info(f'Selecting element "{selector}" by "{by}" on page "{self.name}".')
         method = self.find_selectors[by]
         return method(selector, **kwargs)
 
     def wait_for(self, selector, by=None, present=True, **kwargs):
+        logger.info(f'Selecting element "{selector}" by "{by}" on page "{self.name}".')
         if by is None:
             by = getattr(self._elements, selector)['by']
 

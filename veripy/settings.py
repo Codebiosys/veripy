@@ -46,3 +46,11 @@ REPORTS_DIRECTORY = os.environ.get('REPORTS_DIRECTORY', '../reports')
 
 FIXTURES_DIR = os.environ.get('FIXTURES_DIR', os.path.join(BASE_DIR, 'pages', 'fixtures'))
 RESOURCES_DIR = os.environ.get('RESOURCES_DIR', os.path.join(BASE_DIR, 'resources'))
+
+
+# Logging
+
+LOGGING_CONFIG = {
+    'filename': 'veripy.log',
+    'level': 'INFO',
+}
