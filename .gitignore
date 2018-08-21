@@ -1,6 +1,7 @@
 # Project specific files
 environment.sh
 reports/*
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
