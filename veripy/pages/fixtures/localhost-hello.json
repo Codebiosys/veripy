@@ -41,7 +41,10 @@
                 "by": "tag",
                 "selector": "label"
               }
-            }
+            },
+        "Random Number": {
+            "by": "id",
+            "selector": "rando"
         }
     }
 }

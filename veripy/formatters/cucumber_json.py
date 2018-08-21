@@ -150,6 +150,12 @@ class CucumberJSONFormatter(Formatter):
             'status': self.status(step.status),
             'duration': int(round(step.duration * 1000.0 * 1000.0 * 1000.0)),
         }
+
+        # Adds support for saving results from the step for display.
+        stored_value = getattr(step, 'stored_value', None)
+        if stored_value is not None:
+            self.current_step['stored_value'] = stored_value
+
         if step.error_message and step.status == 'failed':
             # -- OPTIONAL: Provided for failed steps.
             error_message = step.error_message
