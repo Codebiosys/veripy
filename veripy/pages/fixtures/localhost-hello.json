@@ -32,6 +32,16 @@
         "file_field": {
             "by": "name",
             "selector": "file-field"
+        },
+        "form": {
+            "by": "tag",
+            "selector": "form",
+            "elements": {
+              "label": {
+                "by": "tag",
+                "selector": "label"
+              }
+            }
         }
     }
 }

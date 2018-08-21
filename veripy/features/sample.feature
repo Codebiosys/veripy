@@ -28,6 +28,12 @@ Feature: showing off behave
         Then the "h1" contains the text "Hello World"
         Then take a screen shot
 
+
+    Scenario: Test if the demo app has fields in the right order
+        Given that the browser is at "localhost-hello"
+        Then the 2nd label in the "form" contains the text "Optional input"
+        Then take a screen shot
+
     @Example_App
     Scenario: Test if the demo app fields accept the right data.
         Given that the browser is at "localhost-hello"

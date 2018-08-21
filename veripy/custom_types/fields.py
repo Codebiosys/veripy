@@ -1,9 +1,55 @@
 import os.path
 
+from selenium.webdriver.common.keys import Keys
 from behave import register_type
 import parse
 
 from veripy import settings
+
+
+@parse.with_pattern(r"(st|nd|rd|th)")
+def ordinal_indicator_option(text):
+    """ Captures the ordinal indicator of a number.
+        pass
+
+    Use this type by annotating your variable with the ``ordinal_indicator``.
+
+    **Usage**
+    ::
+
+        @then('the user chooses the {option:d}{ordinal:ordinal_indicator}')
+        def test_method(context, option, ordinal):
+            pass
+
+    """
+    return text.strip()
+
+
+register_type(ordinal_indicator=ordinal_indicator_option)
+
+
+@parse.with_pattern(r"|".join(list(map(lambda x: x.replace("_", " ").title(), Keys.__dict__))))
+def parse_pressable_key(text):
+    """ Enables the use of browser Keys in sentences.
+    The value of the property is converted to a human readable version for
+    consumption, and then exrapolated for use in the statement
+        pass
+
+    Use this type by annotating your variable with the ``pressable_key``.
+
+    **Usage**
+    ::
+
+        @then('the user presses {key:pressable_key}')
+        def test_method(context, key):
+            pass
+
+    """
+    key_name = text.strip().replace(" ", "_").upper()
+    return getattr(Keys, key_name)
+
+
+register_type(pressable_key_type=parse_pressable_key)
 
 
 @parse.with_pattern(r'(enabled|disabled)')
