@@ -47,6 +47,17 @@
                 <input name="file-field" type="file" />
               </label>
             </form>
+
+            <label>
+              Random Value
+              <span id="rando"></span>
+            </label>
         </div>
     </body>
+
+    <script>
+      // Set the value of the random element.
+      console.log('Setting random value.')
+      document.getElementById('rando').innerText = Math.random().toString();
+    </script>
 </html>
