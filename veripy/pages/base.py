@@ -73,46 +73,6 @@ class Page(object):
     def __init__(self, name, browser):
         self.name = name
         self.browser = browser
-        self.find_selectors = {
-            # General Selectors
-            'id': browser.find_by_id,
-            'css': browser.find_by_css,
-            'name': browser.find_by_name,
-            'tag': browser.find_by_tag,
-            'text': browser.find_by_text,
-            'value': browser.find_by_value,
-            'xpath': browser.find_by_xpath,
-
-            # Link Selectors
-            'link.href': browser.find_link_by_href,
-            'link.partial_href': browser.find_link_by_partial_href,
-            'link.partial_text': browser.find_link_by_partial_text,
-            'link.text': browser.find_link_by_text,
-
-            # Option Selectors
-            'option.text': browser.find_option_by_text,
-            'option.value': browser.find_option_by_value,
-        }
-
-        self.presence_selectors = {
-            'id': browser.is_element_present_by_id,
-            'css': browser.is_element_present_by_css,
-            'name': browser.is_element_present_by_name,
-            'tag': browser.is_element_present_by_tag,
-            'text': browser.is_element_present_by_text,
-            'value': browser.is_element_present_by_value,
-            'xpath': browser.is_element_present_by_xpath,
-        }
-
-        self.abscence_selectors = {
-            'id': browser.is_element_not_present_by_id,
-            'css': browser.is_element_not_present_by_css,
-            'name': browser.is_element_not_present_by_name,
-            'tag': browser.is_element_not_present_by_tag,
-            'text': browser.is_element_not_present_by_text,
-            'value': browser.is_element_not_present_by_value,
-            'xpath': browser.is_element_not_present_by_xpath,
-        }
 
         # Load the configuration for this page.
         fixture = os.path.join(settings.FIXTURES_DIR, f'{self.name}.json')
@@ -138,9 +98,69 @@ class Page(object):
     def __getitem__(self, name):
         property = getattr(self._elements, name)
         try:
-            return self.find(property['selector'], property['by'])
+            return self.find(property['selector'], property['by'], **property.get('kwargs', {}))
         except Exception:
             raise KeyError(f'Item {name} was not found.')
+
+    def _find_selectors(self, by='id', parent=None):
+        if parent is None:
+            parent = self.browser
+            selectors = {
+                'id': parent.find_by_id,
+                'css': parent.find_by_css,
+                'name': parent.find_by_name,
+                'tag': parent.find_by_tag,
+                'text': parent.find_by_text,
+                'value': parent.find_by_value,
+                'xpath': parent.find_by_xpath,
+                'link.href': parent.find_link_by_href,
+                'link.partial_href': parent.find_link_by_partial_href,
+                'link.partial_text': parent.find_link_by_partial_text,
+                'link.text': parent.find_link_by_text,
+                'option.text': parent.find_option_by_text,
+                'option.value': parent.find_option_by_value,
+            }
+        else:
+            selectors = {
+                'id': parent.find_by_id,
+                'css': parent.find_by_css,
+                'name': parent.find_by_name,
+                'tag': parent.find_by_tag,
+                'text': parent.find_by_text,
+                'value': parent.find_by_value,
+                'xpath': parent.find_by_xpath,
+            }
+        return selectors[by]
+
+    def _presence_selectors(self, by='id', parent=None):
+        if parent is None:
+            parent = self.browser
+
+        selectors = {
+            'id': parent.is_element_present_by_id,
+            'css': parent.is_element_present_by_css,
+            'name': parent.is_element_present_by_name,
+            'tag': parent.is_element_present_by_tag,
+            'text': parent.is_element_present_by_text,
+            'value': parent.is_element_present_by_value,
+            'xpath': parent.is_element_present_by_xpath,
+            }
+        return selectors[by]
+
+    def _abscence_selectors(self, by='id', parent=None):
+        if parent is None:
+            parent = self.browser
+
+        selectors = {
+            'id': parent.is_element_not_present_by_id,
+            'css': parent.is_element_not_present_by_css,
+            'name': parent.is_element_not_present_by_name,
+            'tag': parent.is_element_not_present_by_tag,
+            'text': parent.is_element_not_present_by_text,
+            'value': parent.is_element_not_present_by_value,
+            'xpath': parent.is_element_not_present_by_xpath,
+            }
+        return selectors[by]
 
     # Public Methods
 
@@ -155,8 +175,35 @@ class Page(object):
             page.find('button[type="submit"]', by='css')
         """
         logger.info(f'Selecting element "{selector}" by "{by}" on page "{self.name}".')
-        method = self.find_selectors[by]
+        method = self._find_selectors(by)
         return method(selector, **kwargs)
+
+    def find_children(self, selector, by=None, parent=None, **kwargs):
+        """ Given a method, a parent and a selector, attempt to find the given element
+        with the selector within the parent by the given method. The default method is by ID. All
+        additional kwargs are passed to the selector method.
+
+        **Example**::
+
+            page.find_children('submitButton', parent='Parent Form')
+        """
+        logger.info(f'Selecting child element "{selector}" on "{parent}" \
+        by "{by}" on page "{self.name}".')
+        if parent is None:
+            parent_element = self.browser
+            parent_selector = getattr(self._elements, selector)
+        else:
+            parent_element = self[parent]
+            parent_selector = getattr(self._elements, parent)['elements'][selector]
+
+        try:
+            child_selector = parent_selector['selector']
+            if by is None:
+                by = parent_selector['by']
+        except Exception:
+            raise KeyError(f'Child Element {selector} was not found.')
+        method = self._find_selectors(by, parent_element)
+        return method(child_selector, **kwargs)
 
     def wait_for(self, selector, by=None, present=True, **kwargs):
         logger.info(f'Selecting element "{selector}" by "{by}" on page "{self.name}".')
@@ -164,7 +211,7 @@ class Page(object):
             by = getattr(self._elements, selector)['by']
 
         if present:
-            method = self.presence_selectors[by]
+            method = self._presence_selectors(by)
         else:
-            method = self.abscence_selectors[by]
+            method = self._abscence_selectors(by)
         return method(selector, **kwargs)

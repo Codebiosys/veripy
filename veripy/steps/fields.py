@@ -10,8 +10,6 @@ logger = logging.getLogger('fields')
 
 
 # When
-
-
 @given('"{text}" is entered into the "{input_name}"')
 @when('"{text}" is entered into the "{input_name}"')
 def when_enter_text_into_input(context, text, input_name):
@@ -25,6 +23,20 @@ def when_enter_text_into_input(context, text, input_name):
     logger.info(f'Entering text: "{text}" into selector "{input_name}".')
     input = context.page[input_name]
     input.fill(text)
+
+
+@when('"{text}" is entered into the current field')
+def when_enter_text_into_current_input(context, text):
+    """ Tells the browser to enter the given test into the element with
+    the current focus.
+    ::
+
+        When "query text" is entered into the current field
+
+    """
+    logger.info(f'Entering text: "{text}" into current element.')
+    active_web_element = context.browser.driver.switch_to.active_element
+    active_web_element.send_keys(text)
 
 
 @given('the user clicks the "{element_name}"')
