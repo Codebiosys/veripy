@@ -12,16 +12,6 @@ Feature: showing off behave
         Then behave will test it for us!
 
 
-    Scenario: check that google exists
-        Given that the browser is at "google"
-        When "hello world" is entered into the "search_field"
-        And the user clicks the "submit_button"
-        And the user waits 5 seconds for the "search_results_logo" to be visible
-        Then the "search_results_logo" is visible
-        Then the page title should be "hello world - Google Search"
-        Then take a screen shot
-
-
     Scenario: Test if the demo app has the title "Hello World"
         Given that the browser is at "localhost-hello"
         Then the page title should be "Hello World"
