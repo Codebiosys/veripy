@@ -25,6 +25,10 @@
       "by": "name",
       "selector": "text-field"
     },
+    "textarea_field": {
+      "by": "name",
+      "selector": "textarea-field"
+    },
     "number_field": {
       "by": "name",
       "selector": "number-field"
