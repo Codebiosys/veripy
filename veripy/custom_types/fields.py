@@ -10,7 +10,6 @@ from veripy import settings
 @parse.with_pattern(r"(st|nd|rd|th)")
 def ordinal_indicator_option(text):
     """ Captures the ordinal indicator of a number.
-        pass
 
     Use this type by annotating your variable with the ``ordinal_indicator``.
 
@@ -33,7 +32,6 @@ def parse_pressable_key(text):
     """ Enables the use of browser Keys in sentences.
     The value of the property is converted to a human readable version for
     consumption, and then exrapolated for use in the statement
-        pass
 
     Use this type by annotating your variable with the ``pressable_key``.
 

@@ -1,50 +1,51 @@
 {
-    "url": "http://www/",
-    "elements": {
-        "h1": {
-            "by": "tag",
-            "selector": "h1"
-        },
-        "required_field": {
-            "by": "name",
-            "selector": "required-field"
-        },
-        "optional_field": {
-            "by": "name",
-            "selector": "optional-field"
-        },
-        "enabled_field": {
-            "by": "name",
-            "selector": "enabled-field"
-        },
-        "disabled_field": {
-            "by": "name",
-            "selector": "disabled-field"
-        },
-        "text_field": {
-            "by": "name",
-            "selector": "text-field"
-        },
-        "number_field": {
-            "by": "name",
-            "selector": "number-field"
-        },
-        "file_field": {
-            "by": "name",
-            "selector": "file-field"
-        },
-        "form": {
-            "by": "tag",
-            "selector": "form",
-            "elements": {
-              "label": {
-                "by": "tag",
-                "selector": "label"
-              }
-            },
-        "Random Number": {
-            "by": "id",
-            "selector": "rando"
+  "url": "http://www/",
+  "elements": {
+    "h1": {
+      "by": "tag",
+      "selector": "h1"
+    },
+    "required_field": {
+      "by": "name",
+      "selector": "required-field"
+    },
+    "optional_field": {
+      "by": "name",
+      "selector": "optional-field"
+    },
+    "enabled_field": {
+      "by": "name",
+      "selector": "enabled-field"
+    },
+    "disabled_field": {
+      "by": "name",
+      "selector": "disabled-field"
+    },
+    "text_field": {
+      "by": "name",
+      "selector": "text-field"
+    },
+    "number_field": {
+      "by": "name",
+      "selector": "number-field"
+    },
+    "file_field": {
+      "by": "name",
+      "selector": "file-field"
+    },
+    "Random Number": {
+      "by": "id",
+      "selector": "rando"
+    },
+    "form": {
+      "by": "tag",
+      "selector": "form",
+      "elements": {
+        "label": {
+          "by": "tag",
+          "selector": "label"
         }
+      }
     }
+  }
 }
