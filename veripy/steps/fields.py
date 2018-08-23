@@ -62,7 +62,7 @@ def when_upload_file_to_field(context, field, filename):
 
     """
     logger.info(f'Uploading "{filename}" to "{field}".')
-    assert filename is not None
+    assert filename is not None, 'The filename given was not found.'
 
     field = context.page[field]
     field._element.send_keys(filename)
@@ -87,13 +87,18 @@ def then_field_is_required(context, field, not_, state):
         The "Phone Number" field is optional
 
     """
+    not_ = bool(not_)
     logger.info(f'Asserting that "{field}" is {"not " if not_ else ""}{state}.')
     required = (state == 'required') != not_
-    field = context.page[field]
+    element = context.page[field]
     if required:
-        assert field._element.get_attribute('required')
+        assert element._element.get_attribute('required'), (
+            f'"{field}" is supposed to be required and it was not.'
+        )
     else:
-        assert not field._element.get_attribute('required')
+        assert not element._element.get_attribute('required'), (
+            f'"{field}" is supposed to be optional and it was not.'
+        )
 
 
 @then('the "{field}" field is {not_:optional_not}{state:field_enabled_option}')
@@ -112,13 +117,17 @@ def then_field_is_enabled(context, field, not_, state):
         The "Phone Number" field is disabled
 
     """
+    not_ = bool(not_)
     logger.info(f'Asserting that "{field}" is {"not " if not_ else ""}{state}.')
     require_enabled = (state == 'enabled') != not_
     field = context.page[field]
     if require_enabled:
-        assert not field._element.get_attribute('disabled')
+        assert not field._element.get_attribute('disabled'), \
+            f'"{field}" is supposed to be enabled and it was not.'
     else:
-        assert field._element.get_attribute('disabled')
+        assert field._element.get_attribute('disabled'), (
+            f'"{field}" is supposed to be disabled and it was not.'
+        )
 
 
 @then('the "{field}" field does {not_:optional_not}accept {input_type:field_input_type}')
@@ -138,8 +147,11 @@ def then_field_accepts_type(context, field, not_, input_type):
         The "Phone Number" field does not accept numbers
 
     """
+    not_ = bool(not_)
     logger.info(f'Asserting that "{field}" does {"not " if not_ else ""}accept {input_type}.')
-    field = context.page[field]
-    type = field._element.get_attribute('type')
-    # Assert that the input-type equals the type or that they don't match.
-    assert (type == input_type) != not_
+    element = context.page[field]
+    type = element._element.get_attribute('type')
+    assert (type == input_type) != not_, (
+        f'"{field}" is {"not " if not_ else ""}supposed to accept '
+        f'{input_type} but did{"" if not_ else " not"}.'
+    )

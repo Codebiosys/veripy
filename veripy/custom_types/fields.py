@@ -115,7 +115,10 @@ def parse_word_field_type(text):
     ``password``, ``tel``, ``text``, ``url``, ``file`` as well as their plural
     counterparts (i.e. ``passwords``).
     """
-    return text.strip()
+    text = text.strip()
+    if text[-1] == 's':
+        text = text[:-1]
+    return text
 
 
 register_type(field_input_type=parse_word_field_type)
