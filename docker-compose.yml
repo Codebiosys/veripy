@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
   www:
@@ -12,7 +12,9 @@ services:
       - ./docs/_build/html:/var/www/public/docs/
 
   veripy:
-    build: .
+    build:
+      context: .
+      target: development
     environment:
       - BROWSER=remote
       - SELENIUM_URL=http://selenium_hub:4444/wd/hub
