@@ -51,13 +51,17 @@
             <label>
               Random Value
               <span id="rando"></span>
-            </label>
+            </label><br />
+
+            <label>
+              Link to another page
+              <a href="/other-page.html" id="other-page-link">Go to Other Page &#8594;</a>
+            </label><br />
         </div>
     </body>
 
     <script>
       // Set the value of the random element.
-      console.log('Setting random value.')
       document.getElementById('rando').innerText = Math.random().toString();
     </script>
 </html>

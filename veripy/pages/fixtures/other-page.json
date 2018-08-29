@@ -1,0 +1,13 @@
+{
+  "url": "http://www/other-page.html",
+  "elements": {
+    "Other Random Number": {
+      "by": "id",
+      "selector": "other-rando"
+    },
+    "h1": {
+      "by": "tag",
+      "selector": "h1"
+    }
+  }
+}

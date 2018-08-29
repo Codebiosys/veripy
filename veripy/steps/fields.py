@@ -66,6 +66,7 @@ def when_upload_file_to_field(context, field, filename):
 
     field = context.page[field]
     field._element.send_keys(filename)
+    context.step.stored_value = filename
 
 
 # Then
