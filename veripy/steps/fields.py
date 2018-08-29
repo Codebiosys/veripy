@@ -1,4 +1,5 @@
 import logging
+import os.path
 
 from behave import given, when, then
 
@@ -52,6 +53,23 @@ def when_click_element(context, element_name):
     element.click()
 
 
+@when('the user clears the "{element_name}"')
+def clear_input(context, element_name):
+    """ Tells the browser to clear the target input element
+
+    This method only works with traditional HTML input elements.
+    Your mileage-may-vary with browser plugins.
+
+    ::
+
+        When the user clears the "Prefilled Input"
+
+    """
+    logger.info(f'Clearing "{element_name}".')
+    element = context.page[element_name]
+    element.clear()
+
+
 @when('the file "{filename:file_input_type}" has been added to the "{field}" field')
 def when_upload_file_to_field(context, field, filename):
     """ Given that the desired file is located in the ``RESOURCES_DIR`` this
@@ -68,6 +86,24 @@ def when_upload_file_to_field(context, field, filename):
     field._element.send_keys(filename)
     context.step.stored_value = filename
 
+
+@when('the content from "{filename:file_input_type}" is entered into the "{field}"')
+def when_file_content_entered(context, field, filename):
+    """ Copies the text from the given filename and enters it into the target element
+    ::
+
+        When the content from "My File.md" has been entered into the "Markdown Editor"
+
+    """
+    logger.info(f'Entering content from "{filename}" into "{field}".')
+    assert filename is not None, 'No file specified'
+    assert os.path.isfile(filename), 'Specified file does not exist'
+
+    with open(filename) as fp:
+        content = fp.read()
+
+    field = context.page[field]
+    field.fill(content)
 
 # Then
 
