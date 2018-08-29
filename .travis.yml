@@ -30,7 +30,7 @@ before_install:
   - echo "127.0.0.1       www" | sudo tee -a /etc/hosts
 
 install:
-  - pip install -r dev-requirements.txt
+  - pip install -r requirements-development.txt
 
 script:
   - flake8

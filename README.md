@@ -1,9 +1,17 @@
-# VeriPy
+> Active Development. This product is in active development; breaking changes
+> as well as major refactors should be expected. As with all software, make sure
+> the project works for you before using it.
+
+# VeriPy &middot; [![Build Status](https://travis-ci.com/Codebiosys/veri-py.svg?token=sqxCEuNQWHfr2F3qwRmC&branch=master)](https://travis-ci.com/Codebiosys/veri-py) ![Python Versions](https://img.shields.io/badge/Python-3.6-blue.svg)
 
 *Browser based Gherkin Testing Made Easy*
 
-[![Build Status](https://travis-ci.com/Codebiosys/veri-py.svg?token=sqxCEuNQWHfr2F3qwRmC&branch=master)](https://travis-ci.com/Codebiosys/veri-py)
-![Python Versions](https://img.shields.io/badge/Python-3.6-blue.svg)
+VeriPy is a testing framework that can test a web-based system
+programmatically and output a report for inclusion in validation documentation.
+The purpose of VeriPy is to help automate the validation process encountered
+in clinical systems, especially regressive validations. VeriPy can reduce the
+time it takes for groups with regulatory requirements to introduce new software
+versions into their pipelines/workflows.
 
 ## Installation
 
