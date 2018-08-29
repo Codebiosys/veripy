@@ -37,6 +37,10 @@
       "by": "id",
       "selector": "rando"
     },
+    "Other Page Link": {
+      "by": "id",
+      "selector": "other-page-link"
+    },
     "form": {
       "by": "tag",
       "selector": "form",

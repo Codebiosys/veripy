@@ -7,7 +7,7 @@ services:
       - "80:80"
     volumes:
       - ./example/nginx-services.conf:/etc/nginx/conf.d/default.conf
-      - ./example/index.html:/var/www/public/index.html
+      - ./example:/var/www/public
       - ./reports:/var/www/public/reports
       - ./docs/_build/html:/var/www/public/docs/
 
@@ -22,7 +22,8 @@ services:
       - www
       - selenium_hub
     volumes:
-      - ./:/app/
+      - ./reports:/app/reports
+      - ./veripy:/app/veripy
     links:
       - selenium_hub:selenium_hub
 

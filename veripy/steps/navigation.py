@@ -1,6 +1,6 @@
 import logging
 
-from behave import when, given
+from behave import when, given, then
 
 from veripy import custom_types  # noqa
 
@@ -24,6 +24,63 @@ def given_browser_is_at(context, name):
     logger.info(f'Navigating to page named "{name}"')
     context.page = Page(name, context.browser)
     context.page.browser.visit(context.page.url)
+
+
+@given('the browser is now at "{name}"')
+@when('the browser is now at "{name}"')
+def given_when_page_switch(context, name):
+    """ Allow the user to specify that the browser has implicitly navigated
+    to a new page (usually by clicking a link or submitting a form).
+    ::
+
+        When the browser is now at "Requisitions"
+        # or
+        Given the browser is now at "Requisitions"
+
+    This step simply changes the context of the browser page to allow the user
+    to specify elements using the page's convenience selectors.
+
+    In some cases it is not possible to assert that the page URL is some value
+    because the value is determined at runtime (dynamic URLs, etc). In most cases
+    users should prefer the assertion statement:
+    ::
+
+        Then the browser should be at "Requisitions"
+
+    This statement not only switches the context, but asserts that the current URL
+    is correct for the given page context.
+    """
+    logger.info(f'Switching page context to "{name}"')
+    context.page = Page(name, context.browser)
+
+
+@then('the browser should be at "{name}"')
+def then_page_switch(context, name):
+    """ Assert that the browser has navigated to the new given page, and switch
+    the page context to the new page.
+    ::
+
+        Then the browser should be at "Requisitions"
+
+    This step simply changes the context of the browser page to allow the user
+    to specify elements using the page's convenience selectors.
+
+    If the user has implicitly landed on a page (as a result of a button click,
+    or form submission) that has a dynamic URL, asserting the page URL will cause
+    a failure. In those cases, use the following variation.
+    ::
+
+        When the browser is now at "Requisitions"
+        # or
+        Given the browser is now at "Requisitions"
+
+    These variations do the same context switch without asserting the current URL
+    is the same as the page URL value.
+    """
+    logger.info(f'Asserting the page is "{name}" and switching contexts.')
+    page = Page(name, context.browser)
+    assert page.url == context.browser.url
+    context.page = page
 
 
 @given('the browser window is {width:d} by {height:d} pixels')
