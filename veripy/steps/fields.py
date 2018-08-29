@@ -103,7 +103,7 @@ def when_file_content_entered(context, field, filename):
         content = fp.read()
 
     field = context.page[field]
-    field._element.send_keys(content)
+    field.fill(content)
 
 # Then
 
