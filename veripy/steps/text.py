@@ -10,23 +10,31 @@ logger = logging.getLogger('text')
 def check_page_title(context, title):
     """ Asserts that the browser page's current title is the given value. """
     logger.info(f'Asserting that the page title is "{title}".')
-    assert context.page.browser.title == title
+    assert context.page.browser.title == title, (
+        f'The page title was supposed to be "{title}" but was not.'
+    )
 
 
 @then('the "{element}" contains the text "{text}"')
 def check_element_text(context, element, text):
     """ Asserts that the element contains the given value as text. """
     logger.info(f'Asserting that the element "{element}" contains the text "{text}".')
-    assert text in context.page[element].text
+    assert text in context.page[element].text, (
+        f'"{element}" was supposed to contain "{text}" and did not.'
+    )
 
 
 @then('the "{element}" is {not_:optional_not}visible')
 def check_element_visible(context, element, not_):
     """ Asserts that the element is the visible on the page. """
     try:
-        assert context.page[element].visible != not_
+        assert context.page[element].visible != not_, (
+            f'The element "{element}" was supposed to be visible and was not.'
+        )
     except AttributeError:
-        assert not_
+        assert not_, (
+            f'The element "{element}" was not supposed to be visible and was.'
+        )
 
 
 @then('the {position:d}{ordinal:ordinal_indicator} {sub_element:w} in the "{element_name}" \

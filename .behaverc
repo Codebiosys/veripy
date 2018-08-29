@@ -1,4 +1,6 @@
 [behave]
-; For some reason, formatter must be relative, not absolute dotted path
 format=formatters.cucumber_json:PrettyCucumberJSONFormatter
 outfiles=reports/cucumber.json
+show_snippets=false
+quiet=true
+show_timings=false
