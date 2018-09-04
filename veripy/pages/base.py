@@ -250,7 +250,6 @@ class Page(object):
         else:
             return results[0]
 
-
     def wait_for(self, selector, by=None, present=True, **kwargs):
         logger.info(f'Selecting element "{selector}" by "{by}" on page "{self.name}".')
         if by is None:

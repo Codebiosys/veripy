@@ -1,5 +1,4 @@
 import logging
-import time
 
 from behave import when, given, then
 
