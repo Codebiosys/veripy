@@ -3,6 +3,7 @@ import os.path
 import json
 
 from veripy import settings
+from veripy.utils import allow_retries
 
 
 logger = logging.getLogger(__name__)
@@ -70,6 +71,12 @@ class Page(object):
     class InvalidConfiguration(Exception):
         pass
 
+    class ElementNotFound(Exception):
+        pass
+
+    class MultipleElementsFound(Exception):
+        pass
+
     def __init__(self, name, browser):
         self.name = name
         self.browser = browser
@@ -97,10 +104,7 @@ class Page(object):
 
     def __getitem__(self, name):
         property = getattr(self._elements, name)
-        try:
-            return self.find(property['selector'], property['by'], **property.get('kwargs', {}))
-        except Exception:
-            raise KeyError(f'Item {name} was not found.')
+        return self.find(property['selector'], property['by'], **property.get('kwargs', {}))
 
     def _find_selectors(self, by='id', parent=None):
         if parent is None:
@@ -144,7 +148,7 @@ class Page(object):
             'text': parent.is_element_present_by_text,
             'value': parent.is_element_present_by_value,
             'xpath': parent.is_element_present_by_xpath,
-            }
+        }
         return selectors[by]
 
     def _abscence_selectors(self, by='id', parent=None):
@@ -159,12 +163,13 @@ class Page(object):
             'text': parent.is_element_not_present_by_text,
             'value': parent.is_element_not_present_by_value,
             'xpath': parent.is_element_not_present_by_xpath,
-            }
+        }
         return selectors[by]
 
     # Public Methods
 
-    def find(self, selector, by='id', **kwargs):
+    @allow_retries(retry_on=(ElementNotFound,), retries=1)
+    def find(self, selector, by='id', allow_multiple=False, **kwargs):
         """ Given a method and a selector, attempt to find the given element
         with the selector by the given method. The default method is by ID. All
         additional kwargs are passed to the selector method.
@@ -175,10 +180,31 @@ class Page(object):
             page.find('button[type="submit"]', by='css')
         """
         logger.info(f'Selecting element "{selector}" by "{by}" on page "{self.name}".')
-        method = self._find_selectors(by)
-        return method(selector, **kwargs)
 
-    def find_children(self, selector, by=None, parent=None, **kwargs):
+        # Before we attempt to select the item, wait a max of 3 seconds to give
+        # animations or other effects to render the item we need.
+        self.wait_for(selector, by, wait_time=3)
+
+        method = self._find_selectors(by)
+        results = method(selector, **kwargs)
+
+        if len(results) == 0:
+            raise Page.ElementNotFound(
+                f'The element described by "{selector}" was not found.'
+            )
+
+        visible_results = [result for result in results if result.visible]
+        if not allow_multiple and len(visible_results) > 1:
+            raise Page.MultipleElementsFound(
+                f'The selector "{selector}" describes multiple visible elements.'
+            )
+
+        if allow_multiple:
+            return results
+        else:
+            return results[0]
+
+    def find_children(self, selector, by=None, parent=None, allow_multiple=False, **kwargs):
         """ Given a method, a parent and a selector, attempt to find the given element
         with the selector within the parent by the given method. The default method is by ID. All
         additional kwargs are passed to the selector method.
@@ -187,8 +213,10 @@ class Page(object):
 
             page.find_children('submitButton', parent='Parent Form')
         """
-        logger.info(f'Selecting child element "{selector}" on "{parent}" \
-        by "{by}" on page "{self.name}".')
+        logger.info(
+            f'Selecting child element "{selector}" on "{parent}" by "{by}" on '
+            f'page "{self.name}".'
+        )
         if parent is None:
             parent_element = self.browser
             parent_selector = getattr(self._elements, selector)
@@ -201,9 +229,27 @@ class Page(object):
             if by is None:
                 by = parent_selector['by']
         except Exception:
-            raise KeyError(f'Child Element {selector} was not found.')
+            raise Page.ElementNotFound(f'Child Element {selector} was not found.')
+
         method = self._find_selectors(by, parent_element)
-        return method(child_selector, **kwargs)
+        results = method(child_selector, **kwargs)
+
+        if len(results) == 0:
+            raise Page.ElementNotFound(
+                f'The element described by "{selector}" was not found.'
+            )
+
+        visible_results = [result for result in results if result.visible]
+        if not allow_multiple and len(visible_results) > 1:
+            raise Page.MultipleElementsFound(
+                f'The selector "{selector}" describes multiple visible elements.'
+            )
+
+        if allow_multiple:
+            return results
+        else:
+            return results[0]
+
 
     def wait_for(self, selector, by=None, present=True, **kwargs):
         logger.info(f'Selecting element "{selector}" by "{by}" on page "{self.name}".')

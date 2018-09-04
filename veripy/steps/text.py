@@ -2,11 +2,14 @@ import logging
 
 from behave import then
 
+from veripy.utils import allow_retries
+
 
 logger = logging.getLogger('text')
 
 
 @then('the page title should be "{title}"')
+@allow_retries(retry_on=(AssertionError,), retries=1)
 def check_page_title(context, title):
     """ Asserts that the browser page's current title is the given value. """
     logger.info(f'Asserting that the page title is "{title}".')
@@ -37,8 +40,10 @@ def check_element_visible(context, element, not_):
         )
 
 
-@then('the {position:d}{ordinal:ordinal_indicator} {sub_element:w} in the "{element_name}" \
-contains the text "{text}"')
+@then(
+    'the {position:d}{ordinal:ordinal_indicator} {sub_element:w} in the "{element_name}" '
+    'contains the text "{text}"'
+)
 def check_nth_element_text(context, position, ordinal, sub_element, element_name, text):
     """ Asserts that the nth element contains the given value as text
     ::
@@ -47,7 +52,11 @@ def check_nth_element_text(context, position, ordinal, sub_element, element_name
     """
     logger.info(f'Asserting that the {position}{ordinal} "{sub_element}" \
     of the element: "{element_name}" contains the text "{text}".')
-    chosen_elements = context.page.find_children(sub_element, parent=element_name)
+    chosen_elements = context.page.find_children(
+        sub_element,
+        parent=element_name,
+        allow_multiple=True
+    )
     assert text in chosen_elements[position-1].text
 
 
