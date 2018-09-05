@@ -204,52 +204,6 @@ class Page(object):
         else:
             return results[0]
 
-    def find_children(self, selector, by=None, parent=None, allow_multiple=False, **kwargs):
-        """ Given a method, a parent and a selector, attempt to find the given element
-        with the selector within the parent by the given method. The default method is by ID. All
-        additional kwargs are passed to the selector method.
-
-        **Example**::
-
-            page.find_children('submitButton', parent='Parent Form')
-        """
-        logger.info(
-            f'Selecting child element "{selector}" on "{parent}" by "{by}" on '
-            f'page "{self.name}".'
-        )
-        if parent is None:
-            parent_element = self.browser
-            parent_selector = getattr(self._elements, selector)
-        else:
-            parent_element = self[parent]
-            parent_selector = getattr(self._elements, parent)['elements'][selector]
-
-        try:
-            child_selector = parent_selector['selector']
-            if by is None:
-                by = parent_selector['by']
-        except Exception:
-            raise Page.ElementNotFound(f'Child Element {selector} was not found.')
-
-        method = self._find_selectors(by, parent_element)
-        results = method(child_selector, **kwargs)
-
-        if len(results) == 0:
-            raise Page.ElementNotFound(
-                f'The element described by "{selector}" was not found.'
-            )
-
-        visible_results = [result for result in results if result.visible]
-        if not allow_multiple and len(visible_results) > 1:
-            raise Page.MultipleElementsFound(
-                f'The selector "{selector}" describes multiple visible elements.'
-            )
-
-        if allow_multiple:
-            return results
-        else:
-            return results[0]
-
     def wait_for(self, selector, by=None, present=True, **kwargs):
         logger.info(f'Selecting element "{selector}" by "{by}" on page "{self.name}".')
         if by is None:
