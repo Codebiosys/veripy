@@ -46,13 +46,10 @@
       "selector": "other-page-link"
     },
     "form": {
-      "by": "tag",
-      "selector": "form",
-      "elements": {
-        "label": {
-          "by": "tag",
-          "selector": "label"
-        }
+      "by": "css",
+      "selector": "form label",
+      "kwargs": {
+        "allow_multiple": true
       }
     }
   }

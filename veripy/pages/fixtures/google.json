@@ -2,12 +2,15 @@
     "url": "https://google.com/",
     "elements": {
         "search_field": {
-            "by": "id",
-            "selector": "lst-ib"
+            "by": "css",
+            "selector": "input[type='text']"
         },
         "submit_button": {
             "by": "value",
-            "selector": "Google Search"
+            "selector": "Google Search",
+            "kwargs": {
+                "allow_multiple": true
+            }
         },
         "search_results_logo": {
             "by": "id",
