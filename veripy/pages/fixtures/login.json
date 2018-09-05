@@ -1,0 +1,17 @@
+{
+  "url": "http://www/login.html",
+  "elements": {
+    "User Name Field": {
+      "by": "css",
+      "selector": "[name=\"username\"]"
+    },
+    "Password Field": {
+      "by": "css",
+      "selector": "[name=\"password\"]"
+    },
+    "Log In Button": {
+      "by": "css",
+      "selector": "[type=submit]"
+    }
+  }
+}

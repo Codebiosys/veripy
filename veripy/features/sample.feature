@@ -80,3 +80,10 @@ Feature: showing off behave
       Given that the browser is at "localhost-hello"
       When the content from "copyable-file.txt" is entered into the "textarea_field"
       Then take a screen shot
+
+    Scenario: Test that the user can send login credentials at the specified page
+        Given that the browser is at "login"
+        Then take a screen shot
+
+        Given the user logged in via "login" with username "username" and password "password"
+        Then take a screen shot
