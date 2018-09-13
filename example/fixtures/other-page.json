@@ -8,6 +8,10 @@
     "h1": {
       "by": "tag",
       "selector": "h1"
+    },
+    "Missing Link": {
+      "by": "id",
+      "selector": "an-element-that-is-not-on-the-page"
     }
   }
 }
