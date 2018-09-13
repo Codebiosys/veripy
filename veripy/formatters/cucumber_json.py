@@ -161,17 +161,17 @@ class CucumberJSONFormatter(Formatter):
             error_message = step.error_message
             result_element = self.current_step['result']
             result_element['error_message'] = error_message
-        self._step_index += 1
 
         if getattr(step, 'screenshots', False) and len(step.screenshots) > 0:
-            step_element = self.current_feature_element['steps'][-1]
-            step_element['embeddings'] = [
+            self.current_step['embeddings'] = [
                 {
                     'data': base64.b64encode(data).decode('ascii'),
                     'media': {'type': mime_type},
                 }
                 for data, mime_type in step.screenshots
             ]
+
+        self._step_index += 1
 
     def eof(self):
         """

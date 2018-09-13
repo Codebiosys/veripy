@@ -1,6 +1,8 @@
 import logging
 
 from behave.log_capture import capture
+from behave.model_core import Status
+
 import splinter
 
 from veripy.utils import mkdir
@@ -58,3 +60,12 @@ def before_step(context, step):
     # something so that we can eventually add all kinds of things to the step.
     step.screenshots = []
     context.step = step
+
+
+@capture
+def after_step(context, step):
+    """ Here we capture the screen if the step is a failure.
+    """
+    if step.status == Status.failed:
+        from veripy.utils.browsers import screenshot_bytes
+        step.screenshots.append(screenshot_bytes(context))
