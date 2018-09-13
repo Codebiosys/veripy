@@ -1,5 +1,11 @@
 from behave import given, when, then
 
+from aggregates import * # noqa
+from capture import * # noqa
+from content import * # noqa
+from forms import * # noqa
+from navigation import * # noqa
+
 
 @given('we have behave installed')
 def given_test(context):

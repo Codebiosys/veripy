@@ -35,4 +35,3 @@ FROM base AS production
 COPY . .
 
 # Default command to get the application up and running
-# CMD ["behave", "veripy/features"]
