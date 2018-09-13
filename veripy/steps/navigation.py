@@ -151,3 +151,14 @@ def when_click_nth_element(context, position, ordinal, words, element_name):
     """
     logger.info(f'Clicking on {position}{ordinal} "{words}" of the element: "{element_name}".')
     context.page[element_name][position-1].click()
+
+
+@when('"{value}" is selected for "{name}"')
+def select_option_by(context, value, name):
+    """ Tells the browser to select the HTML `<option>` with the specified value.
+
+    ::
+
+        When "MOBILE" is selected for "Contact Options"
+    """
+    context.page[name].select(value)

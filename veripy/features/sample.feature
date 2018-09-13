@@ -37,6 +37,10 @@ Feature: showing off behave
 
         When the file "uploadable-file.txt" has been added to the "file_field" field
 
+        When "green" is selected for "select_field"
+
+        Then the "select_field" contains the text "Green Color"
+
         Then the "optional_field" field is not required
         Then the "required_field" field is required
 
