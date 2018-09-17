@@ -24,6 +24,7 @@ RUN pip install -r requirements-development.txt
 
 # Copy source code last so it can be mounted in Compose
 COPY . .
+RUN pip install -e .
 
 
 #
@@ -33,5 +34,6 @@ FROM base AS production
 
 # Copy source code last so it can be mounted in Compose
 COPY . .
+RUN pip install .
 
 # Default command to get the application up and running

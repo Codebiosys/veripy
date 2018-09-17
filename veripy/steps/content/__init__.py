@@ -1,2 +1,2 @@
-from content.actions import * # noqa
-from content.checks import * # noqa
+from .actions import * # noqa
+from .checks import * # noqa

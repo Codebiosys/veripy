@@ -1,2 +1,2 @@
-from navigation.actions import * # noqa
-from navigation.checks import * # noqa
+from .actions import * # noqa
+from .checks import * # noqa

@@ -5,11 +5,11 @@ from behave.model_core import Status
 
 import splinter
 
-from veripy.utils import mkdir
-from veripy import settings
+from . import settings
+from .utils import mkdir
 
 # bootstrap the custom types
-from veripy import custom_types  # noqa
+from . import custom_types  # noqa
 
 
 # Bootstrap the logger.
@@ -23,8 +23,8 @@ def before_all(context):
     a directory for the report to be written to.
     """
     logger.debug('Setting up tmp directory and reports output directory.')
-    context.tmp_directory = settings.TMP_DIRECTORY
-    mkdir(settings.REPORTS_DIRECTORY)
+    context.tmp_directory = settings.TMP_DIR
+    mkdir(settings.REPORTS_DIR)
 
 
 @capture
