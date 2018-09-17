@@ -1,1 +1,1 @@
-from aggregates.actions import * # noqa
+from .actions import * # noqa

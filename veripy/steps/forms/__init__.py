@@ -1,2 +1,2 @@
-from forms.actions import * # noqa
-from forms.checks import * # noqa
+from .actions import * # noqa
+from .checks import * # noqa

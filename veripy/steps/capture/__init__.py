@@ -1,4 +1,8 @@
-from os.path import dirname, basename, isfile
-import glob
-modules = glob.glob(dirname(__file__)+"/*.py")
-__all__ = [basename(f)[:-3] for f in modules if isfile(f) and not f.endswith('__init__.py')]
+from .capture_content import *
+from .capture_screenshot import *
+
+__all__ = [
+    'capture_element_text',
+    'capture_screenshot'
+]
+

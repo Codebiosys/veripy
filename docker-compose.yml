@@ -6,9 +6,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./example/nginx-services.conf:/etc/nginx/conf.d/default.conf
-      - ./example:/var/www/public
-      - ./reports:/var/www/public/reports
+      - ./example/sampleapp/nginx-services.conf:/etc/nginx/conf.d/default.conf
+      - ./example/sampleapp:/var/www/public
+      - ./reports/reports:/var/www/public/reports
       - ./docs/_build/html:/var/www/public/docs/
 
   veripy:
@@ -17,30 +17,25 @@ services:
       target: development
     environment:
       - BROWSER=remote
-      - SELENIUM_URL=http://selenium_hub:4444/wd/hub
+      - SELENIUM_URL=http://browser:4444/wd/hub
       - ENVIRONMENT=dev
-      - PYTHONPATH=/app/veripy/
-    depends_on:
-      - www
-      - selenium_hub
+      - REPORTS_DIR=/app/example/reports
+      - FIXTURES_DIR=/app/example/fixtures
+      - RESOURCES_DIR=/app/example/resources
     volumes:
-      - ./reports:/app/reports
+      - ./example:/app/example
       - ./veripy:/app/veripy
-    links:
-      - selenium_hub:selenium_hub
 
   #
   # Browser virtualization integration testing
   #
-  selenium_hub:
+  browser:
     image: selenium/standalone-chrome-debug
-    privileged: true
-    depends_on:
-      - www
     ports:
       - "4444:4444"
       - "5900:5900"
     volumes:
-      - "uploads:/uploads"
-volumes:
-  uploads:
+      # Location to use for browsing for files to upload via browser
+      - ./example/resources:/e2e/uploads
+      # Shared memory, selenium recommends using host's shared memory or setting to 2gb
+      - /dev/shm:/dev/shm
