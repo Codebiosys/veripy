@@ -25,6 +25,7 @@ services:
     volumes:
       - ./example:/app/example
       - ./veripy:/app/veripy
+      - ./docs:/app/docs
 
   #
   # Browser virtualization integration testing

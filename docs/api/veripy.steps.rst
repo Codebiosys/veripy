@@ -9,7 +9,7 @@ Browser Navigation
     :undoc-members:
     :show-inheritance:
 
-Interacting with Fields
+Interacting with Forms
 -----------------------
 
 .. automodule:: veripy.steps.forms
@@ -25,11 +25,20 @@ Interacting with Text
     :undoc-members:
     :show-inheritance:
 
-Capturing Screen Shots
+
+Working with other sentences
+------------------------
+
+.. automodule:: veripy.steps.aggregates
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Capturing Content
 ----------------------
 
 .. automodule:: veripy.steps.capture
     :members:
     :undoc-members:
     :show-inheritance:
-
