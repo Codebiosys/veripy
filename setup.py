@@ -46,5 +46,5 @@ setup(
     #  entry_points="""
     #      [console_scripts]
     #      pydf=pydf.commands.cli:main
-   #  """
+    #  """
 )
