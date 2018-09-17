@@ -39,10 +39,10 @@ RUN_HEADLESS = (
 
 # A place for the test runner to store temporary files (like screenshots)
 # during test runs.
-TMP_DIRECTORY = os.environ.get('TMP_DIRECTORY', '/tmp/behave')
+TMP_DIR = os.environ.get('TMP_DIR', '/tmp/behave')
 
 # Where to put the output reports.
-REPORTS_DIRECTORY = os.environ.get('REPORTS_DIRECTORY', '../reports')
+REPORTS_DIR = os.environ.get('REPORTS_DIR', '../reports')
 
 FIXTURES_DIR = os.environ.get('FIXTURES_DIR', os.path.join(BASE_DIR, 'pages', 'fixtures'))
 RESOURCES_DIR = os.environ.get('RESOURCES_DIR', os.path.join(BASE_DIR, 'resources'))

@@ -2,8 +2,8 @@ import logging
 import os.path
 import json
 
-from veripy import settings
-from veripy.utils import allow_retries
+from .. import settings
+from ..utils import allow_retries
 
 
 logger = logging.getLogger(__name__)

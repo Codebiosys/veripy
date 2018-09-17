@@ -1,6 +1,0 @@
-[behave]
-format=formatters.cucumber_json:PrettyCucumberJSONFormatter
-outfiles=reports/cucumber.json
-show_snippets=false
-quiet=true
-show_timings=false

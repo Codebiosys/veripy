@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from behave import register_type
 import parse
 
-from veripy import settings
+from .. import settings
 
 
 @parse.with_pattern(r"(st|nd|rd|th)")

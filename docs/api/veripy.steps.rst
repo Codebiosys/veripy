@@ -9,10 +9,10 @@ Browser Navigation
     :undoc-members:
     :show-inheritance:
 
-Interacting with Fields
+Interacting with Forms
 -----------------------
 
-.. automodule:: veripy.steps.fields
+.. automodule:: veripy.steps.forms
     :members:
     :undoc-members:
     :show-inheritance:
@@ -20,16 +20,25 @@ Interacting with Fields
 Interacting with Text
 ------------------------
 
-.. automodule:: veripy.steps.text
+.. automodule:: veripy.steps.content
     :members:
     :undoc-members:
     :show-inheritance:
 
-Taking Screen Shots
--------------------
 
-.. automodule:: veripy.steps.screenshots
+Working with other sentences
+------------------------
+
+.. automodule:: veripy.steps.aggregates
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Capturing Content
+----------------------
+
+.. automodule:: veripy.steps.capture
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -16,7 +16,7 @@ addons:
 
 before_install:
   # Start the python web server to test against
-  - cd example && sudo python -m SimpleHTTPServer 80 &
+  - cd example/sampleapp && sudo python -m SimpleHTTPServer 80 &
   # Start Chrome
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   # Install the Chrome Driver according to the Spliter Docs
@@ -30,13 +30,13 @@ before_install:
   - echo "127.0.0.1       www" | sudo tee -a /etc/hosts
 
 install:
-  - pip install -r requirements-development.txt
+  - pip install .[develop]
 
 script:
   - flake8
-  - (cd docs && make html)
+  - make -C docs html
   # TODO: Optimize this command. It's wonky right now.
-  - PYTHONPATH=`pwd`/veripy:$PYTHONPATH behave veripy/features/
+  - FIXTURES_DIR=example/fixtures RESOURCES_DIR=`pwd`/example/resources REPORTS_DIR=example/report behave example/features
 
 # TODO: We don't have coveralls yet.
 # after_success: coveralls

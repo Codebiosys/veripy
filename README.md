@@ -22,8 +22,11 @@ Installing VeriPy is really simple but has a few more steps than most Python pro
 3. Install the requirements
 
 ```bash
-# For production use, just install the normal requirements.txt.
-pip install -r dev-requirements.txt
+# Development
+pip install -e veripy[develop]
+
+#Production
+pip install veripy
 ```
 
 4. Set up your preferred browser driver (default is chrome). Use these instructions
@@ -52,7 +55,6 @@ Behave is configured using environment variables. Please refer to the settings.p
 ```bash
 cat > environment.sh << EOF
 export ENVIRONMENT=dev
-export PYTHONPATH=`pwd`/veripy:$PYTHONPATH
 EOF
 
 source environment.sh
@@ -64,7 +66,7 @@ source environment.sh
 VeriPy is built on Behave. As such any files ending in `.feature` inside of the `features/` directory will be run when the application starts. VeriPy comes with a sample set of tests demonstrating how to use the statements. To run these or any custom tests, use the following command:
 
 ```bash
-behave veripy/features/
+behave example/features/
 ```
 
 
@@ -73,15 +75,13 @@ behave veripy/features/
 VeriPy uses Sphinx for documentation. Once you've installed the dependencies, simply run the following command to generate the docs.
 
 ```bash
-cd docs/
-make html
+make -C docs html
 ```
 
 You should now see a `_build` directory. Either open `index.html` in a browser or serve the directory directly using the following command.
 
 ```bash
-cd _build/html
-python -m http.server
+python -m http.server --directory docs/_build/html
 ```
 
 You should now be able to navigate to [http://localhost:8000/](http://localhost:8000/) and see the documentation.

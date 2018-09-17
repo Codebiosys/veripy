@@ -29,9 +29,13 @@ Installing Veri-Py is really simple but has a few more steps than most Python pr
 3. Install the requirements
 
 ```bash
-# For production use, just install the normal requirements.txt.
-pip install -r dev-requirements.txt
+# Development
+pip install -e veripy[develop]
+
+#Production
+pip install veripy
 ```
+
 
 4. Set up your preferred browser driver (default is chrome). Use these instructions
 
@@ -59,7 +63,6 @@ Behave is configured using environment variables. Please refer to the settings.p
 ```bash
 cat > environment.sh << EOF
 export ENVIRONMENT=dev
-export PYTHONPATH=`pwd`/veripy:$PYTHONPATH
 EOF
 
 source environment.sh
@@ -71,6 +74,5 @@ source environment.sh
 Veri-Py is built on Behave. As such any files ending in `.feature` inside of the `features/` directory will be run when the application starts. Veri-Py comes with a sample set of tests demonstrating how to use the statements. To run these or any custom tests, use the following command:
 
 ```bash
-behave veripy/features/
+behave example/features/
 ```
-
