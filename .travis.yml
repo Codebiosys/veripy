@@ -30,11 +30,11 @@ before_install:
   - echo "127.0.0.1       www" | sudo tee -a /etc/hosts
 
 install:
-  - pip install -r requirements-development.txt
+  - pip install .[develop]
 
 script:
   - flake8
-  - (cd docs && make html)
+  - make -C docs html
   # TODO: Optimize this command. It's wonky right now.
   - behave example/features/
 
