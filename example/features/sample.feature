@@ -19,7 +19,6 @@ Feature: showing off behave
         Then the page title should be "hello world - Google Search"
         Then take a screen shot
 
-    @wtf
     Scenario: Test if the demo app has the title "Hello World"
         Given that the browser is at "localhost-hello"
         Then the page title should be "Hello World"
