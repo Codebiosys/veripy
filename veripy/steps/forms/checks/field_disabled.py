@@ -26,13 +26,13 @@ def then_field_is_enabled(context, field, not_, state):
     logger.info(f'Asserting that "{field}" is {"not " if not_ else ""}{state}.')
     require_enabled = (state == 'enabled') != not_
     try:
-        field = context.page[field]
+        element = context.page[field]
     except context.page.ElementNotFound:
-        raise AssertionError(f'The {field} was not found on the page')
+        raise AssertionError(f'The "{field}" was not found on the page.')
     if require_enabled:
-        assert not field._element.get_attribute('disabled'), \
+        assert not element._element.get_attribute('disabled'), \
             f'"{field}" is supposed to be enabled and it was not.'
     else:
-        assert field._element.get_attribute('disabled'), (
+        assert element._element.get_attribute('disabled'), (
             f'"{field}" is supposed to be disabled and it was not.'
         )

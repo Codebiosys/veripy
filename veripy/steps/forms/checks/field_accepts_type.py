@@ -28,7 +28,7 @@ def then_field_accepts_type(context, field, not_, input_type):
     try:
         element = context.page[field]
     except context.page.ElementNotFound:
-        raise AssertionError(f'The {field} was not found on the page')
+        raise AssertionError(f'The "{field}" was not found on the page.')
 
     type = element._element.get_attribute('type')
     assert (type == input_type) != not_, (

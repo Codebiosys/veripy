@@ -1,4 +1,5 @@
 import logging
+import selenium.common.exceptions
 from behave import given, when
 
 logger = logging.getLogger('forms')
@@ -18,6 +19,8 @@ def when_enter_text_into_input(context, text, input_name):
     try:
         input = context.page[input_name]
     except context.page.ElementNotFound:
-        raise AssertionError(f'The {input_name} was not found on the page')
-
-    input.fill(text)
+        raise AssertionError(f'The "{input_name}" was not found on the page.')
+    try:
+        input.fill(text)
+    except selenium.common.exceptions.InvalidElementStateException:
+        raise AssertionError(f'The "{input_name}" cannot accept text.')

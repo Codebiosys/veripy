@@ -12,8 +12,8 @@ def check_element_text(context, element, text):
     try:
         page_element = context.page[element]
     except context.page.ElementNotFound:
-        raise AssertionError(f'The {element} was not found on the page')
+        raise AssertionError(f'The "{element}" was not found on the page.')
 
     assert text in page_element.text, (
-        f'"{element}" was supposed to contain "{text}" and did not.'
+        f'The "{element}" was supposed to contain "{text}", but instead had "{page_element.text}".'
     )

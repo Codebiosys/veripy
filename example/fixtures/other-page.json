@@ -5,7 +5,7 @@
       "by": "id",
       "selector": "other-rando"
     },
-    "h1": {
+    "Page Header": {
       "by": "tag",
       "selector": "h1"
     },

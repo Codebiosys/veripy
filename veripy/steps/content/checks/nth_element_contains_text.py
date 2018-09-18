@@ -1,4 +1,5 @@
 import logging
+import splinter.exceptions
 from behave import then
 
 logger = logging.getLogger('content')
@@ -21,11 +22,15 @@ def check_nth_element_text(context, position, ordinal, words, element_name, text
 
     try:
         page_element = context.page[element_name]
+
     except context.page.ElementNotFound:
-        raise AssertionError(f'The {element_name} was not found on the page')
+        raise AssertionError(f'The "{element_name}" was not found on the page.')
     try:
         nth_element = page_element[position-1]
-    except IndexError:
-        raise AssertionError(f'The {element_name} does not have a {position}{ordinal} {words}')
+    except (IndexError, splinter.exceptions.ElementDoesNotExist):
+        raise AssertionError(
+            f'The "{element_name}" does not have a {position}{ordinal} {words}.'
+        )
 
-    assert text in nth_element.text
+    assert text in nth_element.text, \
+        f'The {position}{ordinal} {words} in the "{element_name}" should have contained the text "{text}", but it did not.'  # noqa: E501

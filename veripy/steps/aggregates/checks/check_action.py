@@ -7,19 +7,19 @@ from veripy.utils.extract_substep_response import extract_substep_response
 logger = logging.getLogger('aggregates')
 
 
-@then('the statement that \'{sentence}\' responds with')
-def check_assertion(context, sentence):
+@then('if \'{sentence}\', the system responds with')
+def check_action(context, sentence):
     ''' Asserts that the given sentence raises an exception with the given message
     ::
 
-        the statement that 'the "Home Link" is visible' responds with
+        if 'the user clears the "Missing Field"', the system responds with
         """The element "Home Link" was supposed to be visible and was not."""
     '''
     message = context.text
     logger.info(f'Asserting that the sentence \'{sentence}\' raises the message \'{message}\'')
     try:
         context.execute_steps(f"""
-        Then {sentence}
+        When {sentence}
         """)
     except AssertionError as error:
         newMessage = extract_substep_response(error)
