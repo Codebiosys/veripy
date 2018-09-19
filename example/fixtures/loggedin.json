@@ -1,0 +1,9 @@
+{
+  "url": "http://www/logged_in.html",
+  "elements": {
+    "Log In Message": {
+      "by": "id",
+      "selector": "logged_in"
+    }
+  }
+}

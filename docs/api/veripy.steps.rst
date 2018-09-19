@@ -2,7 +2,7 @@ Steps
 =====
 
 Browser Navigation
------------------------
+------------------
 
 .. automodule:: veripy.steps.navigation
     :members:
@@ -10,7 +10,7 @@ Browser Navigation
     :show-inheritance:
 
 Interacting with Forms
------------------------
+----------------------
 
 .. automodule:: veripy.steps.forms
     :members:
@@ -18,7 +18,7 @@ Interacting with Forms
     :show-inheritance:
 
 Interacting with Text
-------------------------
+---------------------
 
 .. automodule:: veripy.steps.content
     :members:
@@ -27,7 +27,7 @@ Interacting with Text
 
 
 Working with other sentences
-------------------------
+----------------------------
 
 .. automodule:: veripy.steps.aggregates
     :members:
@@ -36,7 +36,7 @@ Working with other sentences
 
 
 Capturing Content
-----------------------
+-----------------
 
 .. automodule:: veripy.steps.capture
     :members:

@@ -9,7 +9,7 @@ services:
       - ./example/sampleapp/nginx-services.conf:/etc/nginx/conf.d/default.conf
       - ./example/sampleapp:/var/www/public
       - ./reports/reports:/var/www/public/reports
-      - ./docs/_build/html:/var/www/public/docs/
+      - ./docs/_build/html:/var/www/public/docs
 
   veripy:
     build:

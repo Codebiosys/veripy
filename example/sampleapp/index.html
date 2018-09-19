@@ -10,7 +10,7 @@
     <body>
         <div class="container">
             <h1>Hello World</h1>
-
+            <div id="invisible" style="display: none;">You cannot see me</div>
             <form action="." method="post">
               <label>
                 Required input
@@ -33,6 +33,11 @@
               </label>
               <br />
               <label>
+                Default value input
+                <input name="default-field" type="text" value="Default Value" />
+              </label>
+              <br />
+              <label>
                 Text input
                 <input name="text-field" type="text" />
               </label>
@@ -50,6 +55,13 @@
               <label>
                 File input
                 <input name="file-field" type="file" />
+              </label>
+              <label>
+                <div id="checkboxes">
+                <input type="checkbox" name="checkbox-one" value="red">Red<br>
+                <input type="checkbox" name="checkbox-two" value="green"> Green<br>
+                <input type="checkbox" name="checkbox-three" value="blue"> Blue<br>
+              </div>
               </label>
               <label>
                 Select input

@@ -28,7 +28,7 @@ def then_field_is_required(context, field, not_, state):
     try:
         element = context.page[field]
     except context.page.ElementNotFound:
-        raise AssertionError(f'The {field} was not found on the page')
+        raise AssertionError(f'The "{field}" was not found on the page.')
 
     if required:
         assert element._element.get_attribute('required'), (

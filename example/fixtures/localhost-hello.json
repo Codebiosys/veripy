@@ -1,45 +1,73 @@
 {
   "url": "http://www/",
   "elements": {
-    "h1": {
+    "Page Header": {
       "by": "tag",
       "selector": "h1"
     },
-    "required_field": {
+    "Hidden Content": {
+      "by": "id",
+      "selector": "invisible"
+    },
+    "Required Field": {
       "by": "name",
       "selector": "required-field"
     },
-    "optional_field": {
+    "Optional Field": {
       "by": "name",
       "selector": "optional-field"
     },
-    "enabled_field": {
+    "Enabled Field": {
       "by": "name",
       "selector": "enabled-field"
     },
-    "disabled_field": {
+    "Disabled Field": {
       "by": "name",
       "selector": "disabled-field"
     },
-    "text_field": {
+    "Default Field": {
+      "by": "name",
+      "selector": "default-field"
+    },
+    "Text Field": {
       "by": "name",
       "selector": "text-field"
     },
-    "textarea_field": {
+    "Textarea Field": {
       "by": "name",
       "selector": "textarea-field"
     },
-    "number_field": {
+    "Number Field": {
       "by": "name",
       "selector": "number-field"
     },
-    "file_field": {
+    "Checkboxes": {
+      "by": "id",
+      "selector": "checkboxes"
+    },
+    "Checkbox One": {
+      "by": "name",
+      "selector": "checkbox-one"
+    },
+    "Checkbox Two": {
+      "by": "name",
+      "selector": "checkbox-two"
+    },
+    "Checkbox Three": {
+      "by": "name",
+      "selector": "checkbox-three"
+    },
+    "File Upload Field": {
       "by": "name",
       "selector": "file-field"
     },
-    "select_field": {
+    "Select Field": {
       "by": "name",
       "selector": "select-field"
+    },
+    "Missing Field": {
+      "by": "id",
+      "selector": "a-field-that-is-not-on-the-page"
     },
     "Random Number": {
       "by": "id",
@@ -55,6 +83,10 @@
       "kwargs": {
         "allow_multiple": true
       }
+    },
+    "Missing Link": {
+      "by": "id",
+      "selector": "an-element-that-is-not-on-the-page"
     }
   }
 }

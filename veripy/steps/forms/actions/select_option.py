@@ -1,4 +1,5 @@
 import logging
+import splinter.exceptions
 from behave import when
 
 logger = logging.getLogger('forms')
@@ -14,8 +15,10 @@ def select_option_by(context, value, name):
     """
     try:
         element = context.page[name]
-
     except context.page.ElementNotFound:
-        raise AssertionError(f'The {name} was not found on the page')
+        raise AssertionError(f'The "{name}" was not found on the page.')
 
-    element.select(value)
+    try:
+        element.select(value)
+    except (AttributeError, IndexError, splinter.exceptions.ElementDoesNotExist):
+        raise AssertionError(f'"{name}" has no option with value "{value}".')

@@ -16,14 +16,14 @@ def when_file_content_entered(context, field, filename):
 
     """
     logger.info(f'Entering content from "{filename}" into "{field}".')
-    assert filename is not None, 'No file specified'
-    assert os.path.isfile(filename), 'Specified file does not exist'
+    assert filename is not None, 'No file specified.'
+    assert os.path.isfile(filename), 'The specified file does not exist.'
 
     with open(filename) as fp:
         content = fp.read()
     try:
         field = context.page[field]
     except context.page.ElementNotFound:
-        raise AssertionError(f'The {field} was not found on the page')
+        raise AssertionError(f'The "{field}" was not found on the page.')
 
     field.fill(content)

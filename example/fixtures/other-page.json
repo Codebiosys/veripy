@@ -5,9 +5,13 @@
       "by": "id",
       "selector": "other-rando"
     },
-    "h1": {
+    "Page Header": {
       "by": "tag",
       "selector": "h1"
+    },
+    "Missing Link": {
+      "by": "id",
+      "selector": "an-element-that-is-not-on-the-page"
     }
   }
 }

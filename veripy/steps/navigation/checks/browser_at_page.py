@@ -30,5 +30,5 @@ def then_page_switch(context, name):
     """
     logger.info(f'Asserting the page is "{name}" and switching contexts.')
     page = Page(name, context.browser)
-    assert page.url == context.browser.url
+    assert page.url == context.browser.url, f'Expected to be on the Page "{name}", but was not.'
     context.page = page

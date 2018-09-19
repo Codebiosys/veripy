@@ -21,6 +21,6 @@ def clear_input(context, element_name):
     try:
         element = context.page[element_name]
     except context.page.ElementNotFound:
-        raise AssertionError(f'The {element_name} was not found on the page')
+        raise AssertionError(f'The "{element_name}" was not found on the page.')
 
     element.clear()

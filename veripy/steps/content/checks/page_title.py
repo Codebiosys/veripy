@@ -11,5 +11,5 @@ def check_page_title(context, title):
     """ Asserts that the browser page's current title is the given value. """
     logger.info(f'Asserting that the page title is "{title}".')
     assert context.page.browser.title == title, (
-        f'The page title was supposed to be "{title}" but was not.'
+        f'The page title was supposed to be "{title}" but was "{context.page.browser.title}".'
     )
