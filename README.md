@@ -69,6 +69,13 @@ VeriPy is built on Behave. As such any files ending in `.feature` inside of the 
 behave example/features/
 ```
 
+To identify where sentences are used (and which are undefined), use the dry-run mode to
+output that data to step_usage.txt:
+
+```bash
+behave example/features/ --dry-run
+```
+
 
 ## Generating Documentation
 
