@@ -85,6 +85,13 @@ VeriPy uses Sphinx for documentation. Once you've installed the dependencies, si
 make -C docs html
 ```
 
+Behave can also add step documentation. To generate, run the following command
+
+```bash
+behave -f sphinx.steps -o docs/step_definitions --dry-run -q
+```
+
+
 You should now see a `_build` directory. Either open `index.html` in a browser or serve the directory directly using the following command.
 
 ```bash
