@@ -69,6 +69,13 @@ VeriPy is built on Behave. As such any files ending in `.feature` inside of the 
 behave example/features/
 ```
 
+To identify where sentences are used (and which are undefined), use the dry-run mode to
+output that data to step_usage.txt:
+
+```bash
+behave example/features/ --dry-run
+```
+
 
 ## Generating Documentation
 
@@ -77,6 +84,13 @@ VeriPy uses Sphinx for documentation. Once you've installed the dependencies, si
 ```bash
 make -C docs html
 ```
+
+Behave can also add step documentation. To generate, run the following command
+
+```bash
+behave -f sphinx.steps -o docs/step_definitions --dry-run -q
+```
+
 
 You should now see a `_build` directory. Either open `index.html` in a browser or serve the directory directly using the following command.
 

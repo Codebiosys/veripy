@@ -1,0 +1,255 @@
+@given('we have behave installed')        # veripy/steps/__init__.py:10
+  Given we have behave installed          # example/features/sample.feature:10
+
+@when('we implement a test')              # veripy/steps/__init__.py:15
+  When we implement a test                # example/features/sample.feature:11
+
+@then('behave will test it for us!')      # veripy/steps/__init__.py:21
+  Then behave will test it for us!        # example/features/sample.feature:12
+
+@given('the user logged in via "{name}" with username "{username}" and password "{password}"')  # veripy/steps/aggregates/actions/auth.py:12
+  Given the user logged in via "login" with username "username" and password "password"         # example/features/aggregates.feature:11
+
+@then('if '{sentence}', the system responds with')                                                              # veripy/steps/aggregates/checks/check_action.py:10
+  Then if 'the user clears the "Missing Field"', the system responds with                                       # example/features/forms.feature:17
+  Then if 'the content from "copyable-file.txt" is entered into the "Missing Field"', the system responds with  # example/features/forms.feature:36
+  Then if 'the content from "missing-file.txt" is entered into the "Textarea Field"', the system responds with  # example/features/forms.feature:40
+  Then if '"Example Text" is entered into the "Disabled Field"', the system responds with                       # example/features/forms.feature:67
+  Then if '"Example Text" is entered into the "Other Page Link"', the system responds with                      # example/features/forms.feature:71
+  Then if '"Example Text" is entered into the "Missing Field"', the system responds with                        # example/features/forms.feature:75
+  Then if '"yellow" is selected for "Select Field"', the system responds with                                   # example/features/forms.feature:92
+  Then if '"green" is selected for "Missing Field"', the system responds with                                   # example/features/forms.feature:96
+  Then if 'the file "uploadable-file.txt" has been added to the "Missing Field"', the system responds with      # example/features/forms.feature:116
+  Then if 'the file "missing-file.txt" has been added to the "File Upload Field"', the system responds with     # example/features/forms.feature:120
+  Then if 'the user clicks the "Missing Link"', the system responds with                                        # example/features/navigation.feature:41
+  Then if 'the user clicks the "Missing Link"', the system responds with                                        # example/features/navigation.feature:49
+
+@then('the statement that '{sentence}' responds with')                                                     # veripy/steps/aggregates/checks/check_assertion.py:10
+  Then the statement that 'the "Page Header" contains the text "Goodbye World"' responds with              # example/features/content.feature:15
+  Then the statement that 'the "Missing Link" contains the text "Goodbye World"' responds with             # example/features/content.feature:19
+  Then the statement that 'the "Page Header" is not visible' responds with                                 # example/features/content.feature:40
+  Then the statement that 'the "Hidden Content" is visible' responds with                                  # example/features/content.feature:44
+  Then the statement that 'the "Missing Link" is visible' responds with                                    # example/features/content.feature:48
+  Then the statement that 'the 2nd label in the "form" contains the text "Required input"' responds with   # example/features/content.feature:66
+  Then the statement that 'the 99th label in the "form" contains the text "Required input"' responds with  # example/features/content.feature:70
+  Then the statement that 'the 1st word in the "Missing Link" contains the text "Not"' responds with       # example/features/content.feature:74
+  Then the statement that 'the page title should be "Goodbye World"' responds with                         # example/features/content.feature:92
+  Then the statement that 'the "Text Field" field does not accept text' responds with                      # example/features/forms.feature:139
+  Then the statement that 'the "Text Field" field does accept numbers' responds with                       # example/features/forms.feature:143
+  Then the statement that 'the "Missing Field" field does accept text' responds with                       # example/features/forms.feature:147
+  Then the statement that 'the "Enabled Field" field is not enabled' responds with                         # example/features/forms.feature:164
+  Then the statement that 'the "Disabled Field" field is enabled' responds with                            # example/features/forms.feature:168
+  Then the statement that 'the "Missing Field" field is enabled' responds with                             # example/features/forms.feature:172
+  Then the statement that 'the "Required Field" field is not required' responds with                       # example/features/forms.feature:191
+  Then the statement that 'the "Optional Field" field is required' responds with                           # example/features/forms.feature:195
+  Then the statement that 'the "Missing Field" field is required' responds with                            # example/features/forms.feature:199
+  Then the statement that 'the browser should be at "login"' responds with                                 # example/features/navigation.feature:100
+
+@then('it is not the case that {sentence}')                                                    # veripy/steps/aggregates/checks/invert_check.py:10
+  Then it is not the case that the page title should be "Logged In"                            # example/features/aggregates.feature:20
+  Then it is not the case that the "Page Header" contains the text "Goodbye World"             # example/features/content.feature:14
+  Then it is not the case that the "Page Header" is not visible                                # example/features/content.feature:38
+  Then it is not the case that the "Hidden Content" is visible                                 # example/features/content.feature:39
+  Then it is not the case that the 1nd label in the "form" contains the text "Optional input"  # example/features/content.feature:64
+  Then it is not the case that the 2nd label in the "form" contains the text "Required input"  # example/features/content.feature:65
+  Then it is not the case that the page title should be "Goodbye World"                        # example/features/content.feature:91
+  Then it is not the case that the "Textarea Field" has an empty value                         # example/features/forms.feature:29
+  Then it is not the case that the "File Upload Field" has an empty value                      # example/features/forms.feature:109
+  Then it is not the case that the "Optional Field" field is required                          # example/features/forms.feature:182
+  Then it is not the case that the "Required Field" field is not required                      # example/features/forms.feature:184
+
+@then('write the "{element}" generated by the system')          # veripy/steps/capture/capture_content.py:7
+  Then write the "Random Number" generated by the system        # example/features/capture.feature:9
+  Then write the "Random Number" generated by the system        # example/features/navigation.feature:30
+  Then write the "Other Random Number" generated by the system  # example/features/navigation.feature:35
+
+@then('take a screen shot')               # veripy/steps/capture/capture_screenshot.py:8
+  Then take a screen shot                 # example/features/aggregates.feature:9
+  Then take a screen shot                 # example/features/aggregates.feature:13
+  And take a screen shot                  # example/features/capture.feature:10
+  Then take a screen shot                 # example/features/capture.feature:17
+  Then take a screen shot                 # example/features/content.feature:9
+  Then take a screen shot                 # example/features/content.feature:23
+  Then take a screen shot                 # example/features/content.feature:32
+  Then take a screen shot                 # example/features/content.feature:52
+  Then take a screen shot                 # example/features/content.feature:59
+  Then take a screen shot                 # example/features/content.feature:78
+  Then take a screen shot                 # example/features/content.feature:85
+  Then take a screen shot                 # example/features/content.feature:96
+  Then take a screen shot                 # example/features/forms.feature:8
+  Then take a screen shot                 # example/features/forms.feature:12
+  Then take a screen shot                 # example/features/forms.feature:26
+  Then take a screen shot                 # example/features/forms.feature:30
+  Then take a screen shot                 # example/features/forms.feature:53
+  Then take a screen shot                 # example/features/forms.feature:61
+  Then take a screen shot                 # example/features/forms.feature:86
+  Then take a screen shot                 # example/features/forms.feature:106
+  Then take a screen shot                 # example/features/forms.feature:110
+  Then take a screen shot                 # example/features/forms.feature:134
+  Then take a screen shot                 # example/features/forms.feature:158
+  Then take a screen shot                 # example/features/forms.feature:185
+  Then take a screen shot                 # example/features/navigation.feature:7
+  Then take a screen shot                 # example/features/navigation.feature:13
+  Then take a screen shot                 # example/features/navigation.feature:24
+  Then take a screen shot                 # example/features/navigation.feature:31
+  Then take a screen shot                 # example/features/navigation.feature:36
+  Then take a screen shot                 # example/features/navigation.feature:45
+  Then take a screen shot                 # example/features/navigation.feature:53
+  Then take a screen shot                 # example/features/navigation.feature:60
+  Then take a screen shot                 # example/features/navigation.feature:70
+  Then take a screen shot                 # example/features/navigation.feature:82
+  Then take a screen shot                 # example/features/navigation.feature:88
+  Then take a screen shot                 # example/features/navigation.feature:92
+  Then take a screen shot                 # example/features/navigation.feature:105
+  Then take a screen shot                 # example/features/sample.feature:21
+
+@then('the "{element}" contains the text "{text}"')       # veripy/steps/content/checks/element_contains_text.py:7
+  Then the "Page Header" contains the text "Hello World"  # example/features/content.feature:8
+
+@then('the "{element}" is {not_:optional_not}visible')  # veripy/steps/content/checks/element_visible.py:7
+  Then the "Page Header" is visible                     # example/features/content.feature:29
+  Then the "Hidden Content" is not visible              # example/features/content.feature:30
+  Then the "Missing Link" is not visible                # example/features/content.feature:31
+  Then the "Other Random Number" is not visible         # example/features/navigation.feature:23
+
+@then('the {position:d}{ordinal:ordinal_indicator} {words} in the "{element_name}" contains the text "{text}"')  # veripy/steps/content/checks/nth_element_contains_text.py:8
+  Then the 2nd label in the "form" contains the text "Optional input"                                            # example/features/content.feature:58
+
+@when('the user clears the "{element_name}"')  # veripy/steps/forms/actions/clear_input.py:8
+  When the user clears the "Default Field"     # example/features/forms.feature:10
+
+@when('the content from "{filename:file_input_type}" is entered into the "{field}"')  # veripy/steps/forms/actions/enter_input_from_file.py:10
+  When the content from "copyable-file.txt" is entered into the "Textarea Field"      # example/features/forms.feature:28
+
+@when('"{text}" is entered into the current field')  # veripy/steps/forms/actions/enter_text_into_current.py:7
+  When "New Text" is entered into the current field  # example/features/forms.feature:51
+  When "New Text" is entered into the current field  # example/features/navigation.feature:68
+
+@when('"{text}" is entered into the "{input_name}"')        # veripy/steps/forms/actions/enter_text_into_field.py:8
+  When "Example Text" is entered into the "Required Field"  # example/features/forms.feature:49
+  When "Example Text" is entered into the "Default Field"   # example/features/forms.feature:59
+  When "Example Text" is entered into the "Required Field"  # example/features/navigation.feature:66
+  When "hello world" is entered into the "search_field"     # example/features/sample.feature:17
+
+@when('"{value}" is selected for "{name}"')    # veripy/steps/forms/actions/select_option.py:8
+  When "green" is selected for "Select Field"  # example/features/forms.feature:84
+
+@when('the file "{filename:file_input_type}" has been added to the "{field}"')   # veripy/steps/forms/actions/upload_file_to_field.py:11
+  When the file "uploadable-file.txt" has been added to the "File Upload Field"  # example/features/forms.feature:108
+
+@then('the "{field}" field does {not_:optional_not}accept {input_type:field_input_type}')  # veripy/steps/forms/checks/field_accepts_type.py:9
+  Then the "Text Field" field does accept text                                             # example/features/forms.feature:129
+  Then the "Text Field" field does not accept numbers                                      # example/features/forms.feature:130
+  Then the "Number Field" field does accept numbers                                        # example/features/forms.feature:131
+  Then the "Number Field" field does not accept passwords                                  # example/features/forms.feature:132
+  Then the "File Upload Field" field does accept files                                     # example/features/forms.feature:133
+
+@then('the "{field}" field is {not_:optional_not}{state:field_enabled_option}')  # veripy/steps/forms/checks/field_disabled.py:9
+  Then the "Enabled Field" field is enabled                                      # example/features/forms.feature:156
+  Then the "Disabled Field" field is not enabled                                 # example/features/forms.feature:157
+
+@then('the "{element}" has an empty value')        # veripy/steps/forms/checks/field_has_empty_value.py:7
+  Then the "Default Field" has an empty value      # example/features/forms.feature:11
+  Then the "Textarea Field" has an empty value     # example/features/forms.feature:25
+  Then the "File Upload Field" has an empty value  # example/features/forms.feature:105
+
+@then('the "{element}" has the value "{text}"')           # veripy/steps/forms/checks/field_has_value.py:7
+  Then the "Default Field" has the value "Default Value"  # example/features/forms.feature:7
+  Then the "Optional Field" has the value "New Text"      # example/features/forms.feature:52
+  Then the "Default Field" has the value "Example Text"   # example/features/forms.feature:60
+  Then the "Select Field" has the value "green"           # example/features/forms.feature:85
+  Then the "Optional Field" has the value "New Text"      # example/features/navigation.feature:69
+
+@then('the "{field}" field is {not_:optional_not}{state:field_required_option}')  # veripy/steps/forms/checks/field_required.py:9
+  Then the "Optional Field" field is not required                                 # example/features/forms.feature:181
+  Then the "Required Field" field is required                                     # example/features/forms.feature:183
+
+@given('that the browser is at "{name}"')         # veripy/steps/navigation/actions/browser_at_page.py:9
+  Given that the browser is at "login"            # example/features/aggregates.feature:8
+  Given that the browser is at "login"            # example/features/aggregates.feature:18
+  Given that the browser is at "localhost-hello"  # example/features/capture.feature:8
+  Given that the browser is at "localhost-hello"  # example/features/capture.feature:15
+  Given that the browser is at "localhost-hello"  # example/features/content.feature:7
+  Given that the browser is at "localhost-hello"  # example/features/content.feature:13
+  Given that the browser is at "localhost-hello"  # example/features/content.feature:28
+  Given that the browser is at "localhost-hello"  # example/features/content.feature:37
+  Given that the browser is at "localhost-hello"  # example/features/content.feature:57
+  Given that the browser is at "localhost-hello"  # example/features/content.feature:63
+  Given that the browser is at "localhost-hello"  # example/features/content.feature:83
+  Given that the browser is at "localhost-hello"  # example/features/content.feature:90
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:6
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:16
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:24
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:35
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:48
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:58
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:66
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:83
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:91
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:104
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:115
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:128
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:138
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:155
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:163
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:180
+  Given that the browser is at "localhost-hello"  # example/features/forms.feature:190
+  Given that the browser is at "localhost-hello"  # example/features/navigation.feature:6
+  Given that the browser is at "localhost-hello"  # example/features/navigation.feature:11
+  Given that the browser is at "localhost-hello"  # example/features/navigation.feature:17
+  Given that the browser is at "localhost-hello"  # example/features/navigation.feature:29
+  Given that the browser is at "localhost-hello"  # example/features/navigation.feature:40
+  Given that the browser is at "localhost-hello"  # example/features/navigation.feature:48
+  Given that the browser is at "localhost-hello"  # example/features/navigation.feature:58
+  Given that the browser is at "localhost-hello"  # example/features/navigation.feature:65
+  Given that the browser is at "localhost-hello"  # example/features/navigation.feature:75
+  Given that the browser is at "localhost-hello"  # example/features/navigation.feature:87
+  Given that the browser is at "localhost-hello"  # example/features/navigation.feature:97
+  Given that the browser is at "google"           # example/features/sample.feature:16
+
+@given('the browser window is {width:d} by {height:d} pixels')  # veripy/steps/navigation/actions/browser_size.py:7
+  And the browser window is 800 by 600 pixels                   # example/features/capture.feature:16
+  Given the browser window is 600 by 400 pixels                 # example/features/navigation.feature:12
+
+@given('the browser is now at "{name}"')    # veripy/steps/navigation/actions/browser_switch_page.py:8
+  Given the browser is now at "other-page"  # example/features/navigation.feature:18
+
+@when('the user clicks the "{element_name}"')  # veripy/steps/navigation/actions/click_element.py:7
+  When the user clicks the "Other Page Link"   # example/features/navigation.feature:33
+  When the user clicks the "Other Page Link"   # example/features/navigation.feature:90
+  When the user clicks the "Other Page Link"   # example/features/navigation.feature:99
+  And the user clicks the "submit_button"      # example/features/sample.feature:19
+
+@when('the user clicks on the {position:d}{ordinal:ordinal_indicator} {words} in the "{element_name}"')  # veripy/steps/navigation/actions/click_nth_element.py:11
+  When the user clicks on the 2nd input in the "Checkboxes"                                              # example/features/navigation.feature:59
+
+@when('the user presses the "{keyboard_key:pressable_key_type}" key')  # veripy/steps/navigation/actions/press_keyboard_key.py:8
+  When the user presses the "tab" key                                  # example/features/forms.feature:50
+  When the user presses the "tab" key                                  # example/features/navigation.feature:67
+
+@when('the user waits {seconds:d} seconds for the "{element_name}" to be visible')  # veripy/steps/navigation/actions/wait_for_element.py:7
+  When the user waits 1 seconds for the "Required Field" to be visible              # example/features/navigation.feature:76
+
+@when('the user waits {seconds:d} second{plural}')  # veripy/steps/navigation/actions/wait_time.py:7
+  When the user waits 1 seconds                     # example/features/navigation.feature:81
+  And the user waits 2 seconds                      # example/features/sample.feature:18
+
+@then('the browser should be at "{name}"')    # veripy/steps/navigation/checks/browser_at_page.py:8
+  Then the browser should be at "other-page"  # example/features/navigation.feature:34
+  Then the browser should be at "other-page"  # example/features/navigation.feature:91
+  Then the browser should be at "other-page"  # example/features/navigation.feature:104
+
+@then('the page title should be "{title}"')                    # veripy/utils/__init__.py:72
+  Then the page title should be "Logged In"                    # example/features/aggregates.feature:12
+  Then the page title should be "Log In"                       # example/features/aggregates.feature:19
+  Then the page title should be "Hello World"                  # example/features/content.feature:84
+  Then the page title should be "hello world - Google Search"  # example/features/sample.feature:20
+
+UNUSED STEP DEFINITIONS[6]:
+  @given('"{text}" is entered into the "{input_name}"')                                                     # veripy/steps/forms/actions/enter_text_into_field.py:8
+  @when('the browser is now at "{name}"')                                                                   # veripy/steps/navigation/actions/browser_switch_page.py:8
+  @given('the user clicks the "{element_name}"')                                                            # veripy/steps/navigation/actions/click_element.py:7
+  @given('the user clicks on the {position:d}{ordinal:ordinal_indicator} {words} in the "{element_name}"')  # veripy/steps/navigation/actions/click_nth_element.py:11
+  @given('the user waits {seconds:d} seconds for the "{element_name}" to be visible')                       # veripy/steps/navigation/actions/wait_for_element.py:7
+  @given('the user waits {seconds:d} second{plural}')                                                       # veripy/steps/navigation/actions/wait_time.py:7
+

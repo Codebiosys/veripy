@@ -12,6 +12,7 @@ VeriPy - Programmatic Validation for Humans
    logs.md
 
    api/api.rst
+   step_definitions/index.rst
 
 
 Indices and tables

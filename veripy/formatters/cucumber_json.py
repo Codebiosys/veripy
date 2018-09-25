@@ -18,6 +18,26 @@ except ImportError:
 # https://gist.github.com/bitcoder/9ca4f143a9ca1afa9fc55666c974f7c8
 # -----------------------------------------------------------------------------
 class CucumberJSONFormatter(Formatter):
+    """
+    Order of operations
+    for feature in runner.features:
+            formatter = make_formatters(...)
+            formatter.uri(feature.filename)
+            formatter.feature(feature)
+            for scenario in feature.scenarios:
+                formatter.scenario(scenario)
+                for step in scenario.all_steps:
+                    formatter.step(step)
+                    step_match = step_registry.find_match(step)
+                    formatter.match(step_match)
+                    if step_match:
+                        step_match.run()
+                    else:
+                        step.status = Status.undefined
+                    formatter.result(step.status)
+            formatter.eof() # -- FEATURE-END
+        formatter.close()
+    """
     name = 'cucumber'
     description = 'JSON dump of test run'
     dumps_kwargs = {}
@@ -52,7 +72,7 @@ class CucumberJSONFormatter(Formatter):
         elif (status_obj == Status.failed):
             return "failed"
         else:
-            return "skipped"
+            return status_obj.name
 
     def feature(self, feature):
         self.reset()
