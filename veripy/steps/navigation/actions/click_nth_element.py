@@ -17,7 +17,7 @@ logger = logging.getLogger('navigation')
     'in the "{element_list_name}"'
 )
 def when_click_nth_element(context, position, ordinal, element_list_name):
-    """ Tells the browser to click on the nth option within the list of elements of the given identifier.
+    """ Tells the browser to click on the nth option in the list of elements of the given identifier.
     ::
 
         When the user clicks on the 2nd option in the "Table"
