@@ -21,6 +21,9 @@ def when_click_nth_element(context, position, ordinal, element_list_name):
     ::
 
         When the user clicks on the 2nd option in the "Table"
+
+    Note that in order for this step to work properly, you *must* specify
+    `allow_multiple` to `true` in the page fixture.
     """
     logger.info(f'Clicking on {position}{ordinal} option the element: "{element_list_name}".')
 
