@@ -56,7 +56,7 @@ Feature: Navigation Sentences
     @example_app @navigation @actions @click_nth_element
     Scenario: The Nth item sentence finds the correct item clicks it
         Given that the browser is at "localhost-hello"
-        When the user clicks on the 2nd input in the "Checkboxes"
+        When the user clicks on the 2nd option in the "Checkboxes"
         Then take a screen shot
 
 
