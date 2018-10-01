@@ -66,7 +66,7 @@ source environment.sh
 VeriPy is built on Behave. As such any files ending in `.feature` inside of the `features/` directory will be run when the application starts. VeriPy comes with a sample set of tests demonstrating how to use the statements. To run these or any custom tests, use the following command:
 
 ```bash
-behave example/features/
+behave example/features/ --tags ~@xfail
 ```
 
 To identify where sentences are used (and which are undefined), use the dry-run mode to

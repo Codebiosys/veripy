@@ -36,7 +36,7 @@ script:
   - flake8
   - make -C docs html
   # TODO: Optimize this command. It's wonky right now.
-  - FIXTURES_DIR=example/fixtures RESOURCES_DIR=`pwd`/example/resources REPORTS_DIR=example/report behave example/features
+  - FIXTURES_DIR=example/fixtures RESOURCES_DIR=`pwd`/example/resources REPORTS_DIR=example/report behave example/features --tags ~@xfail
 
 # TODO: We don't have coveralls yet.
 # after_success: coveralls
