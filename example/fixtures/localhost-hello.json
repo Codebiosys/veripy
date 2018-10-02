@@ -42,8 +42,18 @@
       "selector": "number-field"
     },
     "Checkboxes": {
-      "by": "id",
-      "selector": "checkboxes"
+      "by": "css",
+      "selector": "#checkboxes input",
+      "kwargs": {
+        "allow_multiple": true
+      }
+    },
+    "Hidden Checkboxes": {
+      "by": "css",
+      "selector": "#hidden-checkboxes input",
+      "kwargs": {
+        "allow_multiple": true
+      }
     },
     "Checkbox One": {
       "by": "name",

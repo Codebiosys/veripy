@@ -9,32 +9,39 @@ logger = logging.getLogger('navigation')
 
 
 @given(
-    'the user clicks on the {position:d}{ordinal:ordinal_indicator} {words} '
-    'in the "{element_name}"'
+    'the user clicks on the {position:d}{ordinal:ordinal_indicator} option '
+    'in the "{element_list_name}"'
 )
 @when(
-    'the user clicks on the {position:d}{ordinal:ordinal_indicator} {words} '
-    'in the "{element_name}"'
+    'the user clicks on the {position:d}{ordinal:ordinal_indicator} option '
+    'in the "{element_list_name}"'
 )
-def when_click_nth_element(context, position, ordinal, words, element_name):
-    """ Tells the browser to click on the nth element within the element of the given identifier.
+def when_click_nth_element(context, position, ordinal, element_list_name):
+    """ Tells the browser to click on the nth option in the list of elements of the given identifier.
     ::
 
-        When the user clicks on the 2nd Entry in the "Table"
+        When the user clicks on the 2nd option in the "Table"
+
+    Note that in order for this step to work properly, you *must* specify
+    `allow_multiple` to `true` in the page fixture.
     """
-    logger.info(f'Clicking on {position}{ordinal} "{words}" of the element: "{element_name}".')
+    logger.info(f'Clicking on {position}{ordinal} option the element: "{element_list_name}".')
 
     try:
-        page_element = context.page[element_name]
+        elements = context.page[element_list_name]
     except context.page.ElementNotFound:
-        raise AssertionError(f'The {element_name} was not found on the page')
+        raise AssertionError(f'The "{element_list_name}" was not found on the page.')
+
     try:
-        nth_element = page_element.find_by_xpath(f'.//{words}')[position-1]
+        nth_element = elements[position - 1]
     except (IndexError, splinter.exceptions.ElementDoesNotExist):
-        raise AssertionError(f'The {element_name} does not have a {position}{ordinal} {words}')
+        raise AssertionError(
+            f'The "{element_list_name}" does not have a {position}{ordinal} option.'
+            )
+
     try:
         nth_element.click()
     except (AttributeError, selenium.common.exceptions.ElementNotVisibleException):
         raise AssertionError(
-            f'The {element_name} does not have a {position}{ordinal} {words} that is clickable'
+            f'The "{element_list_name}" does not have a {position}{ordinal} option that is clickable.'  # noqa: E501
             )
