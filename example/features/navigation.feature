@@ -44,14 +44,11 @@ Feature: Navigation Sentences
       """
     Then take a screen shot
 
-    Scenario: The Demo App option can be selected by position
+    @example_app @navigation @actions @click_element @xfail
+    Scenario: XFail: The Demo App page will raise the correct error when clicking on a missing element
     Given that the browser is at "localhost-hello"
-    Then if 'the user clicks the "Missing Link"', the system responds with
-      """
-      The "Missing Link" was not found on the page.
-      """
+    When the user clicks the "Missing Link"
     Then take a screen shot
-
 
     @example_app @navigation @actions @click_nth_element
     Scenario: The Nth item sentence finds the correct item clicks it
@@ -102,4 +99,11 @@ Feature: Navigation Sentences
             Expected to be on the Page "login", but was not.
             """
         Then the browser should be at "other-page"
+        Then take a screen shot
+
+    @example_app @navigation @checks @browser_at_page @xfail
+    Scenario: XFail: Test that the user can identify failed page context switches
+        Given that the browser is at "localhost-hello"
+        When the user clicks the "Other Page Link"
+        Then the browser should be at "login"
         Then take a screen shot
