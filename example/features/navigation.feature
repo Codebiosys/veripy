@@ -56,6 +56,22 @@ Feature: Navigation Sentences
         When the user clicks on the 2nd option in the "Checkboxes"
         Then take a screen shot
 
+    @example_app @navigation @actions @click_nth_element @exception
+    Scenario: The Nth item sentence will raise the correct error when clicking on a missing element
+        Given that the browser is at "localhost-hello"
+        Then if 'the user clicks on the 2nd option in the "Hidden Checkboxes"', the system responds with
+             """
+             The "Hidden Checkboxes" does not have a 2nd option that is clickable.
+             """
+        Then if 'the user clicks on the 99th option in the "Checkboxes"', the system responds with
+            """
+            The "Checkboxes" does not have a 99th option.
+            """
+        Then if 'the user clicks on the 2nd option in the "Missing Link"', the system responds with
+            """
+            The "Missing Link" was not found on the page.
+            """
+        Then take a screen shot
 
     @example_app @navigation @actions @press_keyboard_key
     Scenario: The tester can press keyboard keys

@@ -30,16 +30,18 @@ def when_click_nth_element(context, position, ordinal, element_list_name):
     try:
         elements = context.page[element_list_name]
     except context.page.ElementNotFound:
-        raise AssertionError(f'The {element_list_name} was not found on the page')
+        raise AssertionError(f'The "{element_list_name}" was not found on the page.')
 
     try:
         nth_element = elements[position - 1]
     except (IndexError, splinter.exceptions.ElementDoesNotExist):
-        raise AssertionError(f'The {element_list_name} does not have a {position}{ordinal} option')
+        raise AssertionError(
+            f'The "{element_list_name}" does not have a {position}{ordinal} option.'
+            )
 
     try:
         nth_element.click()
     except (AttributeError, selenium.common.exceptions.ElementNotVisibleException):
         raise AssertionError(
-            f'The {element_list_name} does not have a {position}{ordinal} option that is clickable'
+            f'The "{element_list_name}" does not have a {position}{ordinal} option that is clickable.'  # noqa: E501
             )

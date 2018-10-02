@@ -30,10 +30,13 @@ Step Definitions
 **Step:** Given the user clicks on the {position:d}{ordinal:ordinal_indicator} option in the "{element_list_name}"
 ------------------------------------------------------------------------------------------------------------------
 
-Tells the browser to click on the nth option within the list of elements of the given identifier.
+Tells the browser to click on the nth option in the list of elements of the given identifier.
 ::
 
     When the user clicks on the 2nd option in the "Table"
+
+Note that in order for this step to work properly, you *must* specify
+`allow_multiple` to `true` in the page fixture.
 
 .. index:: 
     single: When step; When the user clicks on the {position:d}{ordinal:ordinal_indicator} option in the "{element_list_name}"
@@ -43,8 +46,11 @@ Tells the browser to click on the nth option within the list of elements of the 
 **Step:** When the user clicks on the {position:d}{ordinal:ordinal_indicator} option in the "{element_list_name}"
 -----------------------------------------------------------------------------------------------------------------
 
-Tells the browser to click on the nth option within the list of elements of the given identifier.
+Tells the browser to click on the nth option in the list of elements of the given identifier.
 ::
 
     When the user clicks on the 2nd option in the "Table"
+
+Note that in order for this step to work properly, you *must* specify
+`allow_multiple` to `true` in the page fixture.
 

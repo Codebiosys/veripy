@@ -48,6 +48,13 @@
         "allow_multiple": true
       }
     },
+    "Hidden Checkboxes": {
+      "by": "css",
+      "selector": "#hidden-checkboxes input",
+      "kwargs": {
+        "allow_multiple": true
+      }
+    },
     "Checkbox One": {
       "by": "name",
       "selector": "checkbox-one"
