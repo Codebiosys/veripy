@@ -1,5 +1,6 @@
 import logging
 
+from behave import fixture, use_fixture
 from behave.log_capture import capture
 from behave.model_core import Status
 
@@ -17,6 +18,26 @@ logging.basicConfig(**settings.LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 
 
+@fixture
+def browser_chrome(context, timeout=30, **kwargs):
+    """
+    """
+    if settings.BROWSER == 'remote':
+        browser = splinter.Browser(
+            driver_name='remote',
+            browser='chrome',
+            url=settings.SELENIUM_URL,
+        )
+    else:
+        browser = splinter.Browser(
+            driver_name=settings.BROWSER,
+            headless=settings.RUN_HEADLESS,
+        )
+    context.browser = browser
+    context.add_cleanup(browser.quit)
+    return browser
+
+
 @capture
 def before_all(context):
     """ Before the suite runs, we set up a location to write temp files to and
@@ -28,27 +49,22 @@ def before_all(context):
 
 
 @capture
+def before_feature(context, feature):
+    use_fixture(browser_chrome, context, timeout=10)
+
+
+@capture
 def before_scenario(context, scenario):
     """ Before each scenario, we need to restart the browser session so that
     there's no bleed-over from previous tests.
     """
-    if settings.BROWSER == 'remote':
-        context.browser = splinter.Browser(
-            driver_name='remote',
-            browser='chrome',
-            url=settings.SELENIUM_URL,
-        )
-    else:
-        context.browser = splinter.Browser(
-            driver_name=settings.BROWSER,
-            headless=settings.RUN_HEADLESS,
-        )
+    pass
 
 
 @capture
 def after_scenario(context, scenario):
     """ After each scenario, quit the browser session. """
-    context.browser.quit()
+    pass
 
 
 @capture
