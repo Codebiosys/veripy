@@ -1,4 +1,4 @@
-@fixture.browser.chrome @fixture.setup.teardown.FOO
+@fixture.browser.chrome @fixture.setup.FOO
 Feature: Content Sentences
     Content sentences allow a tester to verify information that is displayed
     in the application

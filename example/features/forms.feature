@@ -1,4 +1,4 @@
-@fixture.browser.chrome
+@fixture.browser.chrome @fixture.setup.teardown.FOO
 Feature: Form Sentences
     Form sentences allow a tester to interact with forms
 

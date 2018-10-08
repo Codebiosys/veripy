@@ -1,14 +1,10 @@
-import os
 import logging
 
-from behave import fixture, use_fixture
+from behave import use_fixture
 from behave.log_capture import capture
 from behave.model_core import Status
-from behave.runner_util import parse_features, collect_feature_locations
 
-import splinter
-
-from . import settings
+from . import settings, fixtures
 from .utils import mkdir
 
 # bootstrap the custom types
@@ -17,76 +13,6 @@ from . import custom_types  # noqa
 # Bootstrap the logger.
 logging.basicConfig(**settings.LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
-
-
-@fixture
-def collect_setup_files(context):
-    setup_files = os.path.join(context.config.base_dir, settings.SETUP_DIR)
-    setup_locations = collect_feature_locations([setup_files])
-    setup_features = parse_features(setup_locations)
-    context_setup = {}
-    for feature in setup_features:
-        tag_name = None
-        for tag in feature.tags:
-            if 'configure' in tag:
-                tag_name = tag.replace('configure.', '')
-                break
-        setup = {
-            'setup': [],
-            'teardown': []}
-        for scenario in feature.scenarios:
-            if any(tag == 'teardown' for tag in scenario.tags):
-                setup['teardown'].append(scenario)
-            else:
-                setup['setup'].append(scenario)
-        context_setup[tag_name] = setup
-    context.context_setup = context_setup
-
-
-@fixture
-def browser_chrome(context, timeout=30, **kwargs):
-    """
-    """
-    if settings.BROWSER == 'remote':
-        browser = splinter.Browser(
-            driver_name='remote',
-            browser='chrome',
-            url=settings.SELENIUM_URL,
-        )
-    else:
-        browser = splinter.Browser(
-            driver_name=settings.BROWSER,
-            headless=settings.RUN_HEADLESS,
-        )
-    context.browser = browser
-    context.add_cleanup(browser.quit)
-    return browser
-
-
-@fixture
-def setup_teardown(context, name, set_teardown=False):
-    setup_scenarios = context.context_setup.get(name)
-
-    for scenario in setup_scenarios['setup']:
-        if scenario.should_run():
-            scenario_steps = ''
-            for step in scenario.all_steps:
-                scenario_steps += f'{step.keyword} {step.name}\n'
-            context.execute_steps(scenario_steps)
-            scenario.skip()
-
-    if set_teardown:
-        def cleanup_steps():
-            for scenario in setup_scenarios['teardown']:
-                scenario_steps = ''
-                for step in scenario.all_steps:
-                    scenario_steps += f'{step.keyword} {step.name}\n'
-                context.execute_steps(scenario_steps)
-
-            for scenario in setup_scenarios['setup']:
-                scenario.reset()
-
-        context.add_cleanup(cleanup_steps)
 
 
 @capture
@@ -99,19 +25,19 @@ def before_all(context):
     mkdir(settings.REPORTS_DIR)
 
     if settings.SETUP_DIR:
-        use_fixture(collect_setup_files, context)
+        use_fixture(fixtures.collect_setup_files, context)
 
 
 @capture
 def before_tag(context, tag):
     if tag == "fixture.browser.chrome":
-        use_fixture(browser_chrome, context, timeout=10)
+        use_fixture(fixtures.browser_chrome, context, timeout=10)
     if tag.startswith("fixture.setup.teardown"):
         name = tag.replace("fixture.setup.teardown.", "")
-        use_fixture(setup_teardown, context, name, set_teardown=True)
+        use_fixture(fixtures.setup_teardown, context, name, set_teardown=True)
     elif tag.startswith("fixture.setup"):
         name = tag.replace("fixture.setup.", "")
-        use_fixture(setup_teardown, context, name, set_teardown=False)
+        use_fixture(fixtures.setup_teardown, context, name, set_teardown=False)
 
 
 @capture
