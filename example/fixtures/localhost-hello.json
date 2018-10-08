@@ -42,8 +42,18 @@
       "selector": "number-field"
     },
     "Checkboxes": {
-      "by": "id",
-      "selector": "checkboxes"
+      "by": "css",
+      "selector": "#checkboxes input",
+      "kwargs": {
+        "allow_multiple": true
+      }
+    },
+    "Hidden Checkboxes": {
+      "by": "css",
+      "selector": "#hidden-checkboxes input",
+      "kwargs": {
+        "allow_multiple": true
+      }
     },
     "Checkbox One": {
       "by": "name",
@@ -76,6 +86,10 @@
     "Other Page Link": {
       "by": "id",
       "selector": "other-page-link"
+    },
+    "Other Tab Link": {
+      "by": "id",
+      "selector": "other-tab-link"
     },
     "form": {
       "by": "css",

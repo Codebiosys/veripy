@@ -19,6 +19,12 @@ Feature: Form Sentences
             The "Missing Field" was not found on the page.
             """
 
+    @example_app @forms @actions @clear_input @xfail
+    Scenario: XFail: The clear input sentence handles the input not being found
+        Given that the browser is at "localhost-hello"
+        When the user clears the "Missing Field"
+        Then take a screen shot
+
     @example_app @forms @actions @enter_input_from_file
     Scenario: The Demo App form field can be entered from a file
         Given that the browser is at "localhost-hello"
@@ -42,6 +48,17 @@ Feature: Form Sentences
             The specified file does not exist.
             """
 
+    @example_app @forms @actions @enter_input_from_file @xfail
+    Scenario: XFail: The file entry sentence handles missing form fields
+        Given that the browser is at "localhost-hello"
+        When the content from "copyable-file.txt" is entered into the "Missing Field"
+        Then take a screen shot
+
+    @example_app @forms @actions @enter_input_from_file @xfail
+    Scenario: XFail: The file entry sentence handles missing files
+        Given that the browser is at "localhost-hello"
+        When the content from "missing-file.txt" is entered into the "Textarea Field"
+        Then take a screen shot
 
     @example_app @forms @actions @enter_text_into_current
     Scenario: The tester can press keyboard keys
@@ -77,6 +94,23 @@ Feature: Form Sentences
             The "Missing Field" was not found on the page.
             """
 
+    @example_app @forms @actions @enter_text_into_field @xfail
+    Scenario: XFail: The system responds for disabled fields
+        Given that the browser is at "localhost-hello"
+        When "Example Text" is entered into the "Disabled Field"
+        Then take a screen shot
+
+    @example_app @forms @actions @enter_text_into_field @xfail
+    Scenario: XFail: The system responds for non fields
+        Given that the browser is at "localhost-hello"
+        When "Example Text" is entered into the "Other Page Link"
+        Then take a screen shot
+
+    @example_app @forms @actions @enter_text_into_field @xfail
+    Scenario: XFail: The system responds for missing fields
+        Given that the browser is at "localhost-hello"
+        When "Example Text" is entered into the "Missing Field"
+        Then take a screen shot
 
     @example_app @forms @actions @select_option
     Scenario: A select field can have an option selected
@@ -98,6 +132,18 @@ Feature: Form Sentences
           The "Missing Field" was not found on the page.
           """
 
+    @example_app @forms @actions @select_option @xfail
+    Scenario: XFail: The system responds when there is no option
+        Given that the browser is at "localhost-hello"
+        When "yellow" is selected for "Select Field"
+        Then take a screen shot
+
+
+    @example_app @forms @actions @select_option @xfail
+    Scenario: XFail: The system responds when there is no field
+        Given that the browser is at "localhost-hello"
+        When "green" is selected for "Missing Field"
+        Then take a screen shot
 
     @example_app @forms @actions @upload_file_to_field
     Scenario: A file can be uploaded to a field
@@ -122,6 +168,17 @@ Feature: Form Sentences
             The specified file does not exist.
             """
 
+    @example_app @forms @actions @upload_file_to_field @xfail
+    Scenario: XFail: The file upload sentence handles missing form fields
+        Given that the browser is at "localhost-hello"
+        When the file "uploadable-file.txt" has been added to the "Missing Field"
+        Then take a screen shot
+
+    @example_app @forms @actions @upload_file_to_field @xfail
+    Scenario: XFail: The file upload sentence handles missing files
+        Given that the browser is at "localhost-hello"
+        When the file "missing-file.txt" has been added to the "File Upload Field"
+        Then take a screen shot
 
     @example_app @forms @checks @field_accepts_type
     Scenario: The fields can accept certain types of data
@@ -149,6 +206,20 @@ Feature: Form Sentences
             The "Missing Field" was not found on the page.
             """
 
+    @example_app @forms @checks @field_accepts_type @xfail
+    Scenario: XFail: The check that fields can accept text
+        Given that the browser is at "localhost-hello"
+        Then the "Text Field" field does not accept text
+
+    @example_app @forms @checks @field_accepts_type @xfail
+    Scenario: XFail: The check that fields can accept numbers
+        Given that the browser is at "localhost-hello"
+        Then the "Text Field" field does accept numbers
+
+    @example_app @forms @checks @field_accepts_type @xfail
+    Scenario: XFail: The check that fields can accept numbers
+        Given that the browser is at "localhost-hello"
+        Then the "Missing Field" field does accept text
 
     @example_app @forms @checks @field_disabled
     Scenario: The fields can be enabled or disabled
@@ -174,6 +245,20 @@ Feature: Form Sentences
             The "Missing Field" was not found on the page.
             """
 
+    @example_app @forms @checks @field_disabled @xfail
+    Scenario: XFail: The check that fields are enabled
+        Given that the browser is at "localhost-hello"
+        Then the "Enabled Field" field is not enabled
+
+    @example_app @forms @checks @field_disabled @xfail
+    Scenario: XFail: The check that fields are disabled
+        Given that the browser is at "localhost-hello"
+        Then the "Disabled Field" field is enabled
+
+    @example_app @forms @checks @field_disabled @xfail
+    Scenario: XFail: The check that fields are present
+        Given that the browser is at "localhost-hello"
+        Then the "Missing Field" field is enabled
 
     @example_app @forms @checks @field_required
     Scenario: The fields can be required or optional
@@ -200,3 +285,22 @@ Feature: Form Sentences
             """
             The "Missing Field" was not found on the page.
             """
+
+    @example_app @forms @checks @field_required @xfail
+    Scenario: Xfail: The check that fields are required
+        Given that the browser is at "localhost-hello"
+        Then the "Required Field" field is not required
+
+    @example_app @forms @checks @field_required @xfail
+    Scenario: Xfail: The check that fields are not required
+        Given that the browser is at "localhost-hello"
+        Then the "Optional Field" field is required
+        Then the statement that 'the "Missing Field" field is required' responds with
+            """
+            The "Missing Field" was not found on the page.
+            """
+
+    @example_app @forms @checks @field_required @xfail
+    Scenario: Xfail: The check that fields are present
+        Given that the browser is at "localhost-hello"
+        Then the "Missing Field" field is required

@@ -22,6 +22,18 @@ Feature: Content Sentences
              """
         Then take a screen shot
 
+    @example_app @content @checks @element_contains_text @xfail
+    Scenario: XFail: The Demo App header does not contain the text "Goodbye World"
+        Given that the browser is at "localhost-hello"
+        Then the "Page Header" contains the text "Goodbye World"
+        Then take a screen shot
+
+    @example_app @content @checks @element_contains_text @xfail
+    Scenario: XFail: The Demo App header does not contain the Missing Link
+        Given that the browser is at "localhost-hello"
+        Then the "Missing Link" contains the text "Goodbye World"
+        Then take a screen shot
+
 
     @example_app @content @checks @element_visible
     Scenario: The Demo App header is visible and the Hidden Content is not
@@ -51,6 +63,23 @@ Feature: Content Sentences
              """
         Then take a screen shot
 
+    @example_app @content @checks @element_visible @xfail
+    Scenario: XFail: The visibility check responds for visible objects
+        Given that the browser is at "localhost-hello"
+        Then the "Page Header" is not visible
+        Then take a screen shot
+
+    @example_app @content @checks @element_visible @xfail
+    Scenario: XFail: The visibility check responds for invisible objects
+        Given that the browser is at "localhost-hello"
+        Then the "Hidden Content" is visible
+        Then take a screen shot
+
+    @example_app @content @checks @element_visible @xfail
+    Scenario: XFail: The visibility check responds for missing objects
+        Given that the browser is at "localhost-hello"
+        Then the "Missing Link" is visible
+        Then take a screen shot
 
     @example_app @content @checks @nth_element_contains_text
     Scenario: The Nth item sentence finds the correct item and asserts its text
@@ -77,6 +106,23 @@ Feature: Content Sentences
             """
         Then take a screen shot
 
+    @example_app @content @checks @nth_element_contains_text @xfail
+    Scenario: Xfail: The Nth item sentence responds with missing input
+        Given that the browser is at "localhost-hello"
+        Then the 2nd label in the "form" contains the text "Required input"
+        Then take a screen shot
+
+    @example_app @content @checks @nth_element_contains_text @xfail
+    Scenario: Xfail: The Nth item sentence responds with not enough inputs
+        Given that the browser is at "localhost-hello"
+        Then the 99th label in the "form" contains the text "Required input"
+        Then take a screen shot
+
+    @example_app @content @checks @nth_element_contains_text @xfail
+    Scenario: Xfail: The Nth item sentence responds with not found
+        Given that the browser is at "localhost-hello"
+        Then the 1st word in the "Missing Link" contains the text "Not"
+        Then take a screen shot
 
     @example_app @content @checks @page_title
     Scenario: The Demo App Page Title is "Hello World"
@@ -93,4 +139,10 @@ Feature: Content Sentences
           """
           The page title was supposed to be "Goodbye World" but was "Hello World".
           """
+        Then take a screen shot
+
+    @example_app @content @checks @page_title @xfail
+    Scenario: XFail: The Demo App Page Title is not "Goodbye World"
+        Given that the browser is at "localhost-hello"
+        Then the page title should be "Goodbye World"
         Then take a screen shot
