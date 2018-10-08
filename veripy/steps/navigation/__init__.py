@@ -6,6 +6,8 @@ from .actions.click_nth_element import * # noqa
 from .actions.press_keyboard_key import * # noqa
 from .actions.wait_for_element import * # noqa
 from .actions.wait_time import * # noqa
+from .actions.window_close_last import * # noqa
+from .actions.window_focus_last import * # noqa
 from .checks.browser_at_page import * # noqa
 
 
@@ -18,5 +20,7 @@ __all__ = [
     'when_press_key',
     'when_wait_for_element',
     'when_wait',
-    'then_page_switch'
+    'window_close_last',
+    'window_focus_last',
+    'then_page_switch',
 ]

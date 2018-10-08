@@ -87,6 +87,10 @@
       "by": "id",
       "selector": "other-page-link"
     },
+    "Other Tab Link": {
+      "by": "id",
+      "selector": "other-tab-link"
+    },
     "form": {
       "by": "css",
       "selector": "form label",
