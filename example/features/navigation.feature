@@ -1,3 +1,4 @@
+@fixture.browser.chrome
 Feature: Navigation Sentences
     Nagivation sentences allow a tester to move around the system
 

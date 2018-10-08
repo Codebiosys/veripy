@@ -11,7 +11,7 @@ Feature: showing off behave
         When we implement a test
         Then behave will test it for us!
 
-    @External
+    @External @fixture.browser.chrome
     Scenario: check that google exists
         Given that the browser is at "google"
         When "hello world" is entered into the "search_field"

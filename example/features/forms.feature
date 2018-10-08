@@ -1,3 +1,4 @@
+@fixture.browser.chrome
 Feature: Form Sentences
     Form sentences allow a tester to interact with forms
 
