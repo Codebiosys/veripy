@@ -23,6 +23,29 @@ Feature: Navigation Sentences
         Then the "Other Random Number" is not visible
         Then take a screen shot
 
+    @example_app @navigation @actions @window_focus_last
+    Scenario: The Demo App tab can be switched by clicking a link
+        Given that the browser is at "localhost-hello"
+        When the user clicks the "Other Tab Link"
+        Then the browser should be at "localhost-hello"
+
+        When the user switches to the last opened tab
+        Then the browser should be at "other-page"
+        And take a screen shot
+
+    @example_app @navigation @actions @window_close_last
+    Scenario: The Demo App tab can be switched by clicking a link and then reverted
+        Given that the browser is at "localhost-hello"
+        When the user clicks the "Other Tab Link"
+        Then the browser should be at "localhost-hello"
+
+        When the user switches to the last opened tab
+        Then the browser should be at "other-page"
+
+        When the user closes the last opened tab
+        Then the browser should be at "localhost-hello"
+        And take a screen shot
+
     @example_app @navigation @actions @click_element
     Scenario: The Demo App page can be switched by clicking a link
 
