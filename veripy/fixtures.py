@@ -18,6 +18,11 @@ logger = logging.getLogger(__name__)
 
 @fixture
 def collect_setup_files(context):
+    """
+    Searches feature files in 'setup' directory for any configured setup features
+    and adds them to the context of the current run. This is done before_all so
+    that the setup features are available during the run.
+    """
     setup_files = os.path.join(context.config.base_dir, settings.SETUP_DIR)
     logger.info(f'Parsing setup files from the {setup_files} directory.')
 
@@ -49,6 +54,8 @@ def collect_setup_files(context):
 @fixture
 def browser_chrome(context, timeout=30, **kwargs):
     """
+    Adds a browser to the current context. Adds a cleanup step to quit the browser
+    on end/fail
     """
     if settings.BROWSER == 'remote':
         browser = splinter.Browser(
@@ -68,6 +75,11 @@ def browser_chrome(context, timeout=30, **kwargs):
 
 @fixture
 def setup_teardown(context, name, set_teardown=False):
+    """
+    Based on a tag request (e.g. - @fixture.setup.{name}), run the steps of the
+    @configure.{name} setup feature if the setup feature has not been previously
+    run. Adds a cleanup step after the feature/scenario if set_teardown is True
+    """
     setup_scenarios = context.context_setup.get(name, None)
 
     if not setup_scenarios:
