@@ -75,23 +75,31 @@ def setup_teardown(context, name, set_teardown=False):
         return
 
     logger.info(f'Setup running for {name}')
+
+    def execute_scenario_steps(scenario):
+        scenario_steps = ''
+        for step in scenario.all_steps:
+            scenario_steps += f'{step.keyword} {step.name}\n'
+        context.execute_steps(scenario_steps)
+
     for scenario in setup_scenarios['setup']:
         if scenario.should_run():
-
-            scenario_steps = ''
-            for step in scenario.all_steps:
-                scenario_steps += f'{step.keyword} {step.name}\n'
-            context.execute_steps(scenario_steps)
+            if scenario.type == 'scenario_outline':
+                for sub_scenario in scenario.scenarios:
+                    execute_scenario_steps(sub_scenario)
+            else:
+                execute_scenario_steps(scenario)
             scenario.skip()
 
     if set_teardown:
         def cleanup_steps():
             logger.info(f'Teardown running for {name}')
             for scenario in setup_scenarios['teardown']:
-                scenario_steps = ''
-                for step in scenario.all_steps:
-                    scenario_steps += f'{step.keyword} {step.name}\n'
-                context.execute_steps(scenario_steps)
+                if scenario.type == 'scenario_outline':
+                    for sub_scenario in scenario.scenarios:
+                        execute_scenario_steps(sub_scenario)
+                else:
+                    execute_scenario_steps(scenario)
 
             for scenario in setup_scenarios['setup']:
                 scenario.reset()

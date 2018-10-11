@@ -1,4 +1,4 @@
-@fixture.browser.chrome @fixture.setup.teardown.FOO
+@fixture.browser.chrome @fixture.setup.teardown.SETUP_EXAMPLE
 Feature: Form Sentences
     Form sentences allow a tester to interact with forms
 
@@ -24,13 +24,11 @@ Feature: Form Sentences
     Scenario: XFail: The clear input sentence handles the input not being found
         Given that the browser is at "localhost-hello"
         When the user clears the "Missing Field"
-        Then take a screen shot
 
     @example_app @forms @actions @enter_input_from_file
     Scenario: The Demo App form field can be entered from a file
         Given that the browser is at "localhost-hello"
         Then the "Textarea Field" has an empty value
-        Then take a screen shot
 
         When the content from "copyable-file.txt" is entered into the "Textarea Field"
         Then it is not the case that the "Textarea Field" has an empty value
@@ -99,26 +97,22 @@ Feature: Form Sentences
     Scenario: XFail: The system responds for disabled fields
         Given that the browser is at "localhost-hello"
         When "Example Text" is entered into the "Disabled Field"
-        Then take a screen shot
 
     @example_app @forms @actions @enter_text_into_field @xfail
     Scenario: XFail: The system responds for non fields
         Given that the browser is at "localhost-hello"
         When "Example Text" is entered into the "Other Page Link"
-        Then take a screen shot
 
     @example_app @forms @actions @enter_text_into_field @xfail
     Scenario: XFail: The system responds for missing fields
         Given that the browser is at "localhost-hello"
         When "Example Text" is entered into the "Missing Field"
-        Then take a screen shot
 
     @example_app @forms @actions @select_option
     Scenario: A select field can have an option selected
         Given that the browser is at "localhost-hello"
         When "green" is selected for "Select Field"
         Then the "Select Field" has the value "green"
-        Then take a screen shot
 
 
     @example_app @forms @actions @select_option @exceptions
@@ -137,7 +131,6 @@ Feature: Form Sentences
     Scenario: XFail: The system responds when there is no option
         Given that the browser is at "localhost-hello"
         When "yellow" is selected for "Select Field"
-        Then take a screen shot
 
 
     @example_app @forms @actions @select_option @xfail
@@ -150,11 +143,9 @@ Feature: Form Sentences
     Scenario: A file can be uploaded to a field
         Given that the browser is at "localhost-hello"
         Then the "File Upload Field" has an empty value
-        Then take a screen shot
 
         When the file "uploadable-file.txt" has been added to the "File Upload Field"
         Then it is not the case that the "File Upload Field" has an empty value
-        Then take a screen shot
 
 
     @example_app @forms @actions @upload_file_to_field @exceptions
@@ -173,13 +164,11 @@ Feature: Form Sentences
     Scenario: XFail: The file upload sentence handles missing form fields
         Given that the browser is at "localhost-hello"
         When the file "uploadable-file.txt" has been added to the "Missing Field"
-        Then take a screen shot
 
     @example_app @forms @actions @upload_file_to_field @xfail
     Scenario: XFail: The file upload sentence handles missing files
         Given that the browser is at "localhost-hello"
         When the file "missing-file.txt" has been added to the "File Upload Field"
-        Then take a screen shot
 
     @example_app @forms @checks @field_accepts_type
     Scenario: The fields can accept certain types of data
@@ -189,7 +178,6 @@ Feature: Form Sentences
         Then the "Number Field" field does accept numbers
         Then the "Number Field" field does not accept passwords
         Then the "File Upload Field" field does accept files
-        Then take a screen shot
 
     @example_app @forms @checks @field_accepts_type @exceptions
     Scenario: The check that fields can accept certain types of data handles errors correctly
@@ -227,7 +215,6 @@ Feature: Form Sentences
         Given that the browser is at "localhost-hello"
         Then the "Enabled Field" field is enabled
         Then the "Disabled Field" field is not enabled
-        Then take a screen shot
 
 
     @example_app @forms @checks @field_disabled @exceptions
@@ -268,7 +255,6 @@ Feature: Form Sentences
         Then it is not the case that the "Optional Field" field is required
         Then the "Required Field" field is required
         Then it is not the case that the "Required Field" field is not required
-        Then take a screen shot
 
 
     @example_app @forms @checks @field_required @exception

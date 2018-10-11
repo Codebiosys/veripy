@@ -118,13 +118,15 @@ class CucumberJSONFormatter(Formatter):
         })
         if scenario.description:
             element['description'] = self.format_description(scenario.description)
+        if hasattr(scenario, 'row'):
+            element['table'] = self.make_table(scenario.row)
         self._step_index = 0
 
     @classmethod
-    def make_table(cls, table):
+    def make_table(cls, row):
         table_data = {
-            'headings': table.headings,
-            'rows': [list(row) for row in table.rows]
+            'headings': row.headings,
+            'rows': [[cell for cell in row]]
         }
         return table_data
 

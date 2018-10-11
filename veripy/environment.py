@@ -58,6 +58,8 @@ def after_feature(context, feature):
 def before_scenario(context, scenario):
     """ Before each scenario.
     """
+    if hasattr(context, 'active_outline') and context.active_outline:
+        scenario.row = context.active_outline
     pass
 
 
@@ -74,8 +76,6 @@ def before_step(context, step):
     """
     # TODO: Remove this line. This should be done in a proper step subclass or
     # something so that we can eventually add all kinds of things to the step.
-    # from pprint import pprint as pp
-    # import pdb; pdb.set_trace()
     step.screenshots = []
     context.step = step
 
@@ -84,6 +84,6 @@ def before_step(context, step):
 def after_step(context, step):
     """ Here we capture the screen if the step is a failure.
     """
-    if step.status == Status.failed:
+    if step.status == Status.failed and hasattr(context, 'browser'):
         from veripy.utils.browsers import screenshot_bytes
         step.screenshots.append(screenshot_bytes(context))
