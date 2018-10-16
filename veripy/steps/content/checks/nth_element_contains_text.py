@@ -5,15 +5,24 @@ from behave import then
 logger = logging.getLogger('content')
 
 
+# New
+@then(
+    'the {position:d}{ordinal:ordinal_indicator} item in the "{element_name}" '
+    'contains the text "{text}"'
+)
+# Old
 @then(
     'the {position:d}{ordinal:ordinal_indicator} {words} in the "{element_name}" '
     'contains the text "{text}"'
 )
-def check_nth_element_text(context, position, ordinal, words, element_name, text):
+def check_nth_element_text(context, position, ordinal, element_name, text, words='item'):
     """ Asserts that the nth element contains the given value as text
     ::
 
-        the 3rd label of the "Form" contains the text "First Name"
+        Then the 3rd item in the "Form Labels" contains the text "First Name"
+
+    Note: in order to for this step to function properly, ``{"kwargs": "allow_mulitple": true}``
+    must be set for the element definition in the page fixture.
     """
     logger.info(
         f'Asserting that the {position}{ordinal} "{words}" of the element: '

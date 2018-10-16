@@ -12,22 +12,22 @@ Step Overview
 =============
 
 
-============================================================================ ===== ==== ==== ====
-Step Definition                                                              Given When Then Step
-============================================================================ ===== ==== ==== ====
-Then the "{field}" field is {not_:optional_not}{state:field_required_option}              x      
-============================================================================ ===== ==== ==== ====
+=================================================================================== ===== ==== ==== ====
+Step Definition                                                                     Given When Then Step
+=================================================================================== ===== ==== ==== ====
+Then the "{element_name}" field is {not_:optional_not}{state:field_required_option}              x      
+=================================================================================== ===== ==== ==== ====
 
 Step Definitions
 ================
 
 .. index:: 
-    single: Then step; Then the "{field}" field is {not_:optional_not}{state:field_required_option}
+    single: Then step; Then the "{element_name}" field is {not_:optional_not}{state:field_required_option}
 
-.. _then the "{field}" field is {not_:optional_not}{state:field_required_option}:
+.. _then the "{element_name}" field is {not_:optional_not}{state:field_required_option}:
 
-**Step:** Then the "{field}" field is {not_:optional_not}{state:field_required_option}
---------------------------------------------------------------------------------------
+**Step:** Then the "{element_name}" field is {not_:optional_not}{state:field_required_option}
+---------------------------------------------------------------------------------------------
 
 Require that a field is required or optional in a form.
 This sentence allows the user to specify their requirements in natural

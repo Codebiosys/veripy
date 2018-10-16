@@ -16,6 +16,7 @@ Step Overview
 Step Definition                           Given When Then Step
 ========================================= ===== ==== ==== ====
 When the user clears the "{element_name}"         x           
+When the "{element_name}" is cleared              x           
 ========================================= ===== ==== ==== ====
 
 Step Definitions
@@ -36,5 +37,22 @@ Your mileage-may-vary with browser plugins.
 
 ::
 
-    When the user clears the "Prefilled Input"
+    When the "Prefilled Input" is cleared
+
+.. index:: 
+    single: When step; When the "{element_name}" is cleared
+
+.. _when the "{element_name}" is cleared:
+
+**Step:** When the "{element_name}" is cleared
+----------------------------------------------
+
+Tells the browser to clear the target input element
+
+This method only works with traditional HTML input elements.
+Your mileage-may-vary with browser plugins.
+
+::
+
+    When the "Prefilled Input" is cleared
 

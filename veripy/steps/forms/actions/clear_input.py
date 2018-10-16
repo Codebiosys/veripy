@@ -5,6 +5,9 @@ from behave import when
 logger = logging.getLogger('forms')
 
 
+# New
+@when('the "{element_name}" is cleared')
+# Old
 @when('the user clears the "{element_name}"')
 def clear_input(context, element_name):
     """ Tells the browser to clear the target input element
@@ -14,7 +17,7 @@ def clear_input(context, element_name):
 
     ::
 
-        When the user clears the "Prefilled Input"
+        When the "Prefilled Input" is cleared
 
     """
     logger.info(f'Clearing "{element_name}".')

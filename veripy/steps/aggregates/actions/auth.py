@@ -9,13 +9,15 @@ from veripy import custom_types  # noqa
 logger = logging.getLogger('auth')
 
 
-@given('the user logged in via "{name}" with username "{username}" and password "{password}"')
-def user_logged_in(context, name, username, password):
+# New
+@given('the username "{username}" and password "{password}", log in via "{page_name}"')
+# Old
+@given('the user logged in via "{page_name}" with username "{username}" and password "{password}"')
+def user_logged_in(context, page_name, username, password):
     """ Tells the browser to to navigate to the given page to authenticate
     ::
 
-        Given the user logged in via "Login Page" with username "user" and password "password"
-
+        Given the username "user" and password "password", log in via "Login Page"
 
     This is a convenience step for the purposes of logging into a basic
     web application. This step assumes that for the most part, a login
@@ -27,7 +29,7 @@ def user_logged_in(context, name, username, password):
     authenticated. It only enters the specified credentials at the
     specified page.
 
-    :param name: The name of the page fixture to use for the login page
+    :param page_name: The name of the page fixture to use for the login page
                  This page should specify the following keys:
                  - `User Name Field`: Selector for the user name field
                  - `Password Field`: Selector for the password field
@@ -40,7 +42,7 @@ def user_logged_in(context, name, username, password):
     login_button = 'Log In Button'
 
     context.execute_steps(f"""
-        Given that the browser is at "{name}"
+        Given that the browser is at "{page_name}"
         When "{username}" is entered into the "{username_field}"
         And "{password}" is entered into the "{password_field}"
         And the user clicks the "{login_button}"

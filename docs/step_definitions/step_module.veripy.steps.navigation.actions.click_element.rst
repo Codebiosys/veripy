@@ -16,7 +16,9 @@ Step Overview
 Step Definition                            Given When Then Step
 ========================================== ===== ==== ==== ====
 Given the user clicks the "{element_name}"   x                 
+Given the "{element_name}" is clicked        x                 
 When the user clicks the "{element_name}"          x           
+When the "{element_name}" is clicked               x           
 ========================================== ===== ==== ==== ====
 
 Step Definitions
@@ -31,9 +33,28 @@ Step Definitions
 ----------------------------------------------------
 
 Tells the browser to click on an element with the given identifier.
+
 ::
 
-    When the user clicks the "Search Button"
+    Given the "Search Button" is clicked
+    # Or
+    When the "Search Button" is clicked
+
+.. index:: 
+    single: Given step; Given the "{element_name}" is clicked
+
+.. _given the "{element_name}" is clicked:
+
+**Step:** Given the "{element_name}" is clicked
+-----------------------------------------------
+
+Tells the browser to click on an element with the given identifier.
+
+::
+
+    Given the "Search Button" is clicked
+    # Or
+    When the "Search Button" is clicked
 
 .. index:: 
     single: When step; When the user clicks the "{element_name}"
@@ -44,7 +65,26 @@ Tells the browser to click on an element with the given identifier.
 ---------------------------------------------------
 
 Tells the browser to click on an element with the given identifier.
+
 ::
 
-    When the user clicks the "Search Button"
+    Given the "Search Button" is clicked
+    # Or
+    When the "Search Button" is clicked
+
+.. index:: 
+    single: When step; When the "{element_name}" is clicked
+
+.. _when the "{element_name}" is clicked:
+
+**Step:** When the "{element_name}" is clicked
+----------------------------------------------
+
+Tells the browser to click on an element with the given identifier.
+
+::
+
+    Given the "Search Button" is clicked
+    # Or
+    When the "Search Button" is clicked
 

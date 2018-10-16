@@ -12,22 +12,22 @@ Step Overview
 =============
 
 
-===================================================================================== ===== ==== ==== ====
-Step Definition                                                                       Given When Then Step
-===================================================================================== ===== ==== ==== ====
-Then the "{field}" field does {not_:optional_not}accept {input_type:field_input_type}              x      
-===================================================================================== ===== ==== ==== ====
+============================================================================================ ===== ==== ==== ====
+Step Definition                                                                              Given When Then Step
+============================================================================================ ===== ==== ==== ====
+Then the "{element_name}" field does {not_:optional_not}accept {input_type:field_input_type}              x      
+============================================================================================ ===== ==== ==== ====
 
 Step Definitions
 ================
 
 .. index:: 
-    single: Then step; Then the "{field}" field does {not_:optional_not}accept {input_type:field_input_type}
+    single: Then step; Then the "{element_name}" field does {not_:optional_not}accept {input_type:field_input_type}
 
-.. _then the "{field}" field does {not_:optional_not}accept {input_type:field_input_type}:
+.. _then the "{element_name}" field does {not_:optional_not}accept {input_type:field_input_type}:
 
-**Step:** Then the "{field}" field does {not_:optional_not}accept {input_type:field_input_type}
------------------------------------------------------------------------------------------------
+**Step:** Then the "{element_name}" field does {not_:optional_not}accept {input_type:field_input_type}
+------------------------------------------------------------------------------------------------------
 
 Require that a field be configured to accept or not accept certain input types.
 This sentence allows the user to specify their requirements in natural
