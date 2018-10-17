@@ -2,6 +2,7 @@ import os
 import logging
 
 from behave import fixture
+from behave.runner import scoped_context_layer
 from behave.runner_util import parse_features, collect_feature_locations
 
 import splinter
@@ -26,17 +27,19 @@ def collect_setup_files(context):
     setup_files = os.path.join(context.config.base_dir, settings.SETUP_DIR)
     logger.info(f'Parsing setup files from the {setup_files} directory.')
 
-    setup_locations = collect_feature_locations([setup_files])
-    setup_features = parse_features(setup_locations)
+    feature_locations = collect_feature_locations([setup_files])
+    all_features = parse_features(feature_locations)
     context_setup = {}
-    for feature in setup_features:
+    for feature in all_features:
         tag_name = None
         for tag in feature.tags:
             if 'configure' in tag:
                 tag_name = tag.replace('configure.', '')
                 break
+        if not tag_name:
+            # This was not a configuration, so skip the feature
+            continue
         logger.info(f'Setting Context Setup {tag_name} from {feature.location}.')
-
         setup = {
             'setup': [],
             'teardown': []}
@@ -44,7 +47,7 @@ def collect_setup_files(context):
             if any(tag == 'teardown' for tag in scenario.tags):
                 logger.info(f'Setting teardown from {scenario.location}.')
                 setup['teardown'].append(scenario)
-            else:
+            elif any(tag == 'setup' for tag in scenario.tags):
                 logger.info(f'Setting setup from {scenario.location}.')
                 setup['setup'].append(scenario)
         context_setup[tag_name] = setup
@@ -73,8 +76,31 @@ def browser_chrome(context, timeout=30, **kwargs):
     return browser
 
 
+def execute_scenario_steps(local_scenario, scenario):
+    scenario_steps = ''
+    for step in scenario.steps:
+        scenario_steps += f'{step.keyword} {step.name}\n'
+    local_scenario.execute_steps(scenario_steps)
+
+
+def run_scenario(local_context, scenario):
+    for tag in scenario.tags:
+        local_context._runner.hooks['before_tag'](local_context, tag)
+    local_context._runner.hooks['before_scenario'](local_context, scenario)
+    if scenario.background:
+        execute_scenario_steps(local_context, scenario.background)
+    if scenario.type == 'scenario_outline':
+        for sub_scenario in scenario.scenarios:
+            execute_scenario_steps(local_context, sub_scenario)
+    else:
+        execute_scenario_steps(local_context, scenario)
+    local_context._runner.hooks['after_scenario'](local_context, scenario)
+    for tag in scenario.tags:
+        local_context._runner.hooks['after_tag'](local_context, tag)
+
+
 @fixture
-def setup_teardown(context, name, set_teardown=False):
+def setup_teardown(context, name, set_teardown=False, teardown_only=False):
     """
     Based on a tag request (e.g. - @fixture.setup.{name}), run the steps of the
     @configure.{name} setup feature if the setup feature has not been previously
@@ -88,31 +114,25 @@ def setup_teardown(context, name, set_teardown=False):
 
     logger.info(f'Setup running for {name}')
 
-    def execute_scenario_steps(scenario):
-        scenario_steps = ''
-        for step in scenario.all_steps:
-            scenario_steps += f'{step.keyword} {step.name}\n'
-        context.execute_steps(scenario_steps)
-
-    for scenario in setup_scenarios['setup']:
-        if scenario.should_run():
-            if scenario.type == 'scenario_outline':
-                for sub_scenario in scenario.scenarios:
-                    execute_scenario_steps(sub_scenario)
-            else:
-                execute_scenario_steps(scenario)
-            scenario.skip()
+    if not teardown_only:
+        for scenario in setup_scenarios['setup']:
+            if scenario.should_run():
+                if any(tag.startswith('fixture.browser') for tag in scenario.tags):
+                    with scoped_context_layer(context, layer_name='setup_teardown'):
+                        run_scenario(context, scenario)
+                else:
+                    run_scenario(context, scenario)
+                scenario.skip()
 
     if set_teardown:
         def cleanup_steps():
             logger.info(f'Teardown running for {name}')
             for scenario in setup_scenarios['teardown']:
-                if scenario.type == 'scenario_outline':
-                    for sub_scenario in scenario.scenarios:
-                        execute_scenario_steps(sub_scenario)
+                if any(tag.startswith('fixture.browser') for tag in scenario.tags):
+                    with scoped_context_layer(context, layer_name='setup_teardown'):
+                        run_scenario(context, scenario)
                 else:
-                    execute_scenario_steps(scenario)
-
+                    run_scenario(context, scenario)
             for scenario in setup_scenarios['setup']:
                 scenario.reset()
 

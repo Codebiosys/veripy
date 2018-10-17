@@ -1,3 +1,4 @@
+import time
 import logging
 from behave import when, given
 
@@ -21,4 +22,5 @@ def when_wait(context, seconds, plural):
 
     """
     logger.info(f'Waiting {seconds}')
-    context.browser.is_element_present_by_tag('body', wait_time=seconds)
+    time.sleep(seconds)
+    return context.browser.is_element_present_by_tag('body', wait_time=seconds)
