@@ -38,6 +38,16 @@ def before_tag(context, tag):
     elif tag.startswith("fixture.setup"):
         name = tag.replace("fixture.setup.", "")
         use_fixture(fixtures.setup_teardown, context, name, set_teardown=False)
+    elif tag.startswith("fixture.teardown"):
+        name = tag.replace("fixture.teardown.", "")
+        use_fixture(fixtures.setup_teardown, context, name, set_teardown=True, teardown_only=True)
+
+
+@capture
+def after_tag(context, tag):
+    """
+    """
+    pass
 
 
 @capture

@@ -1,10 +1,12 @@
-@configure.SETUP_EXAMPLE @skip
+@configure.SETUP_EXAMPLE @configure @skip
 Feature: Setup Sentences
     Setup sentences are parsed by tag, and do setup and/or teardown
 
+    @setup
     Scenario: I do setup
         Given we have behave installed
 
+    @setup
     Scenario Outline: Test that the system can handle Scenario outlines
         Given that the browser is at "<page-name>"
         Then the browser should be at "<page-name>"
