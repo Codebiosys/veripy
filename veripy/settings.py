@@ -46,6 +46,7 @@ REPORTS_DIR = os.getenv('REPORTS_DIR', '../reports')
 
 FIXTURES_DIR = os.getenv('FIXTURES_DIR', os.path.join(BASE_DIR, 'pages', 'fixtures'))
 RESOURCES_DIR = os.getenv('RESOURCES_DIR', os.path.join(BASE_DIR, 'resources'))
+SETUP_DIR = os.getenv('SETUP_DIR', 'setup')
 
 
 # Logging

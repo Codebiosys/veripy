@@ -1,7 +1,7 @@
+@fixture.browser.chrome
 Feature: Aggregate Sentences
     Aggregate sentences allow the Tester to run multiple sentences in one action
     or modify an existing sentence in new ways
-
 
     @example_app @aggregates @action @auth
     Scenario: Test that the user can send login credentials at the specified page

@@ -1,16 +1,14 @@
 import logging
 
+from behave import use_fixture
 from behave.log_capture import capture
 from behave.model_core import Status
 
-import splinter
-
-from . import settings
+from . import settings, fixtures
 from .utils import mkdir
 
 # bootstrap the custom types
 from . import custom_types  # noqa
-
 
 # Bootstrap the logger.
 logging.basicConfig(**settings.LOGGING_CONFIG)
@@ -26,29 +24,49 @@ def before_all(context):
     context.tmp_directory = settings.TMP_DIR
     mkdir(settings.REPORTS_DIR)
 
+    if settings.SETUP_DIR:
+        use_fixture(fixtures.collect_setup_files, context)
+
+
+@capture
+def before_tag(context, tag):
+    if tag == "fixture.browser.chrome":
+        use_fixture(fixtures.browser_chrome, context, timeout=10)
+    if tag.startswith("fixture.setup.teardown"):
+        name = tag.replace("fixture.setup.teardown.", "")
+        use_fixture(fixtures.setup_teardown, context, name, set_teardown=True)
+    elif tag.startswith("fixture.setup"):
+        name = tag.replace("fixture.setup.", "")
+        use_fixture(fixtures.setup_teardown, context, name, set_teardown=False)
+
+
+@capture
+def before_feature(context, feature):
+    """ Before each feature.
+    """
+    pass
+
+
+@capture
+def after_feature(context, feature):
+    """ After each feature.
+    """
+    pass
+
 
 @capture
 def before_scenario(context, scenario):
-    """ Before each scenario, we need to restart the browser session so that
-    there's no bleed-over from previous tests.
+    """ Before each scenario.
     """
-    if settings.BROWSER == 'remote':
-        context.browser = splinter.Browser(
-            driver_name='remote',
-            browser='chrome',
-            url=settings.SELENIUM_URL,
-        )
-    else:
-        context.browser = splinter.Browser(
-            driver_name=settings.BROWSER,
-            headless=settings.RUN_HEADLESS,
-        )
+    if hasattr(context, 'active_outline') and context.active_outline:
+        scenario.row = context.active_outline
+    pass
 
 
 @capture
 def after_scenario(context, scenario):
     """ After each scenario, quit the browser session. """
-    context.browser.quit()
+    pass
 
 
 @capture
@@ -66,6 +84,6 @@ def before_step(context, step):
 def after_step(context, step):
     """ Here we capture the screen if the step is a failure.
     """
-    if step.status == Status.failed:
+    if step.status == Status.failed and hasattr(context, 'browser'):
         from veripy.utils.browsers import screenshot_bytes
         step.screenshots.append(screenshot_bytes(context))

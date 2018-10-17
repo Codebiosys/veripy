@@ -63,17 +63,23 @@ source environment.sh
 
 ## Running the Tests
 
-VeriPy is built on Behave. As such any files ending in `.feature` inside of the `features/` directory will be run when the application starts. VeriPy comes with a sample set of tests demonstrating how to use the statements. To run these or any custom tests, use the following command:
+VeriPy is built on Behave. As such any files ending in `.feature` inside of the `features/` directory will be run when the application starts. VeriPy comes with a sample set of tests demonstrating how to use the statements.
+
+Veripy will also look for setup fixtures in the `setup/` directory (or the directory configured in settings.py) for features that are tagged as `@configure.NAME`, where `name` is the setup's name. When features are run, veripy will inspect the tags of each feature for either the tags `@fixture.setup.NAME` or `@fixture.setup.teardown.NAME`, and run the matching `setup/` feature with the same configured name. Using `@fixture.setup.NAME` will NOT run any of the setup's scenarios that are tagged as `@teardown`, while `@fixture.setup.teardown.NAME` will add a cleanup callback with the scenarios tagged as `@teardown`. This allows veripy to set up a through the web data set for testing, and clean it up afterwards. If multiple features rely on the same setup, it will only re-run the setup if the teardown has occurred. This allows multiple features to use the system under test with specific data that may be cumbersome to add throughout the testing lifecycle. `@fixture.setup` tags are run in the order they appear.
+
+Also, veripy has a default browser configured so that any feature/scenario tagged with `@fixture.browser.chrome` will open a browser for testing, and close it at the end of the feature/scenario, respectively.
+
+ To run these or any custom tests, use the following command:
 
 ```bash
-behave example/features/ --tags ~@xfail
+behave example/ --tags ~@xfail
 ```
 
 To identify where sentences are used (and which are undefined), use the dry-run mode to
 output that data to step_usage.txt:
 
 ```bash
-behave example/features/ --dry-run
+behave example/ --dry-run
 ```
 
 

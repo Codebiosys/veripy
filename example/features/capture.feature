@@ -1,3 +1,4 @@
+@fixture.browser.chrome
 Feature: Capture Sentences
     Capture sentences allow the Tester to capture either screenshots or data
     from the page and record it to the report
