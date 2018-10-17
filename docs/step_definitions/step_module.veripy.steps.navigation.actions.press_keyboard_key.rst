@@ -16,6 +16,7 @@ Step Overview
 Step Definition                                                   Given When Then Step
 ================================================================= ===== ==== ==== ====
 When the user presses the "{keyboard_key:pressable_key_type}" key         x           
+When the "{keyboard_key:pressable_key_type}" key is pressed               x           
 ================================================================= ===== ==== ==== ====
 
 Step Definitions
@@ -30,7 +31,22 @@ Step Definitions
 ---------------------------------------------------------------------------
 
 Press the given key.
+
 ::
 
-    the user presses the "Return" key
+    When the "Return" key is pressed
+
+.. index:: 
+    single: When step; When the "{keyboard_key:pressable_key_type}" key is pressed
+
+.. _when the "{keyboard_key:pressable_key_type}" key is pressed:
+
+**Step:** When the "{keyboard_key:pressable_key_type}" key is pressed
+---------------------------------------------------------------------
+
+Press the given key.
+
+::
+
+    When the "Return" key is pressed
 

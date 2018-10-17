@@ -21,7 +21,6 @@ The following step definitions are provided here.
     step_module.veripy.steps.capture.capture_content
     step_module.veripy.steps.capture.capture_screenshot
     step_module.veripy.steps.content.checks.element_contains_text
-    step_module.veripy.steps.content.checks.element_not_contains_text
     step_module.veripy.steps.content.checks.element_visible
     step_module.veripy.steps.content.checks.nth_element_contains_text
     step_module.veripy.steps.forms.actions.clear_input
@@ -41,7 +40,6 @@ The following step definitions are provided here.
     step_module.veripy.steps.navigation.actions.click_element
     step_module.veripy.steps.navigation.actions.click_nth_element
     step_module.veripy.steps.navigation.actions.press_keyboard_key
-    step_module.veripy.steps.navigation.actions.wait_for_element
     step_module.veripy.steps.navigation.actions.wait_time
     step_module.veripy.steps.navigation.actions.window_close_last
     step_module.veripy.steps.navigation.actions.window_focus_last

@@ -16,6 +16,7 @@ Step Overview
 Step Definition                         Given When Then Step
 ======================================= ===== ==== ==== ====
 Then the page title should be "{title}"              x      
+Then the page title is "{title}"                     x      
 ======================================= ===== ==== ==== ====
 
 Step Definitions
@@ -28,6 +29,17 @@ Step Definitions
 
 **Step:** Then the page title should be "{title}"
 -------------------------------------------------
+
+.. todo::
+    Step definition description is missing.
+
+.. index:: 
+    single: Then step; Then the page title is "{title}"
+
+.. _then the page title is "{title}":
+
+**Step:** Then the page title is "{title}"
+------------------------------------------
 
 .. todo::
     Step definition description is missing.

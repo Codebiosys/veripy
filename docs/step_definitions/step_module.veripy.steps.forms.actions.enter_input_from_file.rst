@@ -12,22 +12,22 @@ Step Overview
 =============
 
 
-================================================================================ ===== ==== ==== ====
-Step Definition                                                                  Given When Then Step
-================================================================================ ===== ==== ==== ====
-When the content from "{filename:file_input_type}" is entered into the "{field}"         x           
-================================================================================ ===== ==== ==== ====
+======================================================================================= ===== ==== ==== ====
+Step Definition                                                                         Given When Then Step
+======================================================================================= ===== ==== ==== ====
+When the content from "{filename:file_input_type}" is entered into the "{element_name}"         x           
+======================================================================================= ===== ==== ==== ====
 
 Step Definitions
 ================
 
 .. index:: 
-    single: When step; When the content from "{filename:file_input_type}" is entered into the "{field}"
+    single: When step; When the content from "{filename:file_input_type}" is entered into the "{element_name}"
 
-.. _when the content from "{filename:file_input_type}" is entered into the "{field}":
+.. _when the content from "{filename:file_input_type}" is entered into the "{element_name}":
 
-**Step:** When the content from "{filename:file_input_type}" is entered into the "{field}"
-------------------------------------------------------------------------------------------
+**Step:** When the content from "{filename:file_input_type}" is entered into the "{element_name}"
+-------------------------------------------------------------------------------------------------
 
 Copies the text from the given filename and enters it into the target element
 ::

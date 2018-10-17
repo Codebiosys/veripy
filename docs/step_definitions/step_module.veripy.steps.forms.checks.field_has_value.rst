@@ -12,22 +12,22 @@ Step Overview
 =============
 
 
-=========================================== ===== ==== ==== ====
-Step Definition                             Given When Then Step
-=========================================== ===== ==== ==== ====
-Then the "{element}" has the value "{text}"              x      
-=========================================== ===== ==== ==== ====
+================================================ ===== ==== ==== ====
+Step Definition                                  Given When Then Step
+================================================ ===== ==== ==== ====
+Then the "{element_name}" has the value "{text}"              x      
+================================================ ===== ==== ==== ====
 
 Step Definitions
 ================
 
 .. index:: 
-    single: Then step; Then the "{element}" has the value "{text}"
+    single: Then step; Then the "{element_name}" has the value "{text}"
 
-.. _then the "{element}" has the value "{text}":
+.. _then the "{element_name}" has the value "{text}":
 
-**Step:** Then the "{element}" has the value "{text}"
------------------------------------------------------
+**Step:** Then the "{element_name}" has the value "{text}"
+----------------------------------------------------------
 
 Asserts that a form element has the given value.
 This is useful in identifying the value of a given field.

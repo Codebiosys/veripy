@@ -6,8 +6,8 @@ from veripy import custom_types  # noqa
 logger = logging.getLogger('fields')
 
 
-@then('the "{field}" field does {not_:optional_not}accept {input_type:field_input_type}')
-def then_field_accepts_type(context, field, not_, input_type):
+@then('the "{element_name}" field does {not_:optional_not}accept {input_type:field_input_type}')
+def then_field_accepts_type(context, element_name, not_, input_type):
     """ Require that a field be configured to accept or not accept certain input types.
     This sentence allows the user to specify their requirements in natural
     language.
@@ -24,14 +24,16 @@ def then_field_accepts_type(context, field, not_, input_type):
 
     """
     not_ = bool(not_)
-    logger.info(f'Asserting that "{field}" does {"not " if not_ else ""}accept {input_type}.')
+    logger.info(
+        f'Asserting that "{element_name}" does {"not " if not_ else ""}accept {input_type}.'
+    )
     try:
-        element = context.page[field]
+        element = context.page[element_name]
     except context.page.ElementNotFound:
-        raise AssertionError(f'The "{field}" was not found on the page.')
+        raise AssertionError(f'The "{element_name}" was not found on the page.')
 
     type = element._element.get_attribute('type')
     assert (type == input_type) != not_, (
-        f'"{field}" is {"not " if not_ else ""}supposed to accept '
+        f'"{element_name}" is {"not " if not_ else ""}supposed to accept '
         f'{input_type} but did{"" if not_ else " not"}.'
     )
