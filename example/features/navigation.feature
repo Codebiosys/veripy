@@ -26,6 +26,16 @@ Feature: Navigation Sentences
           """
         Then the "Other Random Number" is not visible
 
+    @example_app @navigation @actions @browser_wait_switch_page
+    Scenario: The Demo App page can be switched
+        Given that the browser is at "localhost-hello"
+        When the browser is at "other-page" after 1 seconds
+          """
+          Context will change but the current page will not.
+          Other Random Number is a property of other page, but not localhost-hello
+          """
+        Then the "Other Random Number" is not visible
+
     @example_app @navigation @actions @window_focus_last
     Scenario: The Demo App tab can be switched by clicking a link
         Given that the browser is at "localhost-hello"
@@ -105,12 +115,13 @@ Feature: Navigation Sentences
     @example_app @navigation @actions @wait_for_element @wait_time
     Scenario: The tester can wait for an element
         Given that the browser is at "localhost-hello"
-        When the user waits 1 seconds for the "Required Field" to be visible
+        When after 1 second
+        Then the "Required Field" is visible after 1 second
             """
-            This does not check for visibility; it just waits either 1 second or
-            untile the element is visible, whichever happens first
+            This checks for visibility; it just waits 1 second before
+            checking if the element is visible
             """
-        When the user waits 1 seconds
+        Then it is not the case that the "Missing Field" is visible after 1 second
         Then take a screen shot
 
 
@@ -118,9 +129,15 @@ Feature: Navigation Sentences
     Scenario: Test that the user can implicitly switch page contexts
         Given that the browser is at "localhost-hello"
         When the user clicks the "Other Page Link"
-        Then the browser should be at "other-page"
+        Then the browser is now at "other-page"
         Then take a screen shot
 
+        @example_app @navigation @checks @wait_browser_at_page
+        Scenario: Test that the user can implicitly switch page contexts
+            Given that the browser is at "localhost-hello"
+            When the user clicks the "Other Page Link"
+            Then after 1 second, the browser is at "other-page"
+            Then take a screen shot
 
     @example_app @navigation @checks @browser_at_page @exceptions
     Scenario: Test that the user can identify failed page context switches
@@ -130,14 +147,14 @@ Feature: Navigation Sentences
             """
             Expected to be on the Page "login", but was not.
             """
-        Then the browser should be at "other-page"
+        Then the browser is now at "other-page"
 
 
     @example_app @navigation @checks @browser_at_page @xfail
     Scenario: XFail: Test that the user can identify failed page context switches
         Given that the browser is at "localhost-hello"
         When the user clicks the "Other Page Link"
-        Then the browser should be at "login"
+        Then the browser is now at "login"
 
 
     @example_app @navigation @checks @browser_at_page @outline
