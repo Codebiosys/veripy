@@ -182,7 +182,6 @@ class Page(object):
         """
         return getattr(self._elements, name)
 
-
     @allow_retries(retry_on=(ElementNotFound,), retries=1)
     def find(self, selector, by='id', allow_multiple=False, **kwargs):
         """ Given a method and a selector, attempt to find the given element
