@@ -32,6 +32,7 @@ The following step definitions are provided here.
     step_module.veripy.steps.forms.actions.upload_file_to_field
     step_module.veripy.steps.forms.checks.field_accepts_type
     step_module.veripy.steps.forms.checks.field_disabled
+    step_module.veripy.steps.forms.checks.field_has_checked
     step_module.veripy.steps.forms.checks.field_has_empty_value
     step_module.veripy.steps.forms.checks.field_has_value
     step_module.veripy.steps.forms.checks.field_required

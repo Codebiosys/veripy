@@ -9,6 +9,7 @@ from .checks.field_disabled import * # noqa
 from .checks.field_has_empty_value import * # noqa
 from .checks.field_has_value import * # noqa
 from .checks.field_required import * # noqa
+from .checks.field_has_checked import * # noqa
 
 __all__ = [
     'clear_input',
@@ -21,5 +22,6 @@ __all__ = [
     'then_field_is_enabled',
     'check_input_empty',
     'check_input_value',
-    'then_field_is_required'
+    'then_field_is_required',
+    'check_checkbox_value'
 ]

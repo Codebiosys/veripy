@@ -114,6 +114,34 @@ Feature: Form Sentences
         When "green" is selected for "Select Field"
         Then the "Select Field" has the value "green"
 
+    @example_app @forms @actions @checkbox
+    Scenario: A select field can have an option selected
+        Given that the browser is at "localhost-hello"
+        When the "Checkbox One" is clicked
+        Then the "Checkbox One" checkbox is checked
+        Then take a screen shot
+        When the "Checkbox One" is clicked
+        Then the "Checkbox One" checkbox is not checked
+
+
+    @example_app @forms @actions @checkbox @exception
+    Scenario: The system responds correctly when A select field has an option selected
+        Given that the browser is at "localhost-hello"
+        Then the statement that 'the "Checkbox One" checkbox is checked' responds with
+            """
+            The "Checkbox One" checkbox was supposed to be checked, but it was not.
+            """
+        When the "Checkbox One" is clicked
+        Then the statement that 'the "Checkbox One" checkbox is not checked' responds with
+            """
+            The "Checkbox One" checkbox was not supposed to be checked, but it was.
+            """
+        When the "Checkbox One" is clicked
+        Then the statement that 'the "Missing Field" checkbox is checked' responds with
+            """
+            The "Missing Field" checkbox was not found on the page.
+            """
+
 
     @example_app @forms @actions @select_option @exceptions
     Scenario: The system responds correctly when a select field can have not an option selected
