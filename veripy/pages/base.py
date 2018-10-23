@@ -103,7 +103,7 @@ class Page(object):
         logger.info(f'Finished initializing page: "{name}"')
 
     def __getitem__(self, name):
-        property = getattr(self._elements, name)
+        property = self.get_element_properties(name)
         return self.find(property['selector'], property['by'], **property.get('kwargs', {}))
 
     def _find_selectors(self, by='id', parent=None):
@@ -167,6 +167,20 @@ class Page(object):
         return selectors[by]
 
     # Public Methods
+
+    def get_element_properties(self, name):
+        """ Given a page element's name, return the configured properties for
+        the element.
+
+        Unless configured otherwise, the returned dictionary will contain a
+        `selector` and `by` attributes. These will contain both the method to
+        select the element and the selector's type.
+
+        Example::
+
+            { 'selector': '//div[@id="top"]/a', 'by': 'xpath' }
+        """
+        return getattr(self._elements, name)
 
     @allow_retries(retry_on=(ElementNotFound,), retries=1)
     def find(self, selector, by='id', allow_multiple=False, **kwargs):

@@ -160,6 +160,25 @@ Feature: Form Sentences
         Given that the browser is at "localhost-hello"
         When "yellow" is selected for "Select Field"
 
+    @example_app @forms @actions @select_option
+    Scenario: A nameless select field can have an option selected
+        Given that the browser is at "localhost-hello"
+        When "green" is selected for "Nameless Select Field"
+        Then the "Nameless Select Field" has the value "green"
+
+
+    @example_app @forms @actions @select_option @exceptions
+    Scenario: The system responds correctly when a nameless select field can have not an option selected
+        Given that the browser is at "localhost-hello"
+        Then if '"yellow" is selected for "Nameless Select Field"', the system responds with
+          """
+          "Nameless Select Field" has no option with value "yellow".
+          """
+
+    @example_app @forms @actions @select_option @xfail
+    Scenario: XFail: The system responds when there is no option on a nameless select
+        Given that the browser is at "localhost-hello"
+        When "yellow" is selected for "Nameless Select Field"
 
     @example_app @forms @actions @select_option @xfail
     Scenario: XFail: The system responds when there is no field

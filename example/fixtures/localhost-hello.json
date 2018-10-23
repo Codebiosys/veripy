@@ -75,6 +75,10 @@
       "by": "name",
       "selector": "select-field"
     },
+    "Nameless Select Field": {
+      "by": "xpath",
+      "selector": "//*[@id=\"nameless-select-field\"]"
+    },
     "Missing Field": {
       "by": "id",
       "selector": "a-field-that-is-not-on-the-page"
