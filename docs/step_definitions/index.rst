@@ -37,6 +37,7 @@ The following step definitions are provided here.
     step_module.veripy.steps.forms.checks.field_has_value
     step_module.veripy.steps.forms.checks.field_required
     step_module.veripy.steps.navigation.actions.browser_at_page
+    step_module.veripy.steps.navigation.actions.browser_prompt
     step_module.veripy.steps.navigation.actions.browser_size
     step_module.veripy.steps.navigation.actions.browser_switch_page
     step_module.veripy.steps.navigation.actions.browser_wait_switch_page

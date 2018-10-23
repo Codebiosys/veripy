@@ -33,7 +33,7 @@ def collect_setup_files(context):
     for feature in all_features:
         tag_name = None
         for tag in feature.tags:
-            if 'configure' in tag:
+            if tag.startswith('configure.'):
                 tag_name = tag.replace('configure.', '')
                 break
         if not tag_name:
