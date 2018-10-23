@@ -132,12 +132,12 @@ Feature: Navigation Sentences
         Then the browser is now at "other-page"
         Then take a screen shot
 
-        @example_app @navigation @checks @wait_browser_at_page
-        Scenario: Test that the user can implicitly switch page contexts
-            Given that the browser is at "localhost-hello"
-            When the user clicks the "Other Page Link"
-            Then after 1 second, the browser is at "other-page"
-            Then take a screen shot
+    @example_app @navigation @checks @wait_browser_at_page
+    Scenario: Test that the user can implicitly switch page contexts
+        Given that the browser is at "localhost-hello"
+        When the user clicks the "Other Page Link"
+        Then after 1 second, the browser is at "other-page"
+        Then take a screen shot
 
     @example_app @navigation @checks @browser_at_page @exceptions
     Scenario: Test that the user can identify failed page context switches
@@ -167,3 +167,31 @@ Feature: Navigation Sentences
         | name          | page-name          | page-title  |
         | Localhost     | localhost-hello    | Hello World |
         | Other Page    | other-page          | Other Page |
+
+
+    @example_app @navigation @prompt
+    Scenario: Test that the user can approve a browser prompt
+        Given that the browser is at "localhost-hello"
+        When the user clicks the "Confirm Prompt Button"
+        # Then the browser prompt contains the text "Confirm the prompt"
+        When the browser prompt is confirmed
+        Then the "Confirm Prompt Result" contains the text "You pressed OK!"
+        Then take a screen shot
+
+        @example_app @navigation @prompt
+        Scenario: Test that the user can approve a browser prompt
+            Given that the browser is at "localhost-hello"
+            When the user clicks the "Confirm Prompt Button"
+            # Then the browser prompt contains the text "Confirm the prompt"
+            When the browser prompt is confirmed
+            Then the "Confirm Prompt Result" contains the text "You pressed OK!"
+            Then take a screen shot
+
+    @example_app @navigation @prompt @exception
+    Scenario: Test that the user can approve a browser prompt
+        Given that the browser is at "localhost-hello"
+        # Then the browser prompt contains the text "Confirm the prompt"
+        Then if 'the browser prompt is cancelled', the system responds with
+             """
+             The browser prompt was not available, and could not be cancelled.
+             """

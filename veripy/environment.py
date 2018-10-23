@@ -3,6 +3,7 @@ import logging
 from behave import use_fixture
 from behave.log_capture import capture
 from behave.model_core import Status
+from selenium.common.exceptions import UnexpectedAlertPresentException
 
 from . import settings, fixtures
 from .utils import mkdir
@@ -95,5 +96,8 @@ def after_step(context, step):
     """ Here we capture the screen if the step is a failure.
     """
     if step.status == Status.failed and hasattr(context, 'browser'):
-        from veripy.utils.browsers import screenshot_bytes
-        step.screenshots.append(screenshot_bytes(context))
+        try:
+            from veripy.utils.browsers import screenshot_bytes
+            step.screenshots.append(screenshot_bytes(context))
+        except UnexpectedAlertPresentException:
+            step.stored_value = "Capturing a screenshot of a browser alert is not supported."

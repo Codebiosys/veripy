@@ -1,5 +1,6 @@
 from .actions.browser_at_page import * # noqa
 from .actions.browser_size import * # noqa
+from .actions.browser_prompt import * # noqa
 from .actions.browser_switch_page import * # noqa
 from .actions.browser_wait_switch_page import * # noqa
 from .actions.click_element import * # noqa
@@ -16,6 +17,7 @@ __all__ = [
     'given_browser_is_at',
     'given_resize_window',
     'given_when_page_switch',
+    'when_prompted',
     'when_wait_page_switch',
     'when_click_element',
     'when_click_nth_element',

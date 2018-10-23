@@ -2,4 +2,5 @@
 from . import (
     fields,
     optional_not,
+    prompt,
 )
