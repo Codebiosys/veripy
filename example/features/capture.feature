@@ -16,3 +16,13 @@ Feature: Capture Sentences
         Given that the browser is at "localhost-hello"
         And the browser window is 800 by 600 pixels
         Then take a screen shot
+
+    @example_app @capture @capture_screenshot @prompt @fixture.browser.chrome
+    Scenario: Test that the capture gracefully fails when there is an alert
+        Given that the browser is at "localhost-hello"
+        And the browser window is 800 by 600 pixels
+        When the user clicks the "Confirm Prompt Button"
+        Then the statement that 'take a screen shot' responds with
+            """
+            Capturing a screenshot of a browser alert is not supported.
+            """

@@ -105,10 +105,23 @@
               Link to another tab
               <a href="/other-page.html" id="other-tab-link" target="_blank">Go to Other Tab&#8594;</a>
             </label><br />
+
+            <button id="confirm-prompt-button" onclick="confirmFuction()">Use Confirm Dialog</button>
+            <p id="confirm-result"></p>
         </div>
     </body>
 
     <script>
+        function confirmFuction() {
+            var txt;
+            var r = confirm("Confirm the prompt");
+            if (r == true) {
+                txt = "You pressed OK!";
+            } else {
+                txt = "You pressed Cancel!";
+            }
+            document.getElementById("confirm-result").innerHTML = txt;
+        }
       // Set the value of the random element.
       document.getElementById('rando').innerText = Math.random().toString();
     </script>

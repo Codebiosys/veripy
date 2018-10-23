@@ -95,6 +95,14 @@
       "by": "id",
       "selector": "other-tab-link"
     },
+    "Confirm Prompt Button": {
+      "by": "id",
+      "selector": "confirm-prompt-button"
+    },
+    "Confirm Prompt Result": {
+      "by": "id",
+      "selector": "confirm-result"
+    },
     "form": {
       "by": "css",
       "selector": "form label",
