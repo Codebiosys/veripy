@@ -16,12 +16,14 @@ __all__ = [
     'when_file_content_entered',
     'when_enter_text_into_current_input',
     'when_enter_text_into_input',
+    'when_text_into_inputs',
     'select_option_by',
     'when_upload_file_to_field',
     'then_field_accepts_type',
     'then_field_is_enabled',
     'check_input_empty',
     'check_input_value',
+    'check_input_values',
     'then_field_is_required',
     'check_checkbox_value'
 ]

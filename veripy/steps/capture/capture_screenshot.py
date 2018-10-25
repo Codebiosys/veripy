@@ -7,6 +7,9 @@ logger = logging.getLogger('capture')
 
 
 @then('take a screen shot')
+@then('take a screenshot')
+@then('a screen shot is taken')
+@then('a screenshot is taken')
 def capture_screenshot(context):
     """ Have the browser take a screenshot of the current window. """
     logger.info('Taking a screenshot.')

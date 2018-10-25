@@ -8,6 +8,17 @@ Feature: Content Sentences
         Given that the browser is at "localhost-hello"
         Then the "Page Header" contains the text "Hello World"
 
+
+    @example_app @content @checks @element_contains_text @tabular
+    Scenario: The Demo App header contains the text "Hello World"
+        Given that the browser is at "localhost-hello"
+        Then the following items are displayed
+        | element         | items            |
+        | Page Header     | Hello World      |
+        | Other Page Link | Go to Other Page |
+        | Other Tab Link  | Go to Other Tab  |
+
+
     @example_app @content @checks @element_contains_text @exceptions
     Scenario: The Demo App header does not contain the text "Goodbye World"
         Given that the browser is at "localhost-hello"
@@ -38,6 +49,34 @@ Feature: Content Sentences
         Then the "Page Header" is visible
         Then the "Hidden Content" is not visible
         Then the "Missing Link" is not visible
+
+
+    @example_app @content @checks @element_visible @element_visible_table
+    Scenario: The Demo App can check multiple items for visibility
+        Given that the browser is at "localhost-hello"
+        Then the following items are visible
+          | items          |
+          | Page Header    |
+          | Required Field |
+          | Optional Field |
+          | Enabled Field  |
+          | Disabled Field |
+        Then the following items are not visible
+          | items          |
+          | Hidden Content |
+          | Missing Link   |
+
+    @example_app @aggregates @checks @element_visible_table @xfail
+    Scenario: The Demo App raises the correct errors
+        Given that the browser is at "localhost-hello"
+        Then the following items are visible
+          """
+          Tabular instructions are not supported by compound sentences.
+          This should respond that all sentences are not visible
+          """
+          | items          |
+          | Hidden Content |
+          | Missing Link   |
 
 
     @example_app @content @checks @element_visible @exceptions

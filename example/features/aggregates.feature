@@ -18,3 +18,14 @@ Feature: Aggregate Sentences
         Given that the browser is at "login"
         Then the page title should be "Log In"
         Then it is not the case that the page title should be "Logged In"
+
+    @example_app @aggregates @checks @xfail
+    Scenario: The Demo App raises the correct errors for tabular sentences
+        Given that the browser is at "localhost-hello"
+        Then the statement that 'the the following items are visible' responds with
+          """
+          Tabular instructions are not supported by compound sentences.
+          """
+          | item           |
+          | Hidden Content |
+          | Missing Link   |

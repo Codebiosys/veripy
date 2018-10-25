@@ -15,6 +15,9 @@ def check_action(context, sentence):
         if 'the user clears the "Missing Field"', the system responds with
         """The element "Home Link" was supposed to be visible and was not."""
     '''
+    if getattr(context, 'table', None) is not None:
+        raise AssertionError(f'Tabular instructions are not supported by compound sentences.')
+
     message = context.text
     logger.info(f'Asserting that the sentence \'{sentence}\' raises the message \'{message}\'')
     try:
