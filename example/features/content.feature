@@ -10,7 +10,7 @@ Feature: Content Sentences
 
 
     @example_app @content @checks @element_contains_text @tabular
-    Scenario: The Demo App header contains the text "Hello World"
+    Scenario: The Demo App contains correct values
         Given that the browser is at "localhost-hello"
         Then the following items are displayed
         | element         | items            |
@@ -18,6 +18,27 @@ Feature: Content Sentences
         | Other Page Link | Go to Other Page |
         | Other Tab Link  | Go to Other Tab  |
 
+    @example_app @content @checks @element_contains_text @tabular @xfail
+    Scenario: The Demo App contains correct values
+        Given that the browser is at "localhost-hello"
+        Then the following items are displayed
+        | element         | items                  |
+        | Page Header     | Goodbye World          |
+        | Other Page Link | Go to A Different Page |
+        | Other Tab Link  | Go to A Different Tab  |
+
+    @example_app @content @checks @element_contains_text @tabular
+    Scenario Outline: The Demo App contains repeatable values
+        Given that the browser is at "localhost-hello"
+        Then the following items are displayed
+        | element         | items             |
+        | <elementname>   | <elementvalue>    |
+
+      Examples: Element <elementname> = <elementvalue>
+          | elementname     | elementvalue     |
+          | Page Header     | Hello World      |
+          | Other Page Link | Go to Other Page |
+          | Other Tab Link  | Go to Other Tab  |
 
     @example_app @content @checks @element_contains_text @exceptions
     Scenario: The Demo App header does not contain the text "Goodbye World"
