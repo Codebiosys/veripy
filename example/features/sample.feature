@@ -15,7 +15,6 @@ Feature: showing off behave
     Scenario: check that google exists
         Given that the browser is at "google"
         When "hello world" is entered into the "search_field"
-        And the user waits 2 seconds
-        And the user clicks the "submit_button"
+        And after a few seconds, the "submit_button" is clicked
         Then the page title should be "hello world - Google Search"
         Then take a screen shot
