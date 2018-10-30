@@ -26,10 +26,10 @@ Feature: Navigation Sentences
           """
         Then the "Other Random Number" is not visible
 
-    @example_app @navigation @actions @browser_wait_switch_page
+    @example_app @navigation @actions @wait_for
     Scenario: The Demo App page can be switched
         Given that the browser is at "localhost-hello"
-        When the browser is at "other-page" after 1 seconds
+        When after 1 second, the browser is now at "other-page"
           """
           Context will change but the current page will not.
           Other Random Number is a property of other page, but not localhost-hello
@@ -112,19 +112,6 @@ Feature: Navigation Sentences
         Then the "Optional Field" has the value "New Text"
 
 
-    @example_app @navigation @actions @wait_for_element @wait_time
-    Scenario: The tester can wait for an element
-        Given that the browser is at "localhost-hello"
-        When after 1 second
-        Then the "Required Field" is visible after 1 second
-            """
-            This checks for visibility; it just waits 1 second before
-            checking if the element is visible
-            """
-        Then it is not the case that the "Missing Field" is visible after 1 second
-        Then take a screen shot
-
-
     @example_app @navigation @checks @browser_at_page
     Scenario: Test that the user can implicitly switch page contexts
         Given that the browser is at "localhost-hello"
@@ -132,11 +119,11 @@ Feature: Navigation Sentences
         Then the browser is now at "other-page"
         Then take a screen shot
 
-    @example_app @navigation @checks @wait_browser_at_page
+    @example_app @navigation @checks @wait_for
     Scenario: Test that the user can implicitly switch page contexts
         Given that the browser is at "localhost-hello"
         When the user clicks the "Other Page Link"
-        Then after 1 second, the browser is at "other-page"
+        Then after 1 second, the browser is now at "other-page"
         Then take a screen shot
 
     @example_app @navigation @checks @browser_at_page @exceptions
