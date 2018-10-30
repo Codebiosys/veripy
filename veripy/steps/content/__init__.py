@@ -6,7 +6,10 @@ from .checks.wait_element_visible import * # noqa
 
 __all__ = [
     'check_element_text',
+    'check_elements_have_text',
+    'check_not_element_text',
     'check_element_visible',
+    'check_elements_visible',
     'check_nth_element_text',
     'check_page_title',
     'then_wait_for_element'

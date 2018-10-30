@@ -77,6 +77,45 @@ Feature: Form Sentences
         Then take a screen shot
 
 
+    @example_app @forms @actions @enter_text_into_field @tabular
+    Scenario: A specified set of inputs can have text intered into it
+        Given that the browser is at "localhost-hello"
+        When the following data are entered
+            | field          | data          |
+            | Default Field  | New Text      |
+            | Text Field     | Text Text     |
+            | Textarea Field | Textarea Text |
+            | Number Field   | 3             |
+
+        Then the following fields have the specified values
+          | field          | value         |
+          | Default Field  | New Text      |
+          | Text Field     | Text Text     |
+          | Textarea Field | Textarea Text |
+          | Number Field   | 3             |
+
+        Then take a screen shot
+
+        @example_app @forms @actions @enter_text_into_field @tabular @xfail
+        Scenario: A specified set of inputs can have text intered into it
+            Given that the browser is at "localhost-hello"
+            When the following data are entered
+                | field          | data            |
+                | Default Field  | New 1 Text      |
+                | Text Field     | New 2 Text      |
+                | Textarea Field | New 3 Text      |
+                | Number Field   | 4               |
+
+            Then the following fields have the specified values
+              | field          | value         |
+              | Default Field  | New 5 Text    |
+              | Text Field     | New 6 Text    |
+              | Textarea Field | New 7 Text    |
+              | Number Field   | 8             |
+
+            Then take a screen shot
+
+
     @example_app @forms @actions @enter_text_into_field @exceptions
     Scenario: The system responds correctly when an error occurs entering text
         Given that the browser is at "localhost-hello"

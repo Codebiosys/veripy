@@ -18,3 +18,29 @@ Feature: Aggregate Sentences
         Given that the browser is at "login"
         Then the page title should be "Log In"
         Then it is not the case that the page title should be "Logged In"
+
+    @example_app @aggregates @checks @xfail
+    Scenario: The Demo App raises the correct errors for tabular sentences
+        Given that the browser is at "localhost-hello"
+        Then the statement that 'the the following items are visible' responds with
+          """
+          Tabular instructions are not supported by compound sentences.
+          """
+          | item           |
+          | Hidden Content |
+          | Missing Link   |
+
+    @example_app @aggregates @actions @wait_for
+    Scenario: The tester can wait for an element
+        Given that the browser is at "localhost-hello"
+        Then after a few seconds, the "Required Field" is visible
+            """
+            This checks for visibility; it just waits 1 second before
+            checking if the element is visible
+            """
+        Then after 1 second, it is not the case that the "Missing Field" is visible
+        Then the statement that 'after 2 seconds, the "Missing Field" is visible' responds with
+          """
+          The "Missing Field" was supposed to be visible but it was not present.
+          """
+        Then take a screen shot
